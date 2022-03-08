@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Downgrooves.Mobile.Domain\Downgrooves.Mobile.Domain.csproj" />
+    <ProjectReference Include="..\Downgrooves.Mobile.Domain\Downgrooves.Mobile.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,10 +4,30 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+<PropertyGroup>
+	<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+</PropertyGroup>
+	
   <ItemGroup>
+    <None Remove="appSettings.json" />
+    <None Remove="env.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appSettings.json" />
+    <EmbeddedResource Include="env.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
@@ -15,6 +35,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Downgrooves.Mobile.Domain\Downgrooves.Mobile.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Mixes.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

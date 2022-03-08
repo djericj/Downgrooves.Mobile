@@ -16,8 +16,13 @@ namespace Downgrooves.Mobile.ApiEndpoints
 
     }
 
-    internal class MixEndpoint : BaseEndpoint, IMixEndpoint
+    public class MixEndpoint : BaseEndpoint, IMixEndpoint
     {
+        public MixEndpoint(IAppSettings appSettings)
+        {
+            BaseUrl = appSettings.MobileApi.Url;
+        }
+
         public async Task<IEnumerable<Mix>> GetMixesAsync(CancellationToken token = default)
         {
             var content = await GetAsync("/mixes", cancel:token);

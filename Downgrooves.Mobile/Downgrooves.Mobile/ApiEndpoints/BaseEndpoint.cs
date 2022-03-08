@@ -1,8 +1,6 @@
 ﻿using RestSharp;
 using Serilog;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +9,9 @@ namespace Downgrooves.Mobile.ApiEndpoints
 {
     public class BaseEndpoint
     {
-        public RestClient Client { get; set; }
+        private readonly IAppSettings _appSettings;
+
+        public RestClient Client { get; set; }    
 
         public string BaseUrl
         {
@@ -37,7 +37,7 @@ namespace Downgrooves.Mobile.ApiEndpoints
         {
             try
             {
-                var request = new RestRequest(path, method);
+                var request = new RestRequest($"{Client.BaseUrl}{path}", method);
                 request.RequestFormat = format;
                 if (data != null) request.AddJsonBody(data);
                 return await Client.ExecuteAsync(request, cancel);

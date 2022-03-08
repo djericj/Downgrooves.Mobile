@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="Downgrooves.Mobile.Views.Mixes"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels;assembly=Downgrooves.Mobile"
+             Title="Mixes" x:DataType="viewModels:MixesViewModel"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Mixes"/>
+            <CollectionView EmptyView="No Mixes." ItemsSource="{Binding Mixes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:MixViewModel">
+                        <Label Text="{Binding Name}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

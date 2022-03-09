@@ -10,12 +10,10 @@
 </PropertyGroup>
 	
   <ItemGroup>
-    <None Remove="appSettings.json" />
     <None Remove="env.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="appsettings.json" />
     <EmbeddedResource Include="env.json" />
   </ItemGroup>
 

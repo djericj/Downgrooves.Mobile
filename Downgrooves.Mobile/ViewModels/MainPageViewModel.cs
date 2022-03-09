@@ -17,8 +17,7 @@ namespace Downgrooves.Mobile.ViewModels
 
         public ICommand NavigateToMixesCommand => new DelegateCommand<MixesViewModel>(async mix =>
         {
-            var x = await _navigationService.NavigateAsync("Mixes");
-            var y = 1;
+            await _navigationService.NavigateAsync("Mixes");
         });
     }
 }

@@ -42,6 +42,7 @@ namespace Downgrooves.Mobile
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(fileProvider, "appSettings.json", false, false)
                 //.AddJsonFile(fileProvider, $"appSettings.{env}.json", true, false)
+                //.AddUserSecrets("f47b7bdb-0a9d-4efc-9752-8e136fa57e5b")
                 .Build();
 
             Settings = configuration.Get<AppSettings>();

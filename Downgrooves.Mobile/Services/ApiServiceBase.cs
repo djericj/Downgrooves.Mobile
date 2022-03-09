@@ -39,6 +39,7 @@ namespace Downgrooves.Mobile.Services
             {
                 var request = new RestRequest($"{Client.BaseUrl.AbsoluteUri.TrimEnd('/')}{path}", method);
                 request.RequestFormat = format;
+                request.AddHeader("Authorization", $"Bearer {App.Settings.MobileApi.Token}");
                 if (data != null) request.AddJsonBody(data);
                 return await Client.ExecuteAsync(request, cancel);
             }

@@ -339,7 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-# Mobile.BuildTools
-appsettings.json
-appsettings.*.json
+**/appsettings.json
+**/appsettings.*.json
 **/secrets.json

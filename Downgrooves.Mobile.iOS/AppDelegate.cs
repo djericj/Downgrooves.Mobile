@@ -1,6 +1,7 @@
 ﻿using Foundation;
 using Prism;
 using Prism.Ioc;
+using Serilog;
 using UIKit;
 
 
@@ -23,6 +24,10 @@ namespace Downgrooves.Mobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
+
+            //Log.Logger = new LoggerConfiguration()
+            //    .WriteTo.NSLog()
+            //    .CreateLogger();
 
             return base.FinishedLaunching(app, options);
         }

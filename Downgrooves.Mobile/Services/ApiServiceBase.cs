@@ -5,39 +5,39 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Downgrooves.Mobile.ApiEndpoints
+namespace Downgrooves.Mobile.Services
 {
-    public class BaseEndpoint
+    public abstract class ApiServiceBase
     {
-        private readonly IAppSettings _appSettings;
+        public ApiServiceBase()
+        {
+            Client = new RestClient();
+            var settings = App.Settings.MobileApi;
+            BaseUrl = settings.Url;
+        }
 
-        public RestClient Client { get; set; }    
+        public RestClient Client { get; set; }
 
         public string BaseUrl
         {
-            get => Client.BaseUrl?.ToString();
+            get => Client.BaseUrl.ToString();
             set => Client.BaseUrl = new Uri(value.TrimEnd('/'));
-        }
-
-        public BaseEndpoint()
-        {
-            Client = new RestClient();
         }
 
         public async Task<IRestResponse> GetAsync(string path, CancellationToken cancel = default)
             => await ExecuteAsync(Method.GET, path, cancel);
-        public async Task<IRestResponse> PostAsync(string path, object data = null, CancellationToken cancel = default) 
+        public async Task<IRestResponse> PostAsync(string path, object data = null, CancellationToken cancel = default)
             => await ExecuteAsync(Method.POST, path, data, cancel);
-        public async Task<IRestResponse> PutAsync(string path, object data = null, CancellationToken cancel = default) 
+        public async Task<IRestResponse> PutAsync(string path, object data = null, CancellationToken cancel = default)
             => await ExecuteAsync(Method.PUT, path, data, cancel);
-        public async Task<IRestResponse> DeleteAsync(string path, CancellationToken cancel = default) 
+        public async Task<IRestResponse> DeleteAsync(string path, CancellationToken cancel = default)
             => await ExecuteAsync(Method.DELETE, path, cancel);
 
         private async Task<IRestResponse> ExecuteAsync(Method method, string path, object data = null, CancellationToken cancel = default, DataFormat format = DataFormat.Json)
         {
             try
             {
-                var request = new RestRequest($"{Client.BaseUrl}{path}", method);
+                var request = new RestRequest($"{Client.BaseUrl.AbsoluteUri.TrimEnd('/')}{path}", method);
                 request.RequestFormat = format;
                 if (data != null) request.AddJsonBody(data);
                 return await Client.ExecuteAsync(request, cancel);
@@ -48,7 +48,5 @@ namespace Downgrooves.Mobile.ApiEndpoints
                 return new RestResponse() { ErrorException = ex, ErrorMessage = ex.Message, StatusCode = HttpStatusCode.InternalServerError };
             }
         }
-
-        
     }
 }

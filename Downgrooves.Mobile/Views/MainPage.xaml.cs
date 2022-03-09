@@ -1,5 +1,4 @@
-﻿
-namespace Downgrooves.Mobile.Views
+﻿namespace Downgrooves.Mobile.Views
 {
     public partial class MainPage
     {
@@ -7,5 +6,7 @@ namespace Downgrooves.Mobile.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

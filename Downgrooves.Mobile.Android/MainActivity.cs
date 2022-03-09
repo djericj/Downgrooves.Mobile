@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
+using Serilog;
 
 namespace Downgrooves.Mobile.Droid
 {
@@ -16,6 +17,11 @@ namespace Downgrooves.Mobile.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            Log.Logger = new LoggerConfiguration()
+                    .WriteTo.AndroidLog()
+                    .Enrich.WithProperty("App", "MyCustomTag") //Sets the Tag field.
+                    .CreateLogger();
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));

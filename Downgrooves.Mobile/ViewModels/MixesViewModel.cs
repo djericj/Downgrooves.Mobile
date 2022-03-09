@@ -1,4 +1,4 @@
-﻿using Downgrooves.Mobile.Services;
+﻿using Downgrooves.Mobile.Services.Interfaces;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace Downgrooves.Mobile.ViewModels
             _mixService = mixService;
         }
 
-        public void LoadMixes() => Mixes = Task.Run(async () => await _mixService.GetMixVieModelsAsync()).Result;
+        public void LoadMixes() => Mixes = Task.Run(async () => await _mixService.GetMixesAsync()).Result;
 
         public void OnNavigatedFrom(INavigationParameters parameters)
         {

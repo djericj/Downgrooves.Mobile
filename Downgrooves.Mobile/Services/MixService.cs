@@ -1,47 +1,51 @@
-﻿using Downgrooves.Mobile.ApiEndpoints;
-using Downgrooves.Mobile.Domain;
+﻿using Downgrooves.Mobile.Domain;
+using Downgrooves.Mobile.Services.Interfaces;
 using Downgrooves.Mobile.ViewModels;
+using Newtonsoft.Json;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.Services
 {
-    public interface IMixService
+
+    public class MixService : ApiServiceBase, IMixService
     {
-        Task<IEnumerable<MixViewModel>> GetMixVieModelsAsync(CancellationToken token = default);
-        Task<IEnumerable<MixViewModel>> GetMixVieModelsAsync(string category, CancellationToken token = default);
-        Task<IEnumerable<MixViewModel>> GetMixVieModelsAsync(Genre genre, CancellationToken token = default);
-        
-    }
-    public class MixService : IMixService
-    {
-        private readonly IMixEndpoint _mixEndpoint;
-
-        public MixService(IMixEndpoint mixEndpoint)
+        public async Task<IEnumerable<MixViewModel>> GetMixesAsync(CancellationToken token = default)
         {
-            _mixEndpoint = mixEndpoint;
+            var response = await GetAsync("/mixes", cancel: token);
+            if (response.IsSuccessful)
+            {
+                IEnumerable<Mix> mixes = JsonConvert.DeserializeObject<List<Mix>>(response.Content);
+                return Convert(mixes);
+            }
+            else
+            {
+                Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription}");
+            }
+            return null;
+            
         }
 
-        public async Task<IEnumerable<MixViewModel>> GetMixVieModelsAsync(CancellationToken token = default)
+        public async Task<IEnumerable<MixViewModel>> GetMixesAsync(string category, CancellationToken token = default)
         {
-            var content = await _mixEndpoint.GetMixesAsync(token);
-            return content.ToList().Select(x => new MixViewModel(x)).ToList();
+            var content = await GetAsync($"/mixes/category/{category}", token);
+            List<Mix> response = JsonConvert.DeserializeObject<List<Mix>>(content.Content);
+            return Convert(response);
         }
 
-        public async Task<IEnumerable<MixViewModel>> GetMixVieModelsAsync(string category, CancellationToken token = default)
+        public async Task<IEnumerable<MixViewModel>> GetMixesAsync(Genre genre, CancellationToken token = default)
         {
-            var content = await _mixEndpoint.GetMixesByCategoryAsync(category, token);
-            return content.ToList().Select(x => new MixViewModel(x)).ToList();
+            var content = await GetAsync($"/mixes/genre/{genre.Name}", token);
+            List<Mix> response = JsonConvert.DeserializeObject<List<Mix>>(content.Content);
+            return Convert(response);
         }
 
-        public async Task<IEnumerable<MixViewModel>> GetMixVieModelsAsync(Genre genre, CancellationToken token = default)
+        private IEnumerable<MixViewModel> Convert(IEnumerable<Mix> mixes)
         {
-            var content = await _mixEndpoint.GetMixesByGenreAsync(genre.Name, token);
-            return content.ToList().Select(x => new MixViewModel(x)).ToList();
+            return mixes.ToList().Select(x => new MixViewModel(x)).ToList();
         }
-
     }
 }

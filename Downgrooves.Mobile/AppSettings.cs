@@ -1,18 +1,8 @@
 ﻿namespace Downgrooves.Mobile
 {
-    public interface IAppSettings
-    {
-        MobileApi MobileApi { get; set; }
-    }
-
-    public class AppSettings : IAppSettings
+    public class AppSettings
     {
         public MobileApi MobileApi { get; set; }
-
-        public AppSettings()
-        {
-            MobileApi = new MobileApi();
-        }
     }
 
     public class MobileApi

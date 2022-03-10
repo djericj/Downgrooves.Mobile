@@ -31,7 +31,7 @@ namespace Downgrooves.Mobile.ViewModels
         }
         public string Artist
         {
-            get => Mix.Artist;
+            get => $"mixed by {Mix.Artist}";
             set => Mix.Artist = value;
         }
         public string Length

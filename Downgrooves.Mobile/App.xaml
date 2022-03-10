@@ -6,6 +6,22 @@
   <Application.Resources>
 
     <!-- Application resource dictionary -->
+
+        <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands">
+            <On Platform="Android" Value="fabrands.otf#Regular" />
+            <On Platform="iOS" Value="FontAwesome6Brands-Regular" />
+        </OnPlatform>
+
+        <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeSolid">
+            <On Platform="Android" Value="fasolid.otf#Regular" />
+            <On Platform="iOS" Value="FontAwesome6Free-Solid" />
+        </OnPlatform>
+
+        <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeRegular">
+            <On Platform="Android" Value="faregular.otf#Regular" />
+            <On Platform="iOS" Value="FontAwesome6Free-Regular" />
+        </OnPlatform>
+
         <Color x:Key="PageBackgroundColor">#555555</Color>
         <Color x:Key="LightBackgroundColor">#555555</Color>
         <Color x:Key="StandardTextColor">#FFFFFF</Color>
@@ -48,8 +64,8 @@
             <Setter Property="TextColor" Value="{StaticResource StandardTextColor}" />
             <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
             <Setter Property="CornerRadius" Value="7" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="2" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextTransform" Value="Lowercase" />
         </Style>

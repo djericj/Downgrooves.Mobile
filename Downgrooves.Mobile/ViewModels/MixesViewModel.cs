@@ -1,6 +1,7 @@
 ﻿using Downgrooves.Mobile.Services.Interfaces;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -26,7 +27,9 @@ namespace Downgrooves.Mobile.ViewModels
 
         public async void LoadMixes()
         {
-            Mixes = new ObservableCollection<MixViewModel>(await _mixService.GetMixesAsync());
+            var mixesList = await _mixService.GetMixesAsync();
+            mixesList = mixesList.OrderBy(x => x.Name);
+            Mixes = new ObservableCollection<MixViewModel>(mixesList);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

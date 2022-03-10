@@ -18,11 +18,18 @@
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0">
                                 <Label Text="{Binding Name}" Style="{DynamicResource h2}"/>
-                                <Label Text="{Binding Genre.Name}" Style="{DynamicResource h4}"/>
-                                 <Button Text="Listen" ImageSource="" VerticalOptions="End" />
+                                    <Label Text="{Binding Artist}" Style="{DynamicResource h5}"/>
+                                    <Label Text="{Binding Genre.Name}" Style="{DynamicResource h4}"/>
+
+                                    <Label Text="{Binding CreateDate, StringFormat='{0:MMM yyyy}'}" Style="{DynamicResource h5}"/>
+                                    <Button Text="Listen" ContentLayout="Left, 5" HorizontalOptions="StartAndExpand" Margin="0" Padding="10,2">
+                                        <Button.ImageSource>
+                                            <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small"/>
+                                        </Button.ImageSource>
+                                    </Button>
                                 </StackLayout>
                             <StackLayout Grid.Column="1">
-                                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
+                                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HeightRequest="140" WidthRequest="140">
                                     <Image Source="{Binding Attachment}" />
                                 </Frame>
                             </StackLayout>

@@ -19,7 +19,8 @@ namespace Downgrooves.Mobile.Services
             if (response.IsSuccessful)
             {
                 IEnumerable<Mix> mixes = JsonConvert.DeserializeObject<List<Mix>>(response.Content);
-                return Convert(mixes);
+                var f = Convert(mixes);
+                return f;
             }
             else
             {

@@ -6,6 +6,64 @@
   <Application.Resources>
 
     <!-- Application resource dictionary -->
+        <Color x:Key="PageBackgroundColor">#555555</Color>
+        <Color x:Key="LightBackgroundColor">#555555</Color>
+        <Color x:Key="StandardTextColor">#FFFFFF</Color>
+        <Color x:Key="SecondaryTextColor">#dcdcdc</Color>
+        <Color x:Key="MenuBackgroundColor">#242b2e</Color>
+        <Color x:Key="LogoBackgroundColor">#212529</Color>
+        <Color x:Key="ButtonBackgroundColor">#333333</Color>
+        <Color x:Key="HoverBackgroundColor">#369</Color>
+    <!-- Default styles -->
+        <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource StandardTextColor}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        </Style>
 
-  </Application.Resources>
+        <Style TargetType="Label" x:Key="h1">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Margin" Value="0, 0, 0, 8" />
+        </Style>
+      
+        <Style TargetType="Label" x:Key="h2">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="h3">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="h4">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="h5">
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style TargetType="Button" x:Key="DefaultButton">
+            <Setter Property="TextColor" Value="{StaticResource StandardTextColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextTransform" Value="Lowercase" />
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource DefaultButton}"/>
+
+        <Style TargetType="BoxView" x:Key="Separator">
+            <Setter Property="BackgroundColor" Value="{StaticResource SecondaryTextColor}"/>
+            <Setter Property="Opacity" Value=".20"/>
+            <Setter Property="HeightRequest" Value="2"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+      
+      
+    </Application.Resources>
 </prism:PrismApplication>

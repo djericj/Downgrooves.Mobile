@@ -1,28 +1,35 @@
 ﻿using Downgrooves.Mobile.Services.Interfaces;
 using Prism.Navigation;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Downgrooves.Mobile.ViewModels
 {
-    public class MixesViewModel : INavigationAware
+    public class MixesViewModel : ViewModelBase, INavigationAware
     {
         private readonly IMixService _mixService;
-        public IEnumerable<MixViewModel> Mixes { get; set; }
+        private ObservableCollection<MixViewModel> _mixes;
 
-        public MixesViewModel(IMixService mixService)
+        public ObservableCollection<MixViewModel> Mixes 
+        { 
+            get => _mixes;
+            set 
+            { 
+                _mixes = value;
+                RaisePropertyChanged(nameof(Mixes));
+            }
+        }
+
+        public MixesViewModel(INavigationService navigationService, IMixService mixService) : base(navigationService)
         {
             _mixService = mixService;
         }
 
-        public void LoadMixes() => Mixes = Task.Run(async () => await _mixService.GetMixesAsync()).Result;
-
-        public void OnNavigatedFrom(INavigationParameters parameters)
+        public async void LoadMixes()
         {
-            
+            Mixes = new ObservableCollection<MixViewModel>(await _mixService.GetMixesAsync());
         }
 
-        public void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             LoadMixes();
         }

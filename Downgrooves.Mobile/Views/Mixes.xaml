@@ -5,16 +5,33 @@
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              Title="Mixes" x:DataType="viewModels:MixesViewModel"
              >
-    
-        <StackLayout>
-            <Label Text="Mixes" TextColor="Black"/>
-            <CollectionView EmptyView="No Mixes." ItemsSource="{Binding Mixes}">
-                <CollectionView.ItemTemplate>
+    <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
+        <ScrollView Orientation="Vertical">
+            <FlexLayout BindableLayout.ItemsSource="{Binding Path=Mixes}" Wrap="Wrap" Padding="20">
+                <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:MixViewModel">
-                        <Label Text="{Binding Name}"/>
+                        <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="{Binding Name}" Style="{DynamicResource h2}"/>
+                                <Label Text="{Binding Genre.Name}" Style="{DynamicResource h4}"/>
+                                 <Button Text="Listen" ImageSource="" VerticalOptions="End" />
+                                </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
+                                    <Image Source="{Binding Attachment}" />
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                            <BoxView Style="{DynamicResource Separator}"/>
+                        </StackLayout>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
-    
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </ScrollView>
+    </Frame>
 </ContentPage>

@@ -51,7 +51,7 @@ namespace Downgrooves.Mobile.ViewModels
         }
         public string Attachment
         {
-            get => Mix.Attachment;
+            get => $"{App.Settings.Website.BaseUrl}/{App.Settings.Website.ImagePath}/mixes/{Mix.Attachment}";
             set => Mix.Attachment = value;
         }
         public DateTime CreateDate

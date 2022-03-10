@@ -6,10 +6,7 @@
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Label Text="Welcome to Xamarin Forms and Prism!" />
-        <Button x:Name="Help" Text="Go to Mixes"
-                Command="{Binding NavigateToMixesCommand}"
-                FontSize="20"
-                Padding="0"/>
+        <Button x:Name="Help" Text="Go to Mixes" Command="{Binding NavigateToMixesCommand}"/>
     </StackLayout>
 
 </ContentPage>

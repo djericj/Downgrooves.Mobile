@@ -27,11 +27,11 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleDisplayName</key>
-	<string>Downgrooves.Mobile</string>
+	<string>Downgrooves</string>
 	<key>CFBundleName</key>
 	<string>Downgrooves.Mobile</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.appname</string>
+	<string>com.downgrooves.mobile</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UIAppFonts</key>
@@ -42,5 +42,7 @@
 	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

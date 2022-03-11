@@ -12,7 +12,7 @@
 
   <assembly fullname="Prism" />
   <assembly fullname="Prism.Forms" />
-  <assembly fullname="Prism.Unity.Forms" />
-  <assembly fullname="Unity.Container" />
+  <assembly fullname="Prism.DryIoc.Forms" />
+  <assembly fullname="DryIoc" />
 
 </linker>

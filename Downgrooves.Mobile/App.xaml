@@ -46,7 +46,7 @@
         </Style>
       
         <Style TargetType="Label" x:Key="h2">
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontSize" Value="19" />
         </Style>
 
         <Style TargetType="Label" x:Key="h3">

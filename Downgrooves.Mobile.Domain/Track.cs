@@ -24,11 +24,8 @@ namespace Downgrooves.Mobile.Domain
         {
             get
             {
-                var name = Remix;
                 if (!string.IsNullOrEmpty(Remix))
-                {
                     return $"({Remix})";
-                }
                 return string.Empty;
             }
         }

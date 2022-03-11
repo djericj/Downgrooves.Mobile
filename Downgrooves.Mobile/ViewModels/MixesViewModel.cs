@@ -1,7 +1,9 @@
 ﻿using Downgrooves.Mobile.Services.Interfaces;
+using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -10,6 +12,7 @@ namespace Downgrooves.Mobile.ViewModels
         private readonly IMixService _mixService;
         private ObservableCollection<MixViewModel> _mixes;
 
+        public ICommand NavigateToTrackListCommand => new DelegateCommand<MixViewModel>(NavigateToTrackList);
         public ObservableCollection<MixViewModel> Mixes 
         { 
             get => _mixes;
@@ -35,6 +38,15 @@ namespace Downgrooves.Mobile.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             LoadMixes();
+        }
+
+        private async void NavigateToTrackList(MixViewModel mix)
+        {
+            var props = new NavigationParameters()
+            {
+                {"mix",  mix}
+            };
+            await NavigationService.NavigateAsync("MixDetail", props);
         }
     }
 }

@@ -30,6 +30,7 @@
         <Color x:Key="LogoBackgroundColor">#212529</Color>
         <Color x:Key="ButtonBackgroundColor">#333333</Color>
         <Color x:Key="HoverBackgroundColor">#369</Color>
+        <Color x:Key="TextBackgroundColor">#35362F</Color>
     <!-- Default styles -->
         <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
             <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>

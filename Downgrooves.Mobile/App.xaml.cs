@@ -41,8 +41,6 @@ namespace Downgrooves.Mobile
             var fileProvider = new ManifestEmbeddedFileProvider(typeof(App).GetTypeInfo().Assembly);
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(fileProvider, "appSettings.json", false, false)
-                //.AddJsonFile(fileProvider, $"appSettings.{env}.json", true, false)
-                //.AddUserSecrets("f47b7bdb-0a9d-4efc-9752-8e136fa57e5b")
                 .Build();
 
             Settings = configuration.Get<AppSettings>();
@@ -52,21 +50,18 @@ namespace Downgrooves.Mobile
             Resolve<IMixService>();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
-            //await NavigationService.NavigateAsync("NavigationPage/Mixes");
 
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IMixService, MixService>();
-
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
-              
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<Mixes, MixesViewModel>();
+            containerRegistry.RegisterForNavigation<MixDetail, MixDetailViewModel>();
         }
 
         private string GetEmbeddedResource(string fileName)

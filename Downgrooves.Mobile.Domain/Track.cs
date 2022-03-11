@@ -9,5 +9,28 @@ namespace Downgrooves.Mobile.Domain
         public string Title { get; set; }
         public string Remix { get; set; }
         public string Label { get; set; }
+
+        public string TitleAndMix
+        {
+            get
+            {
+                var name = Title;
+                if (!string.IsNullOrEmpty(Remix)) name += $" ({Remix})";
+                return name;
+            }
+        }
+
+        public string RemixFormatted
+        {
+            get
+            {
+                var name = Remix;
+                if (!string.IsNullOrEmpty(Remix))
+                {
+                    return $"({Remix})";
+                }
+                return string.Empty;
+            }
+        }
     }
 }

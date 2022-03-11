@@ -18,12 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dg_wtext.png" translatesAutoresizingMaskIntoConstraints="NO" id="XOo-V9-iBq">
-                                <rect key="frame" x="87" y="338" width="240" height="254"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dg_wtext.png" translatesAutoresizingMaskIntoConstraints="NO" id="XOo-V9-iBq">
+                                <rect key="frame" x="57" y="288.5" width="300" height="319"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.12156862745098039" green="0.13725490196078433" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XOo-V9-iBq" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="cQP-Nt-xfR"/>
+                            <constraint firstItem="XOo-V9-iBq" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="n37-n7-2rZ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>

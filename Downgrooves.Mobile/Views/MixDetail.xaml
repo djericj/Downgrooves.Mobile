@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Downgrooves.Mobile.Views.MixDetail"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              xmlns:domain="clr-namespace:Downgrooves.Mobile.Domain;assembly=Downgrooves.Mobile.Domain"
@@ -20,7 +21,7 @@
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
                     <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
-                        <Image Source="{Binding Mix.Attachment}" />
+                        <ff:CachedImage Source="{Binding Mix.Attachment}"/>
                     </Frame>
                 </StackLayout>
                 <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Path=Mix.Name}" Style="{DynamicResource h2}"/>

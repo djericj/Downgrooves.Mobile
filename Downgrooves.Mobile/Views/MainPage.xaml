@@ -33,10 +33,6 @@
                                 </ffsvg:SvgCachedImage.Transformations>
                             </ffsvg:SvgCachedImage>
                             <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase"/>
-                            <!--<Button Text="{Binding Path=Title}" ContentLayout="Top, 15" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Margin="0" Padding="10" FontSize="24"
-                                Command="{Binding Path=NavigateToCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}" 
-                                CommandParameter="{Binding NavigateTo}">
-                            </Button>-->
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

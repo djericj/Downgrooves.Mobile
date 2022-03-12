@@ -2,11 +2,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Downgrooves.Mobile.Views.MainPage"
-             Title="{Binding Title}">
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             Title="Home" x:DataType="viewModels:MainPageViewModel">
+    
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="20" Spacing="10">
+        <Frame CornerRadius="5" Padding="15" Margin="5,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.dg_logo_white.png"/>
+        </Frame>
+        <FlexLayout BindableLayout.ItemsSource="{Binding Path=Tiles}" Wrap="Wrap" Padding="10">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:TileViewModel">
+                    <Frame CornerRadius="10" 
+                           effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}"
+                           effects:TouchEffect.CommandParameter="{Binding}"
+                           BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                           Padding="5"
+                           Margin="5"
+                           HeightRequest="170"
+                           WidthRequest="160"
+                           HorizontalOptions="FillAndExpand"
+                           HasShadow="False">
+                        <StackLayout Padding="10,20">
+                            <ffsvg:SvgCachedImage Source="{Binding SvgIconAbsolutePath}" WidthRequest="80" HeightRequest="80">
+                                <ffsvg:SvgCachedImage.Transformations>
+                                    <fft:TintTransformation HexColor="#FFFFFFFF" EnableSolidColor="true"/>
+                                </ffsvg:SvgCachedImage.Transformations>
+                            </ffsvg:SvgCachedImage>
+                            <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase"/>
+                            <!--<Button Text="{Binding Path=Title}" ContentLayout="Top, 15" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Margin="0" Padding="10" FontSize="24"
+                                Command="{Binding Path=NavigateToCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}" 
+                                CommandParameter="{Binding NavigateTo}">
+                            </Button>-->
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-        <Button x:Name="Help" Text="Go to Mixes" Command="{Binding NavigateToMixesCommand}"/>
     </StackLayout>
+
+    
 
 </ContentPage>

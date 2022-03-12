@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Downgrooves.Mobile.Views.Modular"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             Title="Modular" x:DataType="viewModels:ModularViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Modular Page" Style="{DynamicResource h1}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

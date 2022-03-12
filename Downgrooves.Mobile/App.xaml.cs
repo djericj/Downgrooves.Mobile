@@ -49,6 +49,8 @@ namespace Downgrooves.Mobile
 
             Resolve<IMixService>();
 
+            var resources = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
 
         }
@@ -62,6 +64,9 @@ namespace Downgrooves.Mobile
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<Mixes, MixesViewModel>();
             containerRegistry.RegisterForNavigation<MixDetail, MixDetailViewModel>();
+            containerRegistry.RegisterForNavigation<Contact, ContactViewModel>();
+            containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();   
+            containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
         }
 
         private string GetEmbeddedResource(string fileName)

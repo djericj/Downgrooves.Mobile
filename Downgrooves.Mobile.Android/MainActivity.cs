@@ -18,6 +18,9 @@ namespace Downgrooves.Mobile.Droid
 
             base.OnCreate(savedInstanceState);
 
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageViewHandler();
+
             Log.Logger = new LoggerConfiguration()
                     .WriteTo.AndroidLog()
                     .Enrich.WithProperty("App", "MyCustomTag") //Sets the Tag field.

@@ -1,69 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Downgrooves.Mobile.Views.Mixes"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              Title="DJ Sets" x:DataType="viewModels:MixesViewModel"
              >
     <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
-        <StackLayout>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 AbsoluteLayout.LayoutFlags="All" >
             <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
                 <ScrollView Orientation="Vertical">
-                    <CollectionView ItemsSource="{Binding Path=Mixes}" 
-                                    RemainingItemsThreshold="{Binding ItemThreshold}" 
-                                    RemainingItemsThresholdReachedCommand="{Binding LoadMixesCommand}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:MixViewModel">
-                                <StackLayout Padding="10">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="6*"/>
-                                            <ColumnDefinition Width="4*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout Grid.Column="0">
-                                            <Label Text="{Binding Name}" Style="{DynamicResource h2}"/>
-                                            <Label Text="{Binding Artist}" Style="{DynamicResource h5}"/>
-                                            <Label Text="{Binding Genre.Name}" Style="{DynamicResource h4}"/>
-
-                                            <Label Text="{Binding CreateDate, StringFormat='{0:MMM yyyy}'}" Style="{DynamicResource h5}"/>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Button Grid.Column="0" Text="Listen" ContentLayout="Left, 5" HorizontalOptions="StartAndExpand" Margin="0" Padding="10,2">
-                                                    <Button.ImageSource>
-                                                        <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small"/>
-                                                    </Button.ImageSource>
-                                                </Button>
-                                                <Button Grid.Column="1" Text="Tracks" ContentLayout="Left, 10" HorizontalOptions="StartAndExpand" Margin="0" Padding="10,2" 
-                                                    Command="{Binding NavigateToTrackListCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixesViewModel}}}" 
-                                                    CommandParameter="{Binding}">
-                                                    <Button.ImageSource>
-                                                        <FontImageSource Glyph="&#xf03a;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small"/>
-                                                    </Button.ImageSource>
-                                                </Button>
-                                            </Grid>
-                                        </StackLayout>
-                                        <StackLayout Grid.Column="1">
-                                            <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HeightRequest="140" WidthRequest="140">
-                                                <ff:CachedImage Source="{Binding Attachment}"/>
-                                            </Frame>
-                                        </StackLayout>
-                                    </Grid>
-                                    <BoxView Style="{DynamicResource Separator}"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <controls:MixList ItemsSource="{Binding Path=Mixes}" 
+                                RemainingItemsThreshold="{Binding ItemThreshold}" 
+                                RemainingItemsThresholdReachedCommand="{Binding LoadMixesCommand}"/>
                 </ScrollView>
             </RefreshView>
-            <ActivityIndicator IsRunning="{Binding IsBusy}"
-                           HeightRequest="30"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           WidthRequest="30"/>
-        </StackLayout>
+            </StackLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}" 
+                         Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               HeightRequest="30"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               WidthRequest="30" Opacity="1"/>
+                </StackLayout>
+        </AbsoluteLayout>
     </Frame>
 </ContentPage>

@@ -57,6 +57,7 @@ namespace Downgrooves.Mobile.ViewModels
         {
             try
             {
+                Mixes.Clear();
                 LoadMixes();
             }
             catch (Exception ex)

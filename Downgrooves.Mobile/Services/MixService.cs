@@ -30,6 +30,23 @@ namespace Downgrooves.Mobile.Services
             
         }
 
+        public async Task<IEnumerable<MixViewModel>> GetMixesAsync(int pageNumber, int pageSize, CancellationToken token = default)
+        {
+            var response = await GetAsync($"/mixes/paged?PageNumber={pageNumber}&PageSize={pageSize}", cancel: token);
+            if (response.IsSuccessful)
+            {
+                IEnumerable<Mix> mixes = JsonConvert.DeserializeObject<List<Mix>>(response.Content);
+                var f = Convert(mixes);
+                return f;
+            }
+            else
+            {
+                Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription}");
+            }
+            return null;
+
+        }
+
         public async Task<IEnumerable<MixViewModel>> GetMixesAsync(string category, CancellationToken token = default)
         {
             var content = await GetAsync($"/mixes/category/{category}", token);

@@ -11,7 +11,7 @@ namespace Downgrooves.Mobile.ViewModels
 {
     public class MixesViewModel : ViewModelBase, INavigationAware
     {
-        const int _pageSize = 5;
+        private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
         private readonly IMixService _mixService;
 
@@ -27,7 +27,7 @@ namespace Downgrooves.Mobile.ViewModels
             set { SetProperty(ref _mixes, value); }
         }
 
-        private int _itemThreshold = 5;
+        private int _itemThreshold;
         public int ItemThreshold
         {
             get { return _itemThreshold; }
@@ -78,6 +78,7 @@ namespace Downgrooves.Mobile.ViewModels
         public void LoadMixes()
         {
             _pageNumber = 1;
+            ItemThreshold = App.Settings.MixSettings.ItemThreshold;
             Mixes = new ObservableRangeCollection<MixViewModel>();
             LoadMixes(_pageNumber);
         }

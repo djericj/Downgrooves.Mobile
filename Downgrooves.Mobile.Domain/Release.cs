@@ -2,7 +2,7 @@
 
 namespace Downgrooves.Mobile.Domain
 {
-    public class ITunesTrack
+    public class Release
     {
         public int? Id { get; set; }
 

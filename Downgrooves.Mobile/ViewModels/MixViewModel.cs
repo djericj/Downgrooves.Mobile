@@ -8,10 +8,7 @@ namespace Downgrooves.Mobile.ViewModels
     public class MixViewModel
     {
         public Mix Mix { get; set; }
-        public MixViewModel() : this(new Mix())
-        {
-
-        }
+        public MixViewModel() : this(new Mix()) {}
 
         public MixViewModel(Mix mix)
         {

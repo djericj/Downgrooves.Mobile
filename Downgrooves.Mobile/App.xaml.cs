@@ -21,9 +21,12 @@ namespace Downgrooves.Mobile
     public partial class App
     {
         public static AppSettings Settings { get; private set; }
+
         public static T Resolve<T>() => Current.Container.Resolve<T>();
 
-        public App() : this(null) { }
+        public App() : this(null)
+        {
+        }
 
         public App(IPlatformInitializer initializer = null) : base(initializer, setFormsDependencyResolver: true)
         {
@@ -52,12 +55,12 @@ namespace Downgrooves.Mobile
             var resources = Assembly.GetExecutingAssembly().GetManifestResourceNames();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
-
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IMixService, MixService>();
+            containerRegistry.RegisterSingleton<IReleaseService, ReleaseService>();
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
@@ -65,7 +68,7 @@ namespace Downgrooves.Mobile
             containerRegistry.RegisterForNavigation<Mixes, MixesViewModel>();
             containerRegistry.RegisterForNavigation<MixDetail, MixDetailViewModel>();
             containerRegistry.RegisterForNavigation<Contact, ContactViewModel>();
-            containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();   
+            containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();
             containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
         }
 
@@ -80,7 +83,7 @@ namespace Downgrooves.Mobile
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     return reader.ReadToEnd();
-                }                
+                }
             }
             catch (Exception e)
             {

@@ -1,4 +1,4 @@
-﻿using Downgrooves.Mobile.Domain;
+﻿using Downgrooves.Mobile.Models;
 using System;
 
 namespace Downgrooves.Mobile.ViewModels

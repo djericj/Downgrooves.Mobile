@@ -4,7 +4,7 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Downgrooves.Mobile.Views.MixDetail"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
-             xmlns:domain="clr-namespace:Downgrooves.Mobile.Domain;assembly=Downgrooves.Mobile.Domain"
+             xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              Title="{Binding Mix.Name}" x:DataType="viewModels:MixDetailViewModel"
              >
     <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
@@ -39,7 +39,7 @@
             <ScrollView Orientation="Vertical">
                 <CollectionView ItemsSource="{Binding Path=Mix.Tracks}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="domain:Track">
+                        <DataTemplate x:DataType="models:Track">
                             <StackLayout>
                                 <Grid>
                                     <Grid.ColumnDefinitions>

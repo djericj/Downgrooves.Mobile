@@ -1,4 +1,4 @@
-﻿namespace Downgrooves.Mobile.Domain
+﻿namespace Downgrooves.Mobile.Models
 {
     public class Genre
     {

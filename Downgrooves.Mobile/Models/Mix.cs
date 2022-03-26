@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Downgrooves.Mobile.Domain
+namespace Downgrooves.Mobile.Models
 {
     public class Mix
     {

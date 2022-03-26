@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Downgrooves.Mobile.Domain
+namespace Downgrooves.Mobile.Models
 {
     public class Release
     {

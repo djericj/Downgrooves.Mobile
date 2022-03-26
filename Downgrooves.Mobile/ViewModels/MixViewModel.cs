@@ -1,4 +1,4 @@
-﻿using Downgrooves.Mobile.Domain;
+﻿using Downgrooves.Mobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

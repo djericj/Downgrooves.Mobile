@@ -124,6 +124,16 @@ namespace Downgrooves.Mobile.ViewModels
             set => Release.ArtworkUrl100 = value;
         }
 
+        public string ArtworkUrl250
+        {
+            get => Release.ArtworkUrl250;
+        }
+
+        public string ArtworkUrl500
+        {
+            get => Release.ArtworkUrl500;
+        }
+
         public double CollectionPrice
         {
             get => Release.CollectionPrice;

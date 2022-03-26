@@ -23,6 +23,8 @@ namespace Downgrooves.Mobile.Models
         public string ArtworkUrl30 { get; set; }
         public string ArtworkUrl60 { get; set; }
         public string ArtworkUrl100 { get; set; }
+        public string ArtworkUrl250 => ArtworkUrl100.Replace("100x100", "250x250");
+        public string ArtworkUrl500 => ArtworkUrl100.Replace("100x100", "500x500");
         public double CollectionPrice { get; set; }
         public double TrackPrice { get; set; }
         public DateTime ReleaseDate { get; set; }

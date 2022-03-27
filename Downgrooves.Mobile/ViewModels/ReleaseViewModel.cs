@@ -1,5 +1,6 @@
 ﻿using Downgrooves.Mobile.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -217,5 +218,7 @@ namespace Downgrooves.Mobile.ViewModels
             get => Release.IsStreamable;
             set => Release.IsStreamable = value;
         }
+
+        public IEnumerable<Release> Tracks { get; set; }
     }
 }

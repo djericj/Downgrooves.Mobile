@@ -70,6 +70,7 @@ namespace Downgrooves.Mobile
             containerRegistry.RegisterForNavigation<Contact, ContactViewModel>();
             containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();
             containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
+            containerRegistry.RegisterForNavigation<ReleaseDetail, ReleaseDetailViewModel>();
         }
 
         private string GetEmbeddedResource(string fileName)

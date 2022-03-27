@@ -14,12 +14,12 @@ namespace Downgrooves.Mobile.Services
     {
         public async Task<IEnumerable<ReleaseViewModel>> GetReleases(int pageNumber, int pageSize, CancellationToken token = default)
         {
-            var response = await GetAsync($"/itunes/tracks/paged?PageNumber={pageNumber}&PageSize={pageSize}", cancel: token);
+            var response = await GetAsync($"/releases/paged?PageNumber={pageNumber}&PageSize={pageSize}", cancel: token);
             if (response.IsSuccessful)
             {
                 IEnumerable<Release> releases = JsonConvert.DeserializeObject<List<Release>>(response.Content);
-                var f = Convert(releases);
-                return f;
+                var converted = releases.Select(x => new ReleaseViewModel(x)).ToList();
+                return converted;
             }
             else
             {
@@ -28,9 +28,19 @@ namespace Downgrooves.Mobile.Services
             return null;
         }
 
-        private IEnumerable<ReleaseViewModel> Convert(IEnumerable<Release> releases)
+        public async Task<IEnumerable<Release>> Lookup(int collectionId, CancellationToken token = default)
         {
-            return releases.ToList().Select(x => new ReleaseViewModel(x)).ToList();
+            var response = await GetAsync($"/itunes/lookup/{collectionId}", cancel: token);
+            if (response.IsSuccessful)
+            {
+                IEnumerable<Release> releases = JsonConvert.DeserializeObject<List<Release>>(response.Content);
+                return releases?.OrderBy(x => x.TrackNumber);
+            }
+            else
+            {
+                Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription}");
+            }
+            return null;
         }
     }
 }

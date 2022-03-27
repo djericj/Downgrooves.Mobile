@@ -19,6 +19,8 @@ namespace Downgrooves.Mobile.ViewModels
 
         public ICommand RefreshCommand => new DelegateCommand(Refresh);
 
+        public ICommand NavigateToReleaseCommand => new DelegateCommand<ReleaseViewModel>(NavigateToRelease);
+
         private ObservableRangeCollection<ReleaseViewModel> _releases;
 
         public ObservableRangeCollection<ReleaseViewModel> Releases
@@ -124,7 +126,7 @@ namespace Downgrooves.Mobile.ViewModels
             LoadReleases();
         }
 
-        private async void NavigateToDetails(ReleaseViewModel release)
+        private async void NavigateToRelease(ReleaseViewModel release)
         {
             var props = new NavigationParameters()
             {

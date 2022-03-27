@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             x:Class="Downgrooves.Mobile.Views.ReleaseDetail"
+             Title="Release" x:DataType="viewModels:ReleaseDetailViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HorizontalOptions="CenterAndExpand" HeightRequest="250" WidthRequest="250">
+                <ff:CachedImage Source="{Binding Release.ArtworkUrl250}" />
+            </Frame>
+            <Label Text="{Binding Release.CollectionName}" Style="{DynamicResource h3}" HorizontalOptions="CenterAndExpand" />
+            <BoxView Style="{DynamicResource Separator}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

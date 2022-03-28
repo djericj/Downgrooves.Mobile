@@ -2,16 +2,51 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              x:Class="Downgrooves.Mobile.Views.ReleaseDetail"
-             Title="Release" x:DataType="viewModels:ReleaseDetailViewModel">
+             Title="{Binding Release.CollectionName}" x:DataType="viewModels:ReleaseDetailViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HorizontalOptions="CenterAndExpand" HeightRequest="250" WidthRequest="250">
-                <ff:CachedImage Source="{Binding Release.ArtworkUrl250}" />
+            <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
+                <ff:CachedImage Source="{Binding Release.ArtworkUrl250}" Aspect="AspectFill" />
             </Frame>
+            <Label Text="{Binding Release.ArtistName}" Style="{DynamicResource h3}" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
             <Label Text="{Binding Release.CollectionName}" Style="{DynamicResource h3}" HorizontalOptions="CenterAndExpand" />
+            <Button Text="{Binding Release.CollectionPrice, StringFormat='Buy on iTunes ${0}'}" 
+                    Command="{Binding OpenLinkCommand}"
+                    CommandParameter="{Binding Release.CollectionViewUrl}"
+                    Style="{DynamicResource BuyButton}" Margin="10"/>
+            <StackLayout Orientation="Horizontal" Margin="10,0">
+                <Label Text="Preview" HorizontalOptions="StartAndExpand"/>
+                <Label Text="Buy" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
             <BoxView Style="{DynamicResource Separator}" />
+            <CollectionView ItemsSource="{Binding Release.Tracks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Release">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <ffsvg:SvgCachedImage Source="{Binding PreviewIcon, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" Margin="0,0,10,0" WidthRequest="15" HeightRequest="15">
+                                    <ffsvg:SvgCachedImage.Transformations>
+                                        <fft:TintTransformation HexColor="#FFFFFFFF" EnableSolidColor="true"/>
+                                    </ffsvg:SvgCachedImage.Transformations>
+                                </ffsvg:SvgCachedImage>
+                                <Label Text="{Binding TrackCensoredName}"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Button Text="{Binding TrackPrice, StringFormat='${0}'}" 
+                                            Command="{Binding OpenLinkCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}"
+                                            CommandParameter="{Binding TrackViewUrl}"
+                                            Style="{DynamicResource SmallBuyButton}" HeightRequest="25" WidthRequest="60"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <BoxView Style="{DynamicResource Separator}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

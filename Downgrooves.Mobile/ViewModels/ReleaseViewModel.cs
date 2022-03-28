@@ -61,25 +61,25 @@ namespace Downgrooves.Mobile.ViewModels
 
         public string CollectionName
         {
-            get => Release.CollectionName;
+            get => Release.CollectionName.Replace(" - Single", string.Empty);
             set => Release.CollectionName = value;
         }
 
         public string TrackName
         {
-            get => Release.TrackName;
+            get => Release.TrackName.Replace(" - Single", string.Empty);
             set => Release.TrackName = value;
         }
 
         public string CollectionCensoredName
         {
-            get => Release.CollectionCensoredName;
+            get => Release.CollectionCensoredName.Replace(" - Single", string.Empty);
             set => Release.CollectionCensoredName = value;
         }
 
         public string TrackCensoredName
         {
-            get => Release.TrackCensoredName;
+            get => Release.TrackCensoredName.Replace(" - Single",string.Empty);
             set => Release.TrackCensoredName = value;
         }
 
@@ -217,6 +217,12 @@ namespace Downgrooves.Mobile.ViewModels
         {
             get => Release.IsStreamable;
             set => Release.IsStreamable = value;
+        }
+
+        public string IsOriginal
+        {
+            get => Release.IsOriginal;
+            set => Release.IsOriginal = value;
         }
 
         public IEnumerable<Release> Tracks { get; set; }

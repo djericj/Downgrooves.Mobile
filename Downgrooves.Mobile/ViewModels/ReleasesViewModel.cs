@@ -1,4 +1,5 @@
 ﻿using Downgrooves.Mobile.Services.Interfaces;
+using FFImageLoading.Svg.Forms;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -52,6 +53,8 @@ namespace Downgrooves.Mobile.ViewModels
             get { return _isRefreshing; }
             set { SetProperty(ref _isRefreshing, value); Debug.WriteLine($"IsRefreshing: {IsRefreshing}"); }
         }
+
+        
 
         public ReleasesViewModel(INavigationService navigationService, IReleaseService releaseService) : base(navigationService)
         {

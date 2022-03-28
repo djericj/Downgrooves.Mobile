@@ -17,8 +17,14 @@
     <None Remove="Resources\FontAwesome6-Regular-400.otf" />
     <None Remove="Resources\FontAwesome6-Solid-900.otf" />
     <None Remove="Resources\headphones.svg" />
+    <None Remove="Resources\pause.svg" />
+    <None Remove="Resources\play.svg" />
     <None Remove="Resources\record-vinyl.svg" />
     <None Remove="Resources\spinner.svg" />
+    <None Remove="Resources\stop.svg" />
+    <None Remove="Resources\volume-high.svg" />
+    <None Remove="Resources\volume-low.svg" />
+    <None Remove="Resources\volume-off.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,8 +35,14 @@
     <EmbeddedResource Include="Resources\FontAwesome6-Regular-400.otf" />
     <EmbeddedResource Include="Resources\FontAwesome6-Solid-900.otf" />
     <EmbeddedResource Include="Resources\headphones.svg" />
+    <EmbeddedResource Include="Resources\pause.svg" />
+    <EmbeddedResource Include="Resources\play.svg" />
     <EmbeddedResource Include="Resources\record-vinyl.svg" />
     <EmbeddedResource Include="Resources\spinner.svg" />
+    <EmbeddedResource Include="Resources\stop.svg" />
+    <EmbeddedResource Include="Resources\volume-high.svg" />
+    <EmbeddedResource Include="Resources\volume-low.svg" />
+    <EmbeddedResource Include="Resources\volume-off.svg" />
   </ItemGroup>
 
   <ItemGroup>

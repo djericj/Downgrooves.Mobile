@@ -40,5 +40,7 @@ namespace Downgrooves.Mobile.Models
         public string Currency { get; set; }
         public string PrimaryGenreName { get; set; }
         public string IsStreamable { get; set; }
+
+        public string IsOriginal { get; set; }
     }
 }

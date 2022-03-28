@@ -1,9 +1,7 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Xamarin.Essentials;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -41,6 +39,12 @@ namespace Downgrooves.Mobile.ViewModels
         public virtual void Destroy()
         {
 
+        }
+
+        public async void OpenLink(string url)
+        {
+            var uri = new Uri(url);
+            await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
         }
     }
 }

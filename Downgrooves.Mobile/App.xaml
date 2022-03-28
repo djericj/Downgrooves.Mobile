@@ -31,6 +31,7 @@
         <Color x:Key="ButtonBackgroundColor">#333333</Color>
         <Color x:Key="HoverBackgroundColor">#369</Color>
         <Color x:Key="TextBackgroundColor">#35362F</Color>
+        <Color x:Key="Green">#1fae5b</Color>
     <!-- Default styles -->
         <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
             <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
@@ -72,6 +73,22 @@
         </Style>
 
         <Style TargetType="Button" BasedOn="{StaticResource DefaultButton}"/>
+
+        <Style x:Key="BuyButton" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
+            <Setter Property="BackgroundColor" Value="{StaticResource Green}" />
+            <Setter Property="TextTransform" Value="None" />
+        </Style>
+
+        <Style x:Key="SmallButton" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+
+        <Style x:Key="SmallBuyButton" TargetType="Button" BasedOn="{StaticResource SmallButton}">
+            <Setter Property="BackgroundColor" Value="{StaticResource Green}" />
+            <Setter Property="TextTransform" Value="None" />
+        </Style>
 
         <Style TargetType="BoxView" x:Key="Separator">
             <Setter Property="BackgroundColor" Value="{StaticResource SecondaryTextColor}"/>

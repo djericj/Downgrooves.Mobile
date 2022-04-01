@@ -10,8 +10,8 @@
              Title="Home" x:DataType="viewModels:MainPageViewModel">
     
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="20" Spacing="10">
-        <Frame CornerRadius="5" Padding="15" Margin="5,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PageBackgroundColor}">
-            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.dg_logo_white.png"/>
+        <Frame CornerRadius="5" Padding="15" Margin="5,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource LogoBackgroundColor}">
+            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.dg_logo_white.png" BackgroundColor="{DynamicResource LogoBackgroundColor}"/>
         </Frame>
         <FlexLayout BindableLayout.ItemsSource="{Binding Path=Tiles}" Wrap="Wrap" Padding="10">
             <BindableLayout.ItemTemplate>

@@ -51,8 +51,9 @@ namespace Downgrooves.Mobile.ViewModels
             {
                 var tracks = await _releaseService.Lookup(Release.CollectionId);
                 Release.Tracks = tracks.Where(x => x.WrapperType == "track").ToList();
-                RaisePropertyChanged(nameof(Release));
+                
             }
+            RaisePropertyChanged(nameof(Release));
                 
         }
 

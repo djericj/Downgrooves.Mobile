@@ -22,7 +22,7 @@ namespace Downgrooves.Mobile
     public class Website
     {
         public string BaseUrl { get; set; }
-        public string AssetPath { get; set; }
+        public string AudioFilePath { get; set; }
         public string ImagePath { get; set; }
     }
 

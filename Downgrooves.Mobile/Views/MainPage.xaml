@@ -13,8 +13,11 @@
         <Frame CornerRadius="5" Padding="15" Margin="5,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource LogoBackgroundColor}">
             <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.dg_logo_white.png" BackgroundColor="{DynamicResource LogoBackgroundColor}"/>
         </Frame>
-        <FlexLayout BindableLayout.ItemsSource="{Binding Path=Tiles}" Wrap="Wrap" Padding="10">
-            <BindableLayout.ItemTemplate>
+        <CollectionView ItemsSource="{Binding Path=Tiles}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:TileViewModel">
                     <Frame CornerRadius="10" 
                            effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}"
@@ -24,7 +27,7 @@
                            Margin="5"
                            HeightRequest="170"
                            WidthRequest="160"
-                           HorizontalOptions="FillAndExpand"
+                           HorizontalOptions="Fill"
                            HasShadow="False">
                         <StackLayout Padding="10,20">
                             <ffsvg:SvgCachedImage Source="{Binding SvgIconAbsolutePath}" WidthRequest="80" HeightRequest="80">
@@ -36,8 +39,8 @@
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </StackLayout>
 

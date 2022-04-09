@@ -1,6 +1,6 @@
 ﻿using Prism.Navigation;
 
-namespace Downgrooves.Mobile.ViewModels
+namespace Downgrooves.Mobile.ViewModels.Mixes
 {
     public class MixDetailViewModel : ViewModelBase
     {
@@ -18,7 +18,6 @@ namespace Downgrooves.Mobile.ViewModels
 
         public MixDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
-
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

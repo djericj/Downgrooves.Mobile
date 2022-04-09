@@ -1,6 +1,6 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Downgrooves.Mobile.ViewModels;
+using Downgrooves.Mobile.ViewModels.Mixes;
 using Newtonsoft.Json;
 using Serilog;
 using System.Collections.Generic;
@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.Services
 {
-
     public class MixService : ApiServiceBase, IMixService
     {
         public async Task<IEnumerable<MixViewModel>> GetMixesAsync(CancellationToken token = default)
@@ -27,7 +26,6 @@ namespace Downgrooves.Mobile.Services
                 Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription}");
             }
             return null;
-            
         }
 
         public async Task<IEnumerable<MixViewModel>> GetMixesAsync(int pageNumber, int pageSize, CancellationToken token = default)
@@ -44,7 +42,6 @@ namespace Downgrooves.Mobile.Services
                 Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription}");
             }
             return null;
-
         }
 
         public async Task<IEnumerable<MixViewModel>> GetMixesAsync(string category, CancellationToken token = default)

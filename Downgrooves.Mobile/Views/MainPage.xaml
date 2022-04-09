@@ -13,31 +13,32 @@
         <Frame CornerRadius="5" Padding="15" Margin="5,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource LogoBackgroundColor}">
             <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.dg_logo_white.png" BackgroundColor="{DynamicResource LogoBackgroundColor}"/>
         </Frame>
-        <CollectionView ItemsSource="{Binding Path=Tiles}">
+        <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="10">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:TileViewModel">
-                    <Frame CornerRadius="10" 
-                           effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}"
-                           effects:TouchEffect.CommandParameter="{Binding}"
-                           BackgroundColor="{DynamicResource ButtonBackgroundColor}"
-                           Padding="5"
-                           Margin="5"
-                           HeightRequest="170"
-                           WidthRequest="160"
-                           HorizontalOptions="Fill"
-                           HasShadow="False">
-                        <StackLayout Padding="10,20">
-                            <ffsvg:SvgCachedImage Source="{Binding SvgIconAbsolutePath}" WidthRequest="80" HeightRequest="80">
-                                <ffsvg:SvgCachedImage.Transformations>
-                                    <fft:TintTransformation HexColor="#FFFFFFFF" EnableSolidColor="true"/>
-                                </ffsvg:SvgCachedImage.Transformations>
-                            </ffsvg:SvgCachedImage>
-                            <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase"/>
-                        </StackLayout>
-                    </Frame>
+                    <StackLayout Padding="5">
+                        <Frame CornerRadius="10" 
+                               effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}"
+                               effects:TouchEffect.CommandParameter="{Binding}"
+                               BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                               Padding="5"
+                               HeightRequest="140"
+                               WidthRequest="160"
+                               HorizontalOptions="Fill"
+                               HasShadow="False">
+                            <StackLayout Padding="10">
+                                <ffsvg:SvgCachedImage Source="{Binding SvgIconAbsolutePath}" WidthRequest="80" HeightRequest="80">
+                                    <ffsvg:SvgCachedImage.Transformations>
+                                        <fft:TintTransformation HexColor="#FFFFFFFF" EnableSolidColor="true"/>
+                                    </ffsvg:SvgCachedImage.Transformations>
+                                </ffsvg:SvgCachedImage>
+                                <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

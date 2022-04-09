@@ -1,6 +1,8 @@
 using Downgrooves.Mobile.Services;
 using Downgrooves.Mobile.Services.Interfaces;
 using Downgrooves.Mobile.ViewModels;
+using Downgrooves.Mobile.ViewModels.Releases;
+using Downgrooves.Mobile.ViewModels.Mixes;
 using Downgrooves.Mobile.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;

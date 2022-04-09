@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Downgrooves.Mobile.Views.Releases"
-             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases"
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
-             Title="Releases" x:DataType="viewModels:ReleasesViewModel">
+             Title="{Binding Title}" x:DataType="viewModels:ReleasesViewModel">
     <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"

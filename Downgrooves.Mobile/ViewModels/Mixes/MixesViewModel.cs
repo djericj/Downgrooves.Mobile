@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
 
-namespace Downgrooves.Mobile.ViewModels
+namespace Downgrooves.Mobile.ViewModels.Mixes
 {
     public class MixesViewModel : ViewModelBase, INavigationAware
     {
@@ -21,13 +21,15 @@ namespace Downgrooves.Mobile.ViewModels
         public ICommand RefreshCommand => new DelegateCommand(Refresh);
 
         private ObservableRangeCollection<MixViewModel> _mixes;
-        public ObservableRangeCollection<MixViewModel> Mixes 
+
+        public ObservableRangeCollection<MixViewModel> Mixes
         {
             get { return _mixes; }
             set { SetProperty(ref _mixes, value); }
         }
 
         private int _itemThreshold;
+
         public int ItemThreshold
         {
             get { return _itemThreshold; }
@@ -35,6 +37,7 @@ namespace Downgrooves.Mobile.ViewModels
         }
 
         private bool _isBusy;
+
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -42,6 +45,7 @@ namespace Downgrooves.Mobile.ViewModels
         }
 
         private bool _isRefreshing;
+
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -95,8 +99,8 @@ namespace Downgrooves.Mobile.ViewModels
             try
             {
                 var mixesList = await _mixService.GetMixesAsync(pageNumber, _pageSize);
-                mixesList = mixesList.OrderBy(x => x.Name);
-                
+                mixesList = mixesList.OrderBy(x => x.Title);
+
                 Mixes.AddRange(new ObservableRangeCollection<MixViewModel>(mixesList));
 
                 Debug.WriteLine($"{mixesList.Count()} {Mixes.Count} ");
@@ -113,7 +117,7 @@ namespace Downgrooves.Mobile.ViewModels
             finally
             {
                 IsBusy = false;
-            }            
+            }
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

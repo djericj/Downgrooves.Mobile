@@ -4,21 +4,21 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                 xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
-                xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels">
+                xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases">
     <CollectionView.ItemsLayout>
         <GridItemsLayout Orientation="Vertical" Span="2" />
     </CollectionView.ItemsLayout>
     <CollectionView.ItemTemplate>
         <DataTemplate x:DataType="viewModels:ReleaseViewModel">
             <StackLayout Padding="10">
-                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" 
-                       Margin="1" Padding="3" 
+                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                       Margin="1" Padding="3"
                        HorizontalOptions="CenterAndExpand" HeightRequest="140" WidthRequest="140">
-                    <ff:CachedImage Source="{Binding ArtworkUrl250}"
+                    <ff:CachedImage Source="{Binding ArtworkUrl}"
                         effects:TouchEffect.Command="{Binding NavigateToReleaseCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleasesViewModel}}}"
-                        effects:TouchEffect.CommandParameter="{Binding}"/>
+                        effects:TouchEffect.CommandParameter="{Binding}" />
                 </Frame>
-                <Label Text="{Binding CollectionName}" Style="{DynamicResource h3}" HorizontalOptions="CenterAndExpand" />
+                <Label Text="{Binding Title}" Style="{DynamicResource h3}" HorizontalOptions="CenterAndExpand" />
                 <BoxView Style="{DynamicResource Separator}" />
             </StackLayout>
         </DataTemplate>

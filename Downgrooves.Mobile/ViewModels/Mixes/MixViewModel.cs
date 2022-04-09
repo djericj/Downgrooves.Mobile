@@ -1,72 +1,79 @@
 ﻿using Downgrooves.Mobile.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Downgrooves.Mobile.ViewModels
+namespace Downgrooves.Mobile.ViewModels.Mixes
 {
     public class MixViewModel
     {
         public Mix Mix { get; set; }
-        public MixViewModel() : this(new Mix()) {}
+
+        public MixViewModel() : this(new Mix())
+        {
+        }
 
         public MixViewModel(Mix mix)
         {
             Mix = mix;
         }
 
-        public int MixId => Mix.MixId;
-        public Genre Genre 
+        public int Id => Mix.Id;
+
+        public Genre Genre
         {
             get => Mix.Genre;
             set => Mix.Genre = value;
         }
-        public string Name 
+
+        public string Title
         {
-            get => Mix.Name;
-            set => Mix.Name = value;
+            get => Mix.Title;
+            set => Mix.Title = value;
         }
+
         public string Artist
         {
             get => $"mixed by {Mix.Artist}";
             set => Mix.Artist = value;
         }
+
         public string Length
         {
             get => Mix.Length;
             set => Mix.Length = value;
         }
+
         public string ShortDescription
         {
             get => Mix.ShortDescription;
             set => Mix.ShortDescription = value;
         }
-        public string Mp3File
+
+        public string Description
         {
-            get => Mix.Mp3File;
-            set => Mix.Mp3File = value;
+            get => Mix.Description;
+            set => Mix.Description = value;
         }
-        public string Attachment
+
+        public string AudioUrl
         {
-            get => $"{App.Settings.Website.BaseUrl}/{App.Settings.Website.ImagePath}/mixes/{Mix.Attachment}";
-            set => Mix.Attachment = value;
+            get => Mix.AudioUrl;
+            set => Mix.AudioUrl = value;
         }
+
+        public string ArtworkUrl
+        {
+            get => Mix.ArtworkUrl;
+            set => Mix.ArtworkUrl = value;
+        }
+
         public DateTime CreateDate
         {
             get => Mix.CreateDate;
             set => Mix.CreateDate = value;
         }
-        public string Category
-        {
-            get => Mix.Category;
-            set => Mix.Category = value;
-        }
-        public int Show
-        {
-            get => Mix.Show;
-            set => Mix.Show = value;
-        }
-        public ICollection<Track> Tracks
+
+        public ICollection<MixTrack> Tracks
         {
             get => Mix.Tracks;
             set => Mix.Tracks = value;

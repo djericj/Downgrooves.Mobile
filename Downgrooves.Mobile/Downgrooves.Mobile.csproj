@@ -12,11 +12,13 @@
   <ItemGroup>
     <None Remove="appSettings.json" />
     <None Remove="env.json" />
+    <None Remove="Resources\compact-disc.svg" />
     <None Remove="Resources\dg_logo_white.png" />
     <None Remove="Resources\envelope.svg" />
     <None Remove="Resources\FontAwesome6-Regular-400.otf" />
     <None Remove="Resources\FontAwesome6-Solid-900.otf" />
     <None Remove="Resources\headphones.svg" />
+    <None Remove="Resources\music.svg" />
     <None Remove="Resources\pause.svg" />
     <None Remove="Resources\play.svg" />
     <None Remove="Resources\record-vinyl.svg" />
@@ -30,11 +32,13 @@
   <ItemGroup>
     <EmbeddedResource Include="appSettings.json" />
     <EmbeddedResource Include="env.json" />
+    <EmbeddedResource Include="Resources\compact-disc.svg" />
     <EmbeddedResource Include="Resources\dg_logo_white.png" />
     <EmbeddedResource Include="Resources\envelope.svg" />
     <EmbeddedResource Include="Resources\FontAwesome6-Regular-400.otf" />
     <EmbeddedResource Include="Resources\FontAwesome6-Solid-900.otf" />
     <EmbeddedResource Include="Resources\headphones.svg" />
+    <EmbeddedResource Include="Resources\music.svg" />
     <EmbeddedResource Include="Resources\pause.svg" />
     <EmbeddedResource Include="Resources\play.svg" />
     <EmbeddedResource Include="Resources\record-vinyl.svg" />

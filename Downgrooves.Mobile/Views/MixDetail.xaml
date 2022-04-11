@@ -2,69 +2,66 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
+             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              x:Class="Downgrooves.Mobile.Views.MixDetail"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
-             xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              NavigationPage.HasNavigationBar="false"
              Title="{Binding Mix.Title}" x:DataType="viewModels:MixDetailViewModel">
     <ContentPage.Content>
-        <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
-            <StackLayout Padding="10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="6*" />
-                    </Grid.ColumnDefinitions>
+        <StackLayout>
+            <Frame BackgroundColor="{DynamicResource LogoBackgroundColor}" Margin="0" Padding="0,0,0,5">
+                <Grid RowSpacing="0" HeightRequest="400">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="220*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-                        <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
-                            <ff:CachedImage Source="{Binding Mix.ArtworkUrl}" />
-                        </Frame>
+
+                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Source="{Binding Mix.ArtworkUrl}" Aspect="AspectFill" HeightRequest="400"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                    <AbsoluteLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
+                        <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,5,1,0.2" AbsoluteLayout.LayoutFlags="SizeProportional" Padding="5,5,10,0">
+                            <controls:SvgIcon Icon="{x:Static controls:Icon.AngleLeft}" WidthRequest="32" HeightRequest="32" HorizontalOptions="StartAndExpand">
+                                <controls:SvgIcon.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixDetailViewModel}}}" />
+                                </controls:SvgIcon.GestureRecognizers>
+                            </controls:SvgIcon>
+
+                            <controls:SvgIcon Icon="{Binding FavoriteIcon}" WidthRequest="20" HeightRequest="20" HorizontalOptions="EndAndExpand" Margin="0,0,10,0">
+                                <controls:SvgIcon.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FavoriteCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixDetailViewModel}}}" />
+                                </controls:SvgIcon.GestureRecognizers>
+                            </controls:SvgIcon>
+                        </StackLayout>
+                    </AbsoluteLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="0" Padding="12" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand">
+                        <Label Text="{Binding Mix.Title}" Style="{DynamicResource h3}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" BackgroundColor="{DynamicResource LogoBackgroundColor}" Padding="5,2" />
+                        <Label Text="{Binding Mix.Artist}" Style="{DynamicResource h5}" HorizontalOptions="EndAndExpand" TextColor="{DynamicResource SecondaryTextColor}" BackgroundColor="{DynamicResource LogoBackgroundColor}" Padding="5,2" />
                     </StackLayout>
-                    <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Path=Mix.Title}" Style="{DynamicResource h2}" />
-                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-                        <Label Text="{Binding Path=Mix.Genre.Name}" Style="{DynamicResource h3}" Padding="2,0,0,5" />
-                        <Label Text=" -- " />
-                        <Label Text="{Binding Path=Mix.Length}" Style="{DynamicResource h3}" Padding="2,0,0,5" />
-                    </StackLayout>
-                    <Button Grid.Column="1" Grid.Row="2" Text="Listen" ContentLayout="Left, 5" HorizontalOptions="Fill" VerticalOptions="End" Margin="0" Padding="10,2">
-                        <Button.ImageSource>
-                            <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" />
-                        </Button.ImageSource>
-                    </Button>
                 </Grid>
-                <ScrollView Orientation="Vertical">
-                    <CollectionView ItemsSource="{Binding Path=Mix.Tracks}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:MixTrack">
-                                <StackLayout>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="2*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Column="0" Text="{Binding Number}" HorizontalOptions="Start" Padding="5" BackgroundColor="{DynamicResource TextBackgroundColor}" FontAttributes="Bold" />
-                                        <StackLayout Grid.Column="1" HorizontalOptions="Fill">
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                                                <Label Text="{Binding RemixFormatted}" HorizontalOptions="FillAndExpand" />
-                                            </StackLayout>
-                                            <Label Text="{Binding Artist}" HorizontalOptions="FillAndExpand" />
-                                        </StackLayout>
-                                        <Label Grid.Column="2" Text="{Binding Path=Label}" HorizontalOptions="EndAndExpand" />
-                                    </Grid>
-                                    <BoxView Style="{DynamicResource Separator}" />
+            </Frame>
+
+            <StackLayout Margin="10,0">
+                <Button Text="Listen" Margin="0,10,0,15"
+                    Command="{Binding OpenLinkCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixDetailViewModel}}}"
+                    CommandParameter="{Binding Mix.AudioUrl}" />
+                <BoxView Style="{DynamicResource Separator}" Margin="3" />
+                <CollectionView ItemsSource="{Binding Mix.Tracks}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:MixTrack">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding NumberFormatted}" MinimumWidthRequest="30" HorizontalOptions="Start" BackgroundColor="{DynamicResource LogoBackgroundColor}" LineBreakMode="NoWrap" Margin="5, 0" Padding="5, 0" />
+                                    <StackLayout>
+                                        <Label Text="{Binding TitleAndMix}" HorizontalOptions="Start" LineBreakMode="TailTruncation" FontAttributes="Bold" Style="{DynamicResource h4}" />
+                                        <Label Text="{Binding Artist}" HorizontalOptions="Start" LineBreakMode="TailTruncation" Style="{DynamicResource h5}" TextColor="{DynamicResource SecondaryTextColor}" />
+                                    </StackLayout>
                                 </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </ScrollView>
+                                <BoxView Style="{DynamicResource Separator}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
-        </Frame>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

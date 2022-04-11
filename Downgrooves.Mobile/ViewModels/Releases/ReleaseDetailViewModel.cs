@@ -2,6 +2,7 @@
 using Downgrooves.Mobile.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Downgrooves.Mobile.ViewModels.Releases
@@ -44,10 +45,13 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         public async void Favorite(Release release)
         {
-            if (FavoriteIcon == Icon.HeartOutline)
-                FavoriteIcon = Icon.Heart;
-            else
-                FavoriteIcon = Icon.HeartOutline;
+            await Task.Run(() =>
+            {
+                if (FavoriteIcon == Icon.HeartOutline)
+                    FavoriteIcon = Icon.Heart;
+                else
+                    FavoriteIcon = Icon.HeartOutline;
+            });
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

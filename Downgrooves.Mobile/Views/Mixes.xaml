@@ -7,7 +7,7 @@
              NavigationPage.HasNavigationBar="false"
              Title="DJ Sets" x:DataType="viewModels:MixesViewModel">
     <ContentPage.Content>
-        <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
+        <Frame BackgroundColor="Transparent" Padding="5">
             <AbsoluteLayout>
                 <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="All">

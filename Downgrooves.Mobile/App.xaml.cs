@@ -24,8 +24,6 @@ namespace Downgrooves.Mobile
     {
         public static AppSettings Settings { get; private set; }
 
-        public static T Resolve<T>() => Current.Container.Resolve<T>();
-
         public App() : this(null)
         {
         }
@@ -36,27 +34,33 @@ namespace Downgrooves.Mobile
 
         protected override async void OnInitialized()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            // Get environment file/data
-            var contents = GetEmbeddedResource("env.json") ?? "{}";
-            var config = JsonConvert.DeserializeObject<EnvironmentFile>(contents);
-            var env = config?.Env;
-            // Register json files for configuration settings
-            var fileProvider = new ManifestEmbeddedFileProvider(typeof(App).GetTypeInfo().Assembly);
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile(fileProvider, "appSettings.json", false, false)
-                .Build();
+                // Get environment file/data
+                var contents = GetEmbeddedResource("env.json") ?? "{}";
+                var config = JsonConvert.DeserializeObject<EnvironmentFile>(contents);
+                var env = config?.Env;
+                // Register json files for configuration settings
+                var fileProvider = new ManifestEmbeddedFileProvider(typeof(App).GetTypeInfo().Assembly);
+                var configuration = new ConfigurationBuilder()
+                    .AddJsonFile(fileProvider, "appSettings.json", false, false)
+                    .Build();
 
-            Settings = configuration.Get<AppSettings>();
+                Settings = configuration.Get<AppSettings>();
 
-            Current.PageAppearing += (_, page) => Log.Information("Navigated to {name}", page.Title ?? "Home");
+                Current.PageAppearing += (_, page) => Log.Information("Navigated to {name}", page.Title ?? "Home");
 
-            Resolve<IMixService>();
-
-            var resources = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+                var result = await NavigationService.NavigateAsync("MainPage");
+                var f = 1;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex.Message);
+                Log.Fatal(ex.StackTrace);
+                throw;
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -67,11 +71,13 @@ namespace Downgrooves.Mobile
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
             containerRegistry.RegisterForNavigation<Mixes, MixesViewModel>();
             containerRegistry.RegisterForNavigation<MixDetail, MixDetailViewModel>();
             containerRegistry.RegisterForNavigation<Contact, ContactViewModel>();
             containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();
             containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
+            containerRegistry.RegisterForNavigation<Remixes, RemixesViewModel>();
             containerRegistry.RegisterForNavigation<ReleaseDetail, ReleaseDetailViewModel>();
         }
 

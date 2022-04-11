@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Downgrooves.Mobile.Views.Mixes"
-             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
+             x:Class="Downgrooves.Mobile.Views.Remixes"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases"
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              NavigationPage.HasNavigationBar="false"
-             Title="DJ Sets" x:DataType="viewModels:MixesViewModel">
+             Title="{Binding Title}" x:DataType="viewModels:RemixesViewModel">
     <ContentPage.Content>
         <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
             <AbsoluteLayout>
@@ -13,9 +13,9 @@
                  AbsoluteLayout.LayoutFlags="All">
                     <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
                         <ScrollView Orientation="Vertical">
-                            <controls:MixList ItemsSource="{Binding Path=Mixes}"
+                            <controls:ReleaseList ItemsSource="{Binding Path=Releases}"
                                 RemainingItemsThreshold="{Binding ItemThreshold}"
-                                RemainingItemsThresholdReachedCommand="{Binding LoadMixesCommand}" />
+                                RemainingItemsThresholdReachedCommand="{Binding LoadReleasesCommand}" />
                         </ScrollView>
                     </RefreshView>
                 </StackLayout>

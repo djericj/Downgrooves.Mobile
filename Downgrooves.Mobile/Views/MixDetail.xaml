@@ -5,63 +5,66 @@
              x:Class="Downgrooves.Mobile.Views.MixDetail"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
+             NavigationPage.HasNavigationBar="false"
              Title="{Binding Mix.Title}" x:DataType="viewModels:MixDetailViewModel">
-    <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
-        <StackLayout Padding="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="6*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <StackLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-                    <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
-                        <ff:CachedImage Source="{Binding Mix.ArtworkUrl}" />
-                    </Frame>
-                </StackLayout>
-                <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Path=Mix.Title}" Style="{DynamicResource h2}" />
-                <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-                    <Label Text="{Binding Path=Mix.Genre.Name}" Style="{DynamicResource h3}" Padding="2,0,0,5" />
-                    <Label Text=" -- " />
-                    <Label Text="{Binding Path=Mix.Length}" Style="{DynamicResource h3}" Padding="2,0,0,5" />
-                </StackLayout>
-                <Button Grid.Column="1" Grid.Row="2" Text="Listen" ContentLayout="Left, 5" HorizontalOptions="Fill" VerticalOptions="End" Margin="0" Padding="10,2">
-                    <Button.ImageSource>
-                        <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" />
-                    </Button.ImageSource>
-                </Button>
-            </Grid>
-            <ScrollView Orientation="Vertical">
-                <CollectionView ItemsSource="{Binding Path=Mix.Tracks}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:MixTrack">
-                            <StackLayout>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Number}" HorizontalOptions="Start" Padding="5" BackgroundColor="{DynamicResource TextBackgroundColor}" FontAttributes="Bold" />
-                                    <StackLayout Grid.Column="1" HorizontalOptions="Fill">
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                                            <Label Text="{Binding RemixFormatted}" HorizontalOptions="FillAndExpand" />
+    <ContentPage.Content>
+        <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
+            <StackLayout Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="6*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+                        <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3">
+                            <ff:CachedImage Source="{Binding Mix.ArtworkUrl}" />
+                        </Frame>
+                    </StackLayout>
+                    <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Path=Mix.Title}" Style="{DynamicResource h2}" />
+                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                        <Label Text="{Binding Path=Mix.Genre.Name}" Style="{DynamicResource h3}" Padding="2,0,0,5" />
+                        <Label Text=" -- " />
+                        <Label Text="{Binding Path=Mix.Length}" Style="{DynamicResource h3}" Padding="2,0,0,5" />
+                    </StackLayout>
+                    <Button Grid.Column="1" Grid.Row="2" Text="Listen" ContentLayout="Left, 5" HorizontalOptions="Fill" VerticalOptions="End" Margin="0" Padding="10,2">
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" />
+                        </Button.ImageSource>
+                    </Button>
+                </Grid>
+                <ScrollView Orientation="Vertical">
+                    <CollectionView ItemsSource="{Binding Path=Mix.Tracks}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:MixTrack">
+                                <StackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="{Binding Number}" HorizontalOptions="Start" Padding="5" BackgroundColor="{DynamicResource TextBackgroundColor}" FontAttributes="Bold" />
+                                        <StackLayout Grid.Column="1" HorizontalOptions="Fill">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                                                <Label Text="{Binding RemixFormatted}" HorizontalOptions="FillAndExpand" />
+                                            </StackLayout>
+                                            <Label Text="{Binding Artist}" HorizontalOptions="FillAndExpand" />
                                         </StackLayout>
-                                        <Label Text="{Binding Artist}" HorizontalOptions="FillAndExpand" />
-                                    </StackLayout>
-                                    <Label Grid.Column="2" Text="{Binding Path=Label}" HorizontalOptions="EndAndExpand" />
-                                </Grid>
-                                <BoxView Style="{DynamicResource Separator}" />
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
-        </StackLayout>
-    </Frame>
+                                        <Label Grid.Column="2" Text="{Binding Path=Label}" HorizontalOptions="EndAndExpand" />
+                                    </Grid>
+                                    <BoxView Style="{DynamicResource Separator}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
 </ContentPage>

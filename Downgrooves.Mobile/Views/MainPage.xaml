@@ -1,50 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Downgrooves.Mobile.Views.MainPage"
-             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:ffsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:fft="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
-             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
-             Title="Home" x:DataType="viewModels:MainPageViewModel">
-    
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="20" Spacing="10">
-        <Frame CornerRadius="5" Padding="15" Margin="5,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource LogoBackgroundColor}">
-            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.dg_logo_white.png" BackgroundColor="{DynamicResource LogoBackgroundColor}"/>
-        </Frame>
-        <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="10">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:TileViewModel">
-                    <StackLayout Padding="5">
-                        <Frame CornerRadius="10" 
-                               effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}"
-                               effects:TouchEffect.CommandParameter="{Binding}"
-                               BackgroundColor="{DynamicResource ButtonBackgroundColor}"
-                               Padding="5"
-                               HeightRequest="140"
-                               WidthRequest="160"
-                               HorizontalOptions="Fill"
-                               HasShadow="False">
-                            <StackLayout Padding="10">
-                                <ffsvg:SvgCachedImage Source="{Binding SvgIconAbsolutePath}" WidthRequest="80" HeightRequest="80">
-                                    <ffsvg:SvgCachedImage.Transformations>
-                                        <fft:TintTransformation HexColor="#FFFFFFFF" EnableSolidColor="true"/>
-                                    </ffsvg:SvgCachedImage.Transformations>
-                                </ffsvg:SvgCachedImage>
-                                <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase"/>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-    </StackLayout>
-
-    
-
-</ContentPage>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:Downgrooves.Mobile.Views"
+            xmlns:prism="http://prismlibrary.com"
+            xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+            xmlns:fonts="clr-namespace:Downgrooves.Mobile.Controls"
+            xmlns:behaviors="clr-namespace:Downgrooves.Mobile.Behaviors"
+            x:Class="Downgrooves.Mobile.Views.MainPage"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            NavigationPage.HasNavigationBar="False"
+            BackgroundColor="{DynamicResource LogoBackgroundColor}"
+            BarTextColor="{DynamicResource SecondaryTextColor}"
+            SelectedTabColor="White"
+            UnselectedTabColor="#999999"
+            BackgroundImageSource="{Binding BackgroundImage}"
+            Title="Home" x:DataType="viewModels:MainPageViewModel">
+    <TabbedPage.Behaviors>
+        <behaviors:TabbedPageNavigationBehavior />
+    </TabbedPage.Behaviors>
+    <TabbedPage.Children>
+        <local:Releases Title="Releases">
+            <local:Releases.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.RecordVinyl}" />
+            </local:Releases.IconImageSource>
+        </local:Releases>
+        <local:Remixes Title="Remixes">
+            <local:Remixes.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.CompactDisc}" />
+            </local:Remixes.IconImageSource>
+        </local:Remixes>
+        <local:Modular Title="Modular">
+            <local:Modular.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Spinner}" />
+            </local:Modular.IconImageSource>
+        </local:Modular>
+        <local:Mixes Title="DJ Sets">
+            <local:Mixes.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Headphones}" />
+            </local:Mixes.IconImageSource>
+        </local:Mixes>
+        <local:Releases Title="Other Music">
+            <local:Releases.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Music}" />
+            </local:Releases.IconImageSource>
+        </local:Releases>
+        <local:Shop Title="Shop">
+            <local:Shop.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Shop}" />
+            </local:Shop.IconImageSource>
+        </local:Shop>
+        <local:Contact Title="Contact">
+            <local:Contact.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Envelope}" />
+            </local:Contact.IconImageSource>
+        </local:Contact>
+        <local:Home Title="Home">
+            <local:Home.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.House}" />
+            </local:Home.IconImageSource>
+        </local:Home>
+    </TabbedPage.Children>
+</TabbedPage>

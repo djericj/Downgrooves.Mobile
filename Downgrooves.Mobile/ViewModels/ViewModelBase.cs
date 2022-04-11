@@ -10,6 +10,7 @@ namespace Downgrooves.Mobile.ViewModels
         protected INavigationService NavigationService { get; private set; }
 
         private string _title;
+
         public string Title
         {
             get { return _title; }
@@ -23,28 +24,29 @@ namespace Downgrooves.Mobile.ViewModels
 
         public virtual void Initialize(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
         }
 
         public virtual void Destroy()
         {
-
         }
 
         public async void OpenLink(string url)
         {
             var uri = new Uri(url);
             await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+
+        public async void GoBack()
+        {
+            await NavigationService.GoBackAsync();
         }
     }
 }

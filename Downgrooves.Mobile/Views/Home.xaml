@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
+             xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             NavigationPage.HasNavigationBar="false"
+             x:Class="Downgrooves.Mobile.Views.Home"
+              x:DataType="viewModels:HomeViewModel">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ff:CachedImage Source="{Binding BackgroundImage}" Aspect="Fill" Opacity="0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,20" />
+            <RelativeLayout AbsoluteLayout.LayoutBounds="0,70,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="10">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:TileViewModel">
+                            <StackLayout Padding="5">
+                                <Frame
+                               effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:HomeViewModel}}}"
+                               effects:TouchEffect.CommandParameter="{Binding}"
+                               BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                               Opacity="0.9"
+                               Padding="5"
+                               HeightRequest="140"
+                               WidthRequest="160"
+                               HorizontalOptions="Fill"
+                               HasShadow="False">
+
+                                    <StackLayout Padding="10">
+                                        <controls:SvgIcon Icon="{Binding SvgIcon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" />
+                                        <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase" />
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RelativeLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

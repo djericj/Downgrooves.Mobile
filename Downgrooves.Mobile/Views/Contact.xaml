@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Downgrooves.Mobile.Views.Contact"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             NavigationPage.HasNavigationBar="false"
              Title="Contact Us" x:DataType="viewModels:ContactViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Contact Page" Style="{DynamicResource h1}"
-                VerticalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>

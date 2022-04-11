@@ -12,18 +12,23 @@
   <ItemGroup>
     <None Remove="appSettings.json" />
     <None Remove="env.json" />
+    <None Remove="Resources\angle-left.svg" />
     <None Remove="Resources\compact-disc.svg" />
     <None Remove="Resources\dg_logo_white.png" />
     <None Remove="Resources\envelope.svg" />
     <None Remove="Resources\FontAwesome6-Regular-400.otf" />
     <None Remove="Resources\FontAwesome6-Solid-900.otf" />
     <None Remove="Resources\headphones.svg" />
+    <None Remove="Resources\heart-o.svg" />
+    <None Remove="Resources\heart.svg" />
+    <None Remove="Resources\images\pavel-pjatakov-rywx3yUFaa0-unsplash.jpg" />
     <None Remove="Resources\music.svg" />
     <None Remove="Resources\pause.svg" />
     <None Remove="Resources\play.svg" />
     <None Remove="Resources\record-vinyl.svg" />
     <None Remove="Resources\spinner.svg" />
     <None Remove="Resources\stop.svg" />
+    <None Remove="Resources\svg\ellipsis.svg" />
     <None Remove="Resources\volume-high.svg" />
     <None Remove="Resources\volume-low.svg" />
     <None Remove="Resources\volume-off.svg" />
@@ -32,21 +37,26 @@
   <ItemGroup>
     <EmbeddedResource Include="appSettings.json" />
     <EmbeddedResource Include="env.json" />
-    <EmbeddedResource Include="Resources\compact-disc.svg" />
-    <EmbeddedResource Include="Resources\dg_logo_white.png" />
-    <EmbeddedResource Include="Resources\envelope.svg" />
-    <EmbeddedResource Include="Resources\FontAwesome6-Regular-400.otf" />
-    <EmbeddedResource Include="Resources\FontAwesome6-Solid-900.otf" />
-    <EmbeddedResource Include="Resources\headphones.svg" />
-    <EmbeddedResource Include="Resources\music.svg" />
-    <EmbeddedResource Include="Resources\pause.svg" />
-    <EmbeddedResource Include="Resources\play.svg" />
-    <EmbeddedResource Include="Resources\record-vinyl.svg" />
-    <EmbeddedResource Include="Resources\spinner.svg" />
-    <EmbeddedResource Include="Resources\stop.svg" />
-    <EmbeddedResource Include="Resources\volume-high.svg" />
-    <EmbeddedResource Include="Resources\volume-low.svg" />
-    <EmbeddedResource Include="Resources\volume-off.svg" />
+    <EmbeddedResource Include="Resources\images\pavel-pjatakov-rywx3yUFaa0-unsplash.jpg" />
+    <EmbeddedResource Include="Resources\svg\angle-left.svg" />
+    <EmbeddedResource Include="Resources\svg\compact-disc.svg" />
+    <EmbeddedResource Include="Resources\images\dg_logo_white.png" />
+    <EmbeddedResource Include="Resources\svg\ellipsis.svg" />
+    <EmbeddedResource Include="Resources\svg\envelope.svg" />
+    <EmbeddedResource Include="Resources\fonts\FontAwesome6-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\fonts\FontAwesome6-Solid-900.otf" />
+    <EmbeddedResource Include="Resources\svg\headphones.svg" />
+    <EmbeddedResource Include="Resources\svg\heart-o.svg" />
+    <EmbeddedResource Include="Resources\svg\heart.svg" />
+    <EmbeddedResource Include="Resources\svg\music.svg" />
+    <EmbeddedResource Include="Resources\svg\pause.svg" />
+    <EmbeddedResource Include="Resources\svg\play.svg" />
+    <EmbeddedResource Include="Resources\svg\record-vinyl.svg" />
+    <EmbeddedResource Include="Resources\svg\spinner.svg" />
+    <EmbeddedResource Include="Resources\svg\stop.svg" />
+    <EmbeddedResource Include="Resources\svg\volume-high.svg" />
+    <EmbeddedResource Include="Resources\svg\volume-low.svg" />
+    <EmbeddedResource Include="Resources\svg\volume-off.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +71,7 @@
     <PackageReference Include="Prism.Forms" Version="8.1.97" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
@@ -85,6 +96,9 @@
     <EmbeddedResource Update="Views\Contact.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Home.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\MediaPlayer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -101,6 +115,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Releases.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Remixes.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shop.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

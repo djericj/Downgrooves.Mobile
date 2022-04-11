@@ -1,4 +1,5 @@
-﻿using Downgrooves.Mobile.Services.Interfaces;
+﻿using Downgrooves.Mobile.Controls;
+using Downgrooves.Mobile.Models;
 using Prism.Commands;
 using Prism.Navigation;
 using System.Windows.Input;
@@ -8,8 +9,13 @@ namespace Downgrooves.Mobile.ViewModels.Releases
     public class ReleaseDetailViewModel : ViewModelBase
     {
         private ReleaseViewModel _release;
+        private Icon favoriteIcon;
 
         public ICommand OpenLinkCommand => new DelegateCommand<string>(OpenLink);
+
+        public ICommand GoBackCommand => new DelegateCommand(GoBack);
+
+        public ICommand FavoriteCommand => new DelegateCommand<Release>(Favorite);
 
         public ReleaseViewModel Release
         {
@@ -21,23 +27,32 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             }
         }
 
-        private string _previewIcon;
-
-        public string PreviewIcon
+        public Icon FavoriteIcon
         {
-            get { return _previewIcon; }
-            set { SetProperty(ref _previewIcon, value); }
+            get => favoriteIcon;
+            set
+            {
+                favoriteIcon = value;
+                RaisePropertyChanged(nameof(FavoriteIcon));
+            }
         }
 
         public ReleaseDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
+            FavoriteIcon = Icon.HeartOutline;
+        }
+
+        public async void Favorite(Release release)
+        {
+            if (FavoriteIcon == Icon.HeartOutline)
+                FavoriteIcon = Icon.Heart;
+            else
+                FavoriteIcon = Icon.HeartOutline;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-
-            PreviewIcon = "resource://Downgrooves.Mobile.Resources.play.svg";
 
             if (_release != null) return; // release is already loaded.
 

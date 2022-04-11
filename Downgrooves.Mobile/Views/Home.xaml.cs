@@ -1,4 +1,8 @@
-﻿using Downgrooves.Mobile.ViewModels.Releases;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -6,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Downgrooves.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Releases : ContentPage
+    public partial class Home : ContentPage
     {
-        public Releases()
+        public Home()
         {
             InitializeComponent();
         }

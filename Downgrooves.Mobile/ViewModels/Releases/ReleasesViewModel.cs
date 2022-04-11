@@ -9,7 +9,7 @@ using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace Downgrooves.Mobile.ViewModels.Releases
 {
-    public class ReleasesViewModel : ViewModelBase, INavigationAware
+    public class ReleasesViewModel : ViewModelBase
     {
         private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
@@ -17,6 +17,36 @@ namespace Downgrooves.Mobile.ViewModels.Releases
         private int _artistId = 0;
         private bool _isOriginal = false;
         private bool _isRemix = false;
+
+        public int ArtistId
+        {
+            get => _artistId;
+            set
+            {
+                _artistId = value;
+                RaisePropertyChanged(nameof(ArtistId));
+            }
+        }
+
+        public bool IsOriginal
+        {
+            get => _isOriginal;
+            set
+            {
+                _isOriginal = value;
+                RaisePropertyChanged(nameof(IsOriginal));
+            }
+        }
+
+        public bool IsRemix
+        {
+            get => _isRemix;
+            set
+            {
+                _isRemix = value;
+                RaisePropertyChanged(nameof(IsRemix));
+            }
+        }
 
         public ICommand LoadReleasesCommand => new DelegateCommand(LoadMore);
 
@@ -49,6 +79,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
         }
 
         private bool _isRefreshing;
+        private int artistId;
 
         public bool IsRefreshing
         {
@@ -131,11 +162,15 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            _artistId = Convert.ToInt32(parameters["ArtistId"]);
-            _isOriginal = Convert.ToBoolean(parameters["isOriginal"]);
-            _isRemix = Convert.ToBoolean(parameters["isRemix"]);
+            base.OnNavigatedTo(parameters);
+            if (parameters["ArtistId"] != null)
+                ArtistId = Convert.ToInt32(parameters["ArtistId"]);
 
-            Title = parameters["Title"].ToString();
+            if (parameters["IsOriginal"] != null)
+                IsOriginal = Convert.ToBoolean(parameters["IsOriginal"]);
+
+            if (parameters["IsRemix"] != null)
+                IsRemix = Convert.ToBoolean(parameters["IsRemix"]);
 
             LoadReleases();
         }

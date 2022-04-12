@@ -1,6 +1,4 @@
-﻿using Downgrooves.Mobile.ViewModels.Releases;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Downgrooves.Mobile.Views

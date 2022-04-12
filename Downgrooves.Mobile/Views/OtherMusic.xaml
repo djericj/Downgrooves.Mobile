@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Downgrooves.Mobile.Views.OtherMusic"
+             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             NavigationPage.HasNavigationBar="false"
+             Title="{Binding Title}" x:DataType="viewModels:OtherMusicViewModel">
+    <TabbedPage.Children>
+        <ContentPage Title="Eric Rylos">
+            <StackLayout>
+                <Label Text="Eric Rylos" />
+                <Label Text="Downgrooves producer Eric Rylos produces ambient &amp; downtempo music under his own name." />
+            </StackLayout>
+        </ContentPage>
+        <ContentPage Title="Evotone">
+            <StackLayout>
+                <Label Text="Evotone" />
+                <Label Text="Downgrooves producer Eric Rylos produces organic &amp; minimal under the alias Evotone." />
+            </StackLayout>
+        </ContentPage>
+    </TabbedPage.Children>
+</TabbedPage>

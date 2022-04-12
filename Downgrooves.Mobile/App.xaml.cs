@@ -67,6 +67,7 @@ namespace Downgrooves.Mobile
         {
             containerRegistry.RegisterSingleton<IMixService, MixService>();
             containerRegistry.RegisterSingleton<IReleaseService, ReleaseService>();
+            containerRegistry.RegisterSingleton<ITileService, TileService>();
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
@@ -74,10 +75,8 @@ namespace Downgrooves.Mobile
             containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
             containerRegistry.RegisterForNavigation<Mixes, MixesViewModel>();
             containerRegistry.RegisterForNavigation<MixDetail, MixDetailViewModel>();
-            containerRegistry.RegisterForNavigation<Contact, ContactViewModel>();
             containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();
             containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
-            containerRegistry.RegisterForNavigation<Remixes, RemixesViewModel>();
             containerRegistry.RegisterForNavigation<ReleaseDetail, ReleaseDetailViewModel>();
         }
 

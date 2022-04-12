@@ -81,7 +81,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ReleaseDetail.xaml.cs">
+    <Compile Update="Views\Releases\ReleaseDetail.xaml.cs">
       <DependentUpon>ReleaseDetail.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -90,10 +90,7 @@
     <EmbeddedResource Update="Controls\MixList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\ReleaseList.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Contact.xaml">
+    <EmbeddedResource Update="Controls\ReleaeseCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home.xaml">
@@ -102,25 +99,22 @@
     <EmbeddedResource Update="Views\MediaPlayer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MixDetail.xaml">
+    <EmbeddedResource Update="Views\Mixes\MixDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Mixes.xaml">
+    <EmbeddedResource Update="Views\Mixes\Mixes.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Modular.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReleaseDetail.xaml">
+    <EmbeddedResource Update="Views\OtherMusic.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Releases.xaml">
+    <EmbeddedResource Update="Views\Releases\ReleaseDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Remixes.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Shop.xaml">
+    <EmbeddedResource Update="Views\Releases\Releases.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

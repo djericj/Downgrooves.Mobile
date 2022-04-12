@@ -1,20 +1,30 @@
-﻿using Prism.Mvvm;
+﻿using Prism;
+using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using Xamarin.Essentials;
 
 namespace Downgrooves.Mobile.ViewModels
 {
-    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, IActiveAware
     {
-        protected INavigationService NavigationService { get; private set; }
-
+        private bool _isActive;
         private string _title;
+
+        public event EventHandler IsActiveChanged;
+
+        protected INavigationService NavigationService { get; private set; }
 
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set { SetProperty(ref _isActive, value, RaiseIsActiveChanged); }
         }
 
         public ViewModelBase(INavigationService navigationService)
@@ -47,6 +57,11 @@ namespace Downgrooves.Mobile.ViewModels
         public async void GoBack()
         {
             await NavigationService.GoBackAsync();
+        }
+
+        protected virtual void RaiseIsActiveChanged()
+        {
+            IsActiveChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

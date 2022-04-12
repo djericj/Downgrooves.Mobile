@@ -8,7 +8,7 @@ namespace Downgrooves.Mobile.Services.Interfaces
     public interface IReleaseService
     {
         Task<IEnumerable<ReleaseViewModel>> GetReleases(int pageNumber, int pageSize, string artistName = null,
-            int artistId = 0, bool isOriginal = false, bool isRemix = false, CancellationToken token = default);
+            int artistId = 0, bool originals = false, bool remixes = false, CancellationToken token = default);
 
         Task<ReleaseViewModel> GetRelease(int collectionId, CancellationToken token = default);
     }

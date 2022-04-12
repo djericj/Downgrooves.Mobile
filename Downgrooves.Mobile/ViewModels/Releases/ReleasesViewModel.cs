@@ -1,60 +1,46 @@
-﻿using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Commands;
+﻿using Downgrooves.Mobile.Models;
+using Downgrooves.Mobile.Services.Interfaces;
 using Prism.Navigation;
+using Xamarin.CommunityToolkit.ObjectModel;
+using Prism.Commands;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
-using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace Downgrooves.Mobile.ViewModels.Releases
 {
     public class ReleasesViewModel : ViewModelBase
     {
+        private ObservableRangeCollection<ReleaseViewModel> _releases;
         private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
         private readonly IReleaseService _releaseService;
-        private int _artistId = 0;
-        private bool _isOriginal = false;
-        private bool _isRemix = false;
+        private Artist _artist;
+        private int _itemThreshold;
+        private bool _isBusy;
+        private bool _isRefreshing;
 
-        public int ArtistId
+        public ReleasesViewModel(INavigationService navigationService, IReleaseService releaseService) : base(navigationService)
         {
-            get => _artistId;
-            set
-            {
-                _artistId = value;
-                RaisePropertyChanged(nameof(ArtistId));
-            }
+            _releaseService = releaseService;
+            this.IsActiveChanged += ReleasesViewModel_IsActiveChanged;
         }
 
-        public bool IsOriginal
+        private void ReleasesViewModel_IsActiveChanged(object sender, EventArgs e)
         {
-            get => _isOriginal;
-            set
+            if (sender is ReleasesViewModel)
             {
-                _isOriginal = value;
-                RaisePropertyChanged(nameof(IsOriginal));
+                Artist = new Artist() { ArtistId = 1 };
             }
+            LoadReleases();
         }
 
-        public bool IsRemix
+        public Artist Artist
         {
-            get => _isRemix;
-            set
-            {
-                _isRemix = value;
-                RaisePropertyChanged(nameof(IsRemix));
-            }
+            get => _artist;
+            set { SetProperty(ref _artist, value); }
         }
-
-        public ICommand LoadReleasesCommand => new DelegateCommand(LoadMore);
-
-        public ICommand RefreshCommand => new DelegateCommand(Refresh);
-
-        public ICommand NavigateToReleaseCommand => new DelegateCommand<ReleaseViewModel>(NavigateToRelease);
-
-        private ObservableRangeCollection<ReleaseViewModel> _releases;
 
         public ObservableRangeCollection<ReleaseViewModel> Releases
         {
@@ -62,15 +48,11 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             set { SetProperty(ref _releases, value); }
         }
 
-        private int _itemThreshold;
-
         public int ItemThreshold
         {
             get { return _itemThreshold; }
             set { SetProperty(ref _itemThreshold, value); }
         }
-
-        private bool _isBusy;
 
         public bool IsBusy
         {
@@ -78,36 +60,17 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             set { SetProperty(ref _isBusy, value); Debug.WriteLine($"IsBusy: {IsBusy}"); }
         }
 
-        private bool _isRefreshing;
-        private int artistId;
-
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
             set { SetProperty(ref _isRefreshing, value); Debug.WriteLine($"IsRefreshing: {IsRefreshing}"); }
         }
 
-        public ReleasesViewModel(INavigationService navigationService, IReleaseService releaseService) : base(navigationService)
-        {
-            _releaseService = releaseService;
-        }
+        public ICommand LoadReleasesCommand => new DelegateCommand(LoadMore);
 
-        public void Refresh()
-        {
-            try
-            {
-                Releases.Clear();
-                LoadReleases();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsRefreshing = false;
-            }
-        }
+        public ICommand RefreshCommand => new DelegateCommand(Refresh);
+
+        public ICommand NavigateToReleaseCommand => new DelegateCommand<ReleaseViewModel>(NavigateToRelease);
 
         public void LoadMore()
         {
@@ -133,10 +96,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
             try
             {
-                var releasesList = await _releaseService.GetReleases(pageNumber, _pageSize,
-                    artistId: _artistId,
-                    isOriginal: _isOriginal,
-                    isRemix: _isRemix);
+                var releasesList = await _releaseService.GetReleases(pageNumber, _pageSize, artistId: _artist.ArtistId);
                 releasesList = releasesList.OrderByDescending(x => x.ReleaseDate);
 
                 if (releasesList.Any())
@@ -160,19 +120,22 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public void Refresh()
         {
-            base.OnNavigatedTo(parameters);
-            if (parameters["ArtistId"] != null)
-                ArtistId = Convert.ToInt32(parameters["ArtistId"]);
-
-            if (parameters["IsOriginal"] != null)
-                IsOriginal = Convert.ToBoolean(parameters["IsOriginal"]);
-
-            if (parameters["IsRemix"] != null)
-                IsRemix = Convert.ToBoolean(parameters["IsRemix"]);
-
-            LoadReleases();
+            try
+            {
+                IsRefreshing = true;
+                Releases.Clear();
+                LoadReleases();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
         }
 
         private async void NavigateToRelease(ReleaseViewModel release)
@@ -182,6 +145,11 @@ namespace Downgrooves.Mobile.ViewModels.Releases
                 {"release",  release}
             };
             await NavigationService.NavigateAsync("ReleaseDetail", props);
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
         }
     }
 }

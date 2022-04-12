@@ -13,13 +13,13 @@ namespace Downgrooves.Mobile.Services
     public class ReleaseService : ApiServiceBase, IReleaseService
     {
         public async Task<IEnumerable<ReleaseViewModel>> GetReleases(int pageNumber, int pageSize, string artistName = null,
-            int artistId = 0, bool isOriginal = false, bool isRemix = false, CancellationToken token = default)
+            int artistId = 0, bool originals = false, bool remixes = false, CancellationToken token = default)
         {
             var resource = $"/releases/paged?pageNumber={pageNumber}&pageSize={pageSize}";
             if (artistName != null) resource += $"&artistName={artistName}";
             if (artistId > 0) resource += $"&artistId={artistId}";
-            if (isOriginal) resource += $"&isOriginal=true";
-            if (isRemix) resource += $"&isRemix=true";
+            if (originals) resource += $"&isOriginal=true";
+            if (remixes) resource += $"&isRemix=true";
 
             var response = await GetAsync(resource, cancel: token);
             if (response.IsSuccessful)

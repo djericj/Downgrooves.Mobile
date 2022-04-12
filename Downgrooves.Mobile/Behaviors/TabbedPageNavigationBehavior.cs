@@ -1,10 +1,8 @@
-﻿using Downgrooves.Mobile.Views;
-using Prism.Behaviors;
+﻿using Prism.Behaviors;
 using Prism.Common;
 using Prism.Navigation;
 using System;
 using Xamarin.Forms;
-using Prism.Navigation.TabbedPages;
 
 namespace Downgrooves.Mobile.Behaviors
 {
@@ -31,17 +29,7 @@ namespace Downgrooves.Mobile.Behaviors
             if (this.CurrentPage != null)
             {
                 var parameters = new NavigationParameters();
-                if (newPage is Releases)
-                {
-                    parameters.Add("ArtistId", 1);
-                    parameters.Add("IsOriginal", true);
-                }
-                if (newPage is Remixes)
-                {
-                    parameters.Add("ArtistId", 1);
-                    parameters.Add("IsRemix", true);
-                }
-                PageUtilities.OnNavigatedFrom(this.CurrentPage, parameters);
+
                 PageUtilities.OnNavigatedFrom(this.CurrentPage, parameters);
                 PageUtilities.OnNavigatedTo(newPage, parameters);
             }

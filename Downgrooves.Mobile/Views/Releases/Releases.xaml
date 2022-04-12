@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Downgrooves.Mobile.Views.Releases"
+            xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases"
+            xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
+            NavigationPage.HasNavigationBar="false"
+            Title="{Binding Title}" x:DataType="viewModels:ReleasesViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
+                <AbsoluteLayout>
+                    <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+                            <ScrollView Orientation="Vertical">
+                                <controls:ReleaeseCollectionView
+                                    RemainingItemsThreshold="{Binding ItemThreshold}"
+                                    RemainingItemsThresholdReachedCommand="{Binding LoadReleasesCommand}" />
+                            </ScrollView>
+                        </RefreshView>
+                    </StackLayout>
+                    <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}"
+                         Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
+                        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               HeightRequest="30"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               WidthRequest="30" Opacity="1" />
+                    </StackLayout>
+                </AbsoluteLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace Downgrooves.Mobile.ViewModels
@@ -48,13 +49,13 @@ namespace Downgrooves.Mobile.ViewModels
         {
         }
 
-        public async void OpenLink(string url)
+        public async Task OpenLink(string url)
         {
             var uri = new Uri(url);
             await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
         }
 
-        public async void GoBack()
+        public async Task GoBack()
         {
             await NavigationService.GoBackAsync();
         }

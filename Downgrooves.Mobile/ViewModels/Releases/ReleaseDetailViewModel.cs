@@ -9,16 +9,22 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 {
     public class ReleaseDetailViewModel : ViewModelBase
     {
-        private ReleaseViewModel _release;
+        private Release _release;
         private Icon favoriteIcon;
 
-        public ICommand OpenLinkCommand => new DelegateCommand<string>(OpenLink);
+        public ICommand OpenLinkCommand => new DelegateCommand<string>(async (link) =>
+           {
+               await OpenLink(link);
+           });
 
-        public ICommand GoBackCommand => new DelegateCommand(GoBack);
+        public ICommand GoBackCommand => new DelegateCommand(async () =>
+          {
+              await GoBack();
+          });
 
         public ICommand FavoriteCommand => new DelegateCommand<Release>(Favorite);
 
-        public ReleaseViewModel Release
+        public Release Release
         {
             get => _release;
             set
@@ -58,9 +64,8 @@ namespace Downgrooves.Mobile.ViewModels.Releases
         {
             base.OnNavigatedTo(parameters);
 
-            if (_release != null) return; // release is already loaded.
-
-            Release = parameters["release"] as ReleaseViewModel;
+            if (_release == null)
+                Release = parameters["release"] as Release;
         }
     }
 }

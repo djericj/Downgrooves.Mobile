@@ -1,9 +1,9 @@
 ﻿using Downgrooves.Mobile.Controls;
 using Prism.Navigation;
 
-namespace Downgrooves.Mobile.ViewModels
+namespace Downgrooves.Mobile.Models
 {
-    public class TileViewModel
+    public class Tile
     {
         public string Title { get; set; }
         public Icon SvgIcon { get; set; }

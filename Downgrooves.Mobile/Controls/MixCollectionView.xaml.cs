@@ -2,9 +2,9 @@
 
 namespace Downgrooves.Mobile.Controls
 {
-    public partial class MixList : CollectionView
+    public partial class MixCollectionView : CollectionView
     {
-        public MixList()
+        public MixCollectionView()
         {
             InitializeComponent();
         }

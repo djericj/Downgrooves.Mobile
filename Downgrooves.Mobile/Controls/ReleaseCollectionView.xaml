@@ -2,18 +2,16 @@
 <CollectionView xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases"
+                xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                 xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
-                x:Class="Downgrooves.Mobile.Controls.ReleaeseCollectionView"
-                ItemsSource="{Binding Releases}"
-                RemainingItemsThreshold="{Binding ItemThreshold}"
-                RemainingItemsThresholdReachedCommand="{Binding LoadReleasesCommand}"
+                x:Class="Downgrooves.Mobile.Controls.ReleaseCollectionView"
                 x:DataType="viewModels:ReleasesViewModel">
     <CollectionView.ItemsLayout>
         <GridItemsLayout Orientation="Vertical" Span="2" />
     </CollectionView.ItemsLayout>
     <CollectionView.ItemTemplate>
-        <DataTemplate x:DataType="viewModels:ReleaseViewModel">
+        <DataTemplate x:DataType="models:Release">
             <StackLayout Padding="5">
                 <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HorizontalOptions="CenterAndExpand">
                     <ff:CachedImage Source="{Binding ArtworkUrl}"

@@ -24,6 +24,7 @@
 
         <Color x:Key="PageBackgroundColor">#555555</Color>
         <Color x:Key="LightBackgroundColor">#555555</Color>
+        <Color x:Key="LighterBackgroundColor">#525251</Color>
         <Color x:Key="StandardTextColor">#FFFFFF</Color>
         <Color x:Key="SecondaryTextColor">#dcdcdc</Color>
         <Color x:Key="MenuBackgroundColor">#242b2e</Color>

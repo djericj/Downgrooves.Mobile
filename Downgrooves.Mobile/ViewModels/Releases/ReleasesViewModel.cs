@@ -12,27 +12,27 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 {
     public class ReleasesViewModel : ViewModelBase
     {
-        private ObservableRangeCollection<ReleaseViewModel> _releases;
+        private ObservableRangeCollection<Release> _releases;
         private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
         private readonly IReleaseService _releaseService;
+        private readonly IArtistService _artistService;
         private Artist _artist;
         private int _itemThreshold;
         private bool _isBusy;
         private bool _isRefreshing;
 
-        public ReleasesViewModel(INavigationService navigationService, IReleaseService releaseService) : base(navigationService)
+        public ReleasesViewModel(INavigationService navigationService, IReleaseService releaseService, IArtistService artistService) : base(navigationService)
         {
             _releaseService = releaseService;
+            _artistService = artistService;
             this.IsActiveChanged += ReleasesViewModel_IsActiveChanged;
         }
 
-        private void ReleasesViewModel_IsActiveChanged(object sender, EventArgs e)
+        private async void ReleasesViewModel_IsActiveChanged(object sender, EventArgs e)
         {
             if (sender is ReleasesViewModel)
-            {
-                Artist = new Artist() { ArtistId = 1 };
-            }
+                Artist = await _artistService.GetArtist("Downgrooves");
             LoadReleases();
         }
 
@@ -42,7 +42,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             set { SetProperty(ref _artist, value); }
         }
 
-        public ObservableRangeCollection<ReleaseViewModel> Releases
+        public ObservableRangeCollection<Release> Releases
         {
             get { return _releases; }
             set { SetProperty(ref _releases, value); }
@@ -70,7 +70,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         public ICommand RefreshCommand => new DelegateCommand(Refresh);
 
-        public ICommand NavigateToReleaseCommand => new DelegateCommand<ReleaseViewModel>(NavigateToRelease);
+        public ICommand NavigateToReleaseCommand => new DelegateCommand<Release>(NavigateToRelease);
 
         public void LoadMore()
         {
@@ -82,7 +82,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
         {
             _pageNumber = 1;
             ItemThreshold = App.Settings.MixSettings.ItemThreshold;
-            Releases = new ObservableRangeCollection<ReleaseViewModel>();
+            Releases = new ObservableRangeCollection<Release>();
             LoadReleases(_pageNumber);
         }
 
@@ -101,7 +101,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
                 if (releasesList.Any())
                 {
-                    Releases.AddRange(new ObservableRangeCollection<ReleaseViewModel>(releasesList));
+                    Releases.AddRange(new ObservableRangeCollection<Release>(releasesList));
                     Debug.WriteLine($"{releasesList.Count()} {Releases.Count} ");
                 }
                 else
@@ -138,7 +138,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             }
         }
 
-        private async void NavigateToRelease(ReleaseViewModel release)
+        private async void NavigateToRelease(Release release)
         {
             var props = new NavigationParameters()
             {

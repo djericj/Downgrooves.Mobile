@@ -1,4 +1,5 @@
-﻿using Downgrooves.Mobile.Services.Interfaces;
+﻿using Downgrooves.Mobile.Models;
+using Downgrooves.Mobile.Services.Interfaces;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -15,14 +16,14 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         private int _pageNumber = 0;
         private readonly IMixService _mixService;
 
-        public ICommand NavigateToTrackListCommand => new DelegateCommand<MixViewModel>(NavigateToTrackList);
+        public ICommand NavigateToTrackListCommand => new DelegateCommand<Mix>(NavigateToTrackList);
         public ICommand LoadMixesCommand => new DelegateCommand(LoadMore);
 
         public ICommand RefreshCommand => new DelegateCommand(Refresh);
 
-        private ObservableRangeCollection<MixViewModel> _mixes;
+        private ObservableRangeCollection<Mix> _mixes;
 
-        public ObservableRangeCollection<MixViewModel> Mixes
+        public ObservableRangeCollection<Mix> Mixes
         {
             get { return _mixes; }
             set { SetProperty(ref _mixes, value); }
@@ -84,7 +85,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         {
             _pageNumber = 1;
             ItemThreshold = App.Settings.MixSettings.ItemThreshold;
-            Mixes = new ObservableRangeCollection<MixViewModel>();
+            Mixes = new ObservableRangeCollection<Mix>();
             LoadMixes(_pageNumber);
         }
 
@@ -101,7 +102,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
                 var mixesList = await _mixService.GetMixesAsync(pageNumber, _pageSize);
                 mixesList = mixesList.OrderBy(x => x.Title);
 
-                Mixes.AddRange(new ObservableRangeCollection<MixViewModel>(mixesList));
+                Mixes.AddRange(new ObservableRangeCollection<Mix>(mixesList));
 
                 Debug.WriteLine($"{mixesList.Count()} {Mixes.Count} ");
                 if (mixesList.Count() == 0)
@@ -125,7 +126,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             LoadMixes();
         }
 
-        private async void NavigateToTrackList(MixViewModel mix)
+        private async void NavigateToTrackList(Mix mix)
         {
             var props = new NavigationParameters()
             {

@@ -81,16 +81,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\MixCollectionView.xaml.cs">
+      <DependentUpon>MixCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\ReleaseCollectionView.xaml.cs">
+      <DependentUpon>ReleaseCollectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Releases\ReleaseDetail.xaml.cs">
       <DependentUpon>ReleaseDetail.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\MixList.xaml">
+    <EmbeddedResource Update="Controls\MixCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\ReleaeseCollectionView.xaml">
+    <EmbeddedResource Update="Controls\ReleaseCollectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\VideoCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home.xaml">

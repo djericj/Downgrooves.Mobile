@@ -19,7 +19,6 @@ namespace Downgrooves.Mobile.Models
         public DateTime PublishedAt { get; set; }
         public IList<Thumbnail> Thumbnails { get; set; }
         public int Id { get; set; }
-        public string ArtworkPath { get; set; }
         public string Default { get; set; }
         public string Description { get; set; }
         public string ETag { get; set; }
@@ -29,5 +28,6 @@ namespace Downgrooves.Mobile.Models
         public string SourceSystemId { get; set; }
         public string Standard { get; set; }
         public string Title { get; set; }
+        public string VideoUrl { get; set; }
     }
 }

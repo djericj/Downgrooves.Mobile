@@ -9,12 +9,18 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
 {
     public class MixDetailViewModel : ViewModelBase
     {
-        private MixViewModel _mix;
+        private Mix _mix;
         private Icon favoriteIcon;
 
-        public ICommand OpenLinkCommand => new DelegateCommand<string>(OpenLink);
+        public ICommand OpenLinkCommand => new DelegateCommand<string>(async (link) =>
+         {
+             await OpenLink(link);
+         });
 
-        public ICommand GoBackCommand => new DelegateCommand(GoBack);
+        public ICommand GoBackCommand => new DelegateCommand(async () =>
+         {
+             await GoBack();
+         });
 
         public ICommand FavoriteCommand => new DelegateCommand<Mix>(Favorite);
 
@@ -28,7 +34,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             }
         }
 
-        public MixViewModel Mix
+        public Mix Mix
         {
             get => _mix;
             set
@@ -57,9 +63,8 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (_mix != null) return; // mix is already loaded.
-
-            Mix = parameters["mix"] as MixViewModel;
+            if (_mix == null)
+                Mix = parameters["mix"] as Mix;
         }
     }
 }

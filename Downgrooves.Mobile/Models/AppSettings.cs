@@ -10,7 +10,6 @@ namespace Downgrooves.Mobile
         public ListSettings MixSettings { get; set; }
         public ListSettings ReleaseSettings { get; set; }
         public ListSettings ModularSettings { get; set; }
-        public TileSettings TileSettings { get; set; }
     }
 
     public class MobileApi
@@ -24,11 +23,6 @@ namespace Downgrooves.Mobile
         public string BaseUrl { get; set; }
         public string AudioFilePath { get; set; }
         public string ImagePath { get; set; }
-    }
-
-    public class TileSettings
-    {
-        public ICollection<TileViewModel> Tiles { get; set; }
     }
 
     public class ListSettings

@@ -3,13 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Downgrooves.Mobile.Views.Modular"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              NavigationPage.HasNavigationBar="false"
              Title="Modular" x:DataType="viewModels:ModularViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Modular Page" Style="{DynamicResource h1}"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+            <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
+                <AbsoluteLayout>
+                    <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+                            <ScrollView Orientation="Vertical">
+                                <controls:VideoCollectionView ItemsSource="{Binding Videos}" />
+                            </ScrollView>
+                        </RefreshView>
+                    </StackLayout>
+                    <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}"
+                         Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
+                        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               HeightRequest="30"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               WidthRequest="30" Opacity="1" />
+                    </StackLayout>
+                </AbsoluteLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

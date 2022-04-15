@@ -65,9 +65,11 @@ namespace Downgrooves.Mobile
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IArtistService, ArtistService>();
             containerRegistry.RegisterSingleton<IMixService, MixService>();
             containerRegistry.RegisterSingleton<IReleaseService, ReleaseService>();
             containerRegistry.RegisterSingleton<ITileService, TileService>();
+            containerRegistry.RegisterSingleton<IVideoService, VideoService>();
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
@@ -78,6 +80,7 @@ namespace Downgrooves.Mobile
             containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();
             containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
             containerRegistry.RegisterForNavigation<ReleaseDetail, ReleaseDetailViewModel>();
+            containerRegistry.RegisterForNavigation<OtherMusic, OtherMusicViewModel>();
         }
 
         private string GetEmbeddedResource(string fileName)

@@ -4,6 +4,7 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              NavigationPage.HasNavigationBar="false"
              x:Class="Downgrooves.Mobile.Views.Home"
@@ -12,38 +13,38 @@
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ff:CachedImage Source="{Binding BackgroundImage}" Aspect="Fill" Opacity="0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                             AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
-            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png"
-                            HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
-                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,20" />
-            <RelativeLayout AbsoluteLayout.LayoutBounds="0,70,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,20">
+            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png" />
+                <Label Text="Deep, melodic electronic music" Style="{DynamicResource h1}" HorizontalOptions="CenterAndExpand" Padding="20" 
+                       TextColor="{DynamicResource SecondaryTextColor}" Opacity="0.7"/>
+            
                 <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="10">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="2" />
-                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewModels:TileViewModel">
+                        <DataTemplate x:DataType="models:Tile">
                             <StackLayout Padding="5">
                                 <Frame
                                effects:TouchEffect.Command="{Binding TapTileCommand, Source={RelativeSource AncestorType={x:Type viewModels:HomeViewModel}}}"
                                effects:TouchEffect.CommandParameter="{Binding}"
                                BackgroundColor="{DynamicResource ButtonBackgroundColor}"
                                Opacity="0.9"
+                               CornerRadius="20"
                                Padding="5"
-                               HeightRequest="140"
+                               HeightRequest="60"
                                WidthRequest="160"
                                HorizontalOptions="Fill"
                                HasShadow="False">
-
-                                    <StackLayout Padding="10">
+                                    <StackLayout Padding="10" Orientation="Horizontal">
                                         <controls:SvgIcon Icon="{Binding SvgIcon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" />
-                                        <Label Text="{Binding Path=Title}" HorizontalOptions="CenterAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase" />
+                                        <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase" />
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RelativeLayout>
+            
+            </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

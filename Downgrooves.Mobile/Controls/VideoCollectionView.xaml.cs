@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace Downgrooves.Mobile.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ReleaeseCollectionView : CollectionView
+    public partial class VideoCollectionView : CollectionView
     {
-        public ReleaeseCollectionView()
+        public VideoCollectionView()
         {
             InitializeComponent();
         }

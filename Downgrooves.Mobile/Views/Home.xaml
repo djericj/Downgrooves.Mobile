@@ -14,12 +14,18 @@
             <ff:CachedImage Source="{Binding BackgroundImage}" Aspect="Fill" Opacity="0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                             AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
-                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,20">
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="0,20"/>
+                        <On Platform="iOS" Value="20, 80"/>
+                    </OnPlatform>
+                </StackLayout.Margin>
             <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png" />
                 <Label Text="Deep, melodic electronic music" Style="{DynamicResource h1}" HorizontalOptions="CenterAndExpand" Padding="20" 
                        TextColor="{DynamicResource SecondaryTextColor}" Opacity="0.7"/>
             
-                <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="10">
+                <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="0">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Tile">
                             <StackLayout Padding="5">
@@ -36,7 +42,8 @@
                                HasShadow="False">
                                     <StackLayout Padding="10" Orientation="Horizontal">
                                         <controls:SvgIcon Icon="{Binding SvgIcon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" />
-                                        <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}" FontAttributes="Bold" TextTransform="Lowercase" />
+                                        <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}"
+                                              VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextTransform="Lowercase" />
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>

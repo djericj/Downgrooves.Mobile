@@ -7,9 +7,18 @@
             x:Class="Downgrooves.Mobile.Views.OtherMusic"
             prism:ViewModelLocator.AutowireViewModel="True"
             NavigationPage.HasNavigationBar="false"
+            BarBackgroundColor="{DynamicResource PageBackgroundColor}"
+            BarTextColor="White"
+            SelectedTabColor="AliceBlue"
+            
              x:DataType="viewModels:OtherMusicViewModel">
     <TabbedPage.Children>
         <ContentPage Title="Eric Rylos">
+            <ContentPage.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="5, 40"/>
+                </OnPlatform>
+            </ContentPage.Padding>
             <StackLayout>
                 <Label Text="Downgrooves producer Eric Rylos produces ambient &amp; downtempo music under his own name." Style="{DynamicResource h3}" Padding="10,15" />
                 <ScrollView Orientation="Vertical">
@@ -18,6 +27,11 @@
             </StackLayout>
         </ContentPage>
         <ContentPage Title="Evotone">
+            <ContentPage.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="5, 40"/>
+                </OnPlatform>
+            </ContentPage.Padding>
             <StackLayout>
                 <Label Text="Downgrooves producer Eric Rylos produces organic &amp; minimal under the alias Evotone." Style="{DynamicResource h3}" Padding="10,15" />
                 <ScrollView Orientation="Vertical">

@@ -8,11 +8,11 @@
              Title="Modular" x:DataType="viewModels:ModularViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="{StaticResource PageBackgroundColor}" Padding="5">
+            <Frame BackgroundColor="{StaticResource PageBackgroundColor}">
                 <AbsoluteLayout>
                     <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                         <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-                            <ScrollView Orientation="Vertical">
+                            <ScrollView Orientation="Vertical" Padding="5">
                                 <controls:VideoCollectionView ItemsSource="{Binding Videos}" />
                             </ScrollView>
                         </RefreshView>

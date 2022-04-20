@@ -6,13 +6,14 @@
                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                 xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
                 x:Class="Downgrooves.Mobile.Controls.VideoCollectionView"
+                ItemSizingStrategy="MeasureAllItems"
                 x:DataType="viewModels:ModularViewModel">
     <CollectionView.ItemsLayout>
         <GridItemsLayout Orientation="Vertical" Span="2" />
     </CollectionView.ItemsLayout>
     <CollectionView.ItemTemplate>
         <DataTemplate x:DataType="models:Video">
-            <StackLayout Padding="5">
+            <StackLayout HeightRequest="180" Padding="5">
                 <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HorizontalOptions="CenterAndExpand">
                     <ff:CachedImage Source="{Binding MaxRes}"
                             effects:TouchEffect.Command="{Binding NavigateToVideoCommand, Source={RelativeSource AncestorType={x:Type viewModels:ModularViewModel}}}"

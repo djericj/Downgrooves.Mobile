@@ -111,6 +111,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <BundleResource Include="Resources\fasolid.otf" />
     <BundleResource Include="Resources\faregular.otf" />
+    <Compile Include="Renderers\ExtendedTabbedPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png">
@@ -206,12 +207,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Downgrooves.Mobile\Downgrooves.Mobile.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{6D9D6775-FC78-4C91-951D-71A7BF366634}</Project>
       <Name>Downgrooves.Mobile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\dg_wtext.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

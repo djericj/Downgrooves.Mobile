@@ -18,10 +18,16 @@
                 <StackLayout.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="Android" Value="0,20"/>
-                        <On Platform="iOS" Value="20, 80"/>
+                        <On Platform="iOS" Value="20, 60"/>
                     </OnPlatform>
                 </StackLayout.Margin>
-            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png" />
+            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png">
+                <ff:CachedImage.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="40,0"/>
+                    </OnPlatform>
+                </ff:CachedImage.Margin>
+            </ff:CachedImage>
                 <Label Text="Deep, melodic electronic music" Style="{DynamicResource h1}" HorizontalOptions="CenterAndExpand" Padding="20" 
                        TextColor="{DynamicResource SecondaryTextColor}" Opacity="0.7"/>
             
@@ -43,7 +49,13 @@
                                     <StackLayout Padding="10" Orientation="Horizontal">
                                         <controls:SvgIcon Icon="{Binding SvgIcon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" />
                                         <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}"
-                                              VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextTransform="Lowercase" />
+                                              VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextTransform="Lowercase">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="iOS" Value="0,0,0,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                        </Label>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>

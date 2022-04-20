@@ -6,14 +6,17 @@
                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                 xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
                 x:Class="Downgrooves.Mobile.Controls.ReleaseCollectionView"
-                x:DataType="viewModels:ReleasesViewModel">
+                x:DataType="viewModels:ReleasesViewModel" Margin="10"
+                ItemSizingStrategy="MeasureFirstItem"
+                >
     <CollectionView.ItemsLayout>
         <GridItemsLayout Orientation="Vertical" Span="2" />
     </CollectionView.ItemsLayout>
     <CollectionView.ItemTemplate>
         <DataTemplate x:DataType="models:Release">
             <StackLayout Padding="5">
-                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HorizontalOptions="CenterAndExpand">
+                <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3"
+                       HorizontalOptions="StartAndExpand">
                     <ff:CachedImage Source="{Binding ArtworkUrl}"
                             effects:TouchEffect.Command="{Binding NavigateToReleaseCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleasesViewModel}}}"
                             effects:TouchEffect.CommandParameter="{Binding}" />

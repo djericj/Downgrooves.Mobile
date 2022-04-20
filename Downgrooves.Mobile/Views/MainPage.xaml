@@ -11,11 +11,11 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             NavigationPage.HasNavigationBar="False"
-            BackgroundColor="{DynamicResource LogoBackgroundColor}"
+            Background="{DynamicResource LogoBackgroundColor}"
+            BarBackgroundColor="{DynamicResource LogoBackgroundColor}"
             BarTextColor="{DynamicResource SecondaryTextColor}"
             SelectedTabColor="White"
             UnselectedTabColor="#999999"
-
             Title="Home" x:DataType="viewModels:MainPageViewModel">
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />

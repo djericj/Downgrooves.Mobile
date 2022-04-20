@@ -190,6 +190,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Naxam.TopTabbedPage.Forms">
+      <Version>0.0.3.5</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Forms">
       <Version>8.1.97</Version>
     </PackageReference>
@@ -214,8 +217,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\dg_wtext.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Renderers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

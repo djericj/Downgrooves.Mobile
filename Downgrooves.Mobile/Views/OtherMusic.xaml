@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<forms:TopTabbedPage
+            xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
-            xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
-            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             x:Class="Downgrooves.Mobile.Views.OtherMusic"
-            prism:ViewModelLocator.AutowireViewModel="True"
-            NavigationPage.HasNavigationBar="false"
-            BarBackgroundColor="{DynamicResource PageBackgroundColor}"
-            BarTextColor="White"
-            SelectedTabColor="AliceBlue"
-            
-             x:DataType="viewModels:OtherMusicViewModel">
+            xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
+            xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+            xmlns:forms="clr-namespace:Naxam.Controls.Forms;assembly=Naxam.TopTabbedPage.Forms"
+            BarTextColor="#00b9e1"
+            BarIndicatorColor="#00b9e1"
+            BarBackgroundColor="#ffffff"
+            x:DataType="viewModels:OtherMusicViewModel">
     <TabbedPage.Children>
         <ContentPage Title="Eric Rylos">
             <ContentPage.Padding>
@@ -40,4 +38,4 @@
             </StackLayout>
         </ContentPage>
     </TabbedPage.Children>
-</TabbedPage>
+</forms:TopTabbedPage>

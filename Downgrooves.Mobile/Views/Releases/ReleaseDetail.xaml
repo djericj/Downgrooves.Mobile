@@ -19,7 +19,8 @@
                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Source="{Binding Release.ArtworkUrl}" Aspect="AspectFill" HeightRequest="400"
                                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                     <AbsoluteLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
-                        <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="0,5,1,0.2" AbsoluteLayout.LayoutFlags="SizeProportional" Padding="5,5,10,0">
+                        <StackLayout Orientation="Horizontal"
+                                     AbsoluteLayout.LayoutBounds="{OnPlatform Android='0,5,1,0.2', iOS='0,25,1,0.2'}" AbsoluteLayout.LayoutFlags="SizeProportional" Padding="5,5,10,0">
                             <controls:SvgIcon Icon="{x:Static controls:Icon.AngleLeft}" WidthRequest="32" HeightRequest="32" HorizontalOptions="StartAndExpand">
                                 <controls:SvgIcon.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Downgrooves.Mobile.ViewModels.Mixes;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Downgrooves.Mobile.Views
@@ -9,6 +10,7 @@ namespace Downgrooves.Mobile.Views
         public MixDetail()
         {
             InitializeComponent();
+            this.BindingContext = App.Current.Services.GetService<MixDetailViewModel>();
         }
     }
 }

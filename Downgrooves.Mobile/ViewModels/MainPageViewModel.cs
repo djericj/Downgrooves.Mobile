@@ -1,4 +1,5 @@
 ﻿using Downgrooves.Mobile.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -14,6 +15,11 @@ namespace Downgrooves.Mobile.ViewModels
         {
             get => _selectedViewModelIndex;
             set => SetProperty(ref _selectedViewModelIndex, value);
+        }
+
+        public override Task Load()
+        {
+            return null;
         }
     }
 }

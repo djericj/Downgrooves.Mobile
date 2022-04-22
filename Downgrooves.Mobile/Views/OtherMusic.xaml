@@ -8,7 +8,7 @@
             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
             x:DataType="viewModels:OtherMusicViewModel">
     <Grid>
-        <tabs:ViewSwitcher x:Name="Switcher" Animate="True"
+        <!--<tabs:ViewSwitcher x:Name="Switcher" Animate="True"
                            SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
             <ContentView>
                 <StackLayout>
@@ -32,6 +32,6 @@
                 <tabs:UnderlinedTabItem Label="Eric Rylos"></tabs:UnderlinedTabItem>
                 <tabs:UnderlinedTabItem Label="Evotone"></tabs:UnderlinedTabItem>
             </tabs:TabHostView.Tabs>
-        </tabs:TabHostView>
+        </tabs:TabHostView>-->
     </Grid>
 </ContentPage>

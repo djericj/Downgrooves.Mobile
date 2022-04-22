@@ -1,5 +1,4 @@
-﻿using Downgrooves.Mobile.Controls;
-using Downgrooves.Mobile.Models;
+﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
     public class ReleaseDetailViewModel : ViewModelBase
     {
         private Release _release;
-        private Icon _favoriteIcon;
+        private string _favoriteIcon;
 
         public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
            {
@@ -30,7 +29,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             set => SetProperty(ref _release, value);
         }
 
-        public Icon FavoriteIcon
+        public string FavoriteIcon
         {
             get => _favoriteIcon;
             set => SetProperty(ref _favoriteIcon, value);
@@ -38,18 +37,26 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         public ReleaseDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
-            FavoriteIcon = Icon.HeartOutline;
+            FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
+            Task.Run(() => Load());
+        }
+
+        public async override Task Load()
+        {
+            
         }
 
         public async void Favorite(Release release)
         {
             await Task.Run(() =>
             {
-                if (FavoriteIcon == Icon.HeartOutline)
-                    FavoriteIcon = Icon.Heart;
+                if (FavoriteIcon == Fonts.FontAwesomeIcons.HeartCrack)
+                    FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
                 else
-                    FavoriteIcon = Icon.HeartOutline;
+                    FavoriteIcon = Fonts.FontAwesomeIcons.HeartCrack;
             });
         }
+
+        
     }
 }

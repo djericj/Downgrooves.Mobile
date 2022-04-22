@@ -1,7 +1,5 @@
-﻿using Downgrooves.Mobile.Controls;
-using Downgrooves.Mobile.Models;
+﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Threading.Tasks;
@@ -12,21 +10,21 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
     public class MixDetailViewModel : ViewModelBase
     {
         private Mix _mix;
-        private Icon _favoriteIcon;
+        private string _favoriteIcon;
 
         public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
          {
-             throw new NotImplementedException();
+             await OpenLink(link);
          });
 
         public ICommand GoBackCommand => new RelayCommand(async () =>
          {
-             throw new NotImplementedException();
+             await GoBack();
          });
 
         public ICommand FavoriteCommand => new RelayCommand<Mix>(Favorite);
 
-        public Icon FavoriteIcon
+        public string FavoriteIcon
         {
             get => _favoriteIcon;
             set => SetProperty(ref _favoriteIcon, value);
@@ -40,18 +38,26 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
 
         public MixDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
-            FavoriteIcon = Icon.HeartOutline;
+            FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
+            Task.Run(() => Load());
+        }
+
+        public override Task Load()
+        {
+            return null;            
         }
 
         public async void Favorite(Mix mix)
         {
             await Task.Run(() =>
             {
-                if (FavoriteIcon == Icon.HeartOutline)
-                    FavoriteIcon = Icon.Heart;
+                if (FavoriteIcon == Fonts.FontAwesomeIcons.HeartPulse)
+                    FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
                 else
-                    FavoriteIcon = Icon.HeartOutline;
+                    FavoriteIcon = Fonts.FontAwesomeIcons.HeartPulse;
             });
         }
+
+        
     }
 }

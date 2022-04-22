@@ -23,6 +23,18 @@ namespace Downgrooves.Mobile.ViewModels
         {
             _releaseService = releaseService;
             _artistService = artistService;
+            Task.Run(() => Load());
+        }
+
+        public override async Task Load()
+        {
+            var ericRylos = await _artistService.GetArtist("Eric Rylos");
+            if (ericRylos != null)
+                Releases = await LoadReleases(ericRylos);
+
+            var evotone = await _artistService.GetArtist("Evotone");
+            if (evotone != null)
+                Releases2 = await LoadReleases(evotone);
         }
 
         public int SelectedViewModelIndex 
@@ -50,17 +62,6 @@ namespace Downgrooves.Mobile.ViewModels
         }
 
         public ICommand NavigateToReleaseCommand => new RelayCommand<Release>(NavigateToRelease);
-
-        public async void LoadReleases()
-        {
-            var ericRylos = await _artistService.GetArtist("Eric Rylos");
-            if (ericRylos != null)
-                Releases = await LoadReleases(ericRylos);
-
-            var evotone = await _artistService.GetArtist("Evotone");
-            if (evotone != null)
-                Releases2 = await LoadReleases(evotone);
-        }
 
         public async Task<ObservableCollection<Release>> LoadReleases(Artist artist)
         {

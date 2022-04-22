@@ -4,6 +4,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
 
@@ -16,9 +17,9 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         private readonly IMixService _mixService;
 
         public ICommand NavigateToTrackListCommand => new RelayCommand<Mix>(NavigateToTrackList);
-        public ICommand LoadMixesCommand => new RelayCommand(LoadMore);
+        public ICommand LoadMixesCommand => new RelayCommand(async () => await LoadMore());
 
-        public ICommand RefreshCommand => new RelayCommand(Refresh);
+        public ICommand RefreshCommand => new RelayCommand(async () => await Refresh());
 
         private ObservableRangeCollection<Mix> _mixes;
 
@@ -57,12 +58,17 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             _mixService = mixService;
         }
 
-        public void Refresh()
+        public async override Task Load()
+        {
+            await LoadMixes();
+        }
+
+        public async Task Refresh()
         {
             try
             {
                 Mixes.Clear();
-                LoadMixes();
+                await LoadMixes();
             }
             catch (Exception ex)
             {
@@ -74,21 +80,21 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             }
         }
 
-        public void LoadMore()
+        public async Task LoadMore()
         {
             _pageNumber++;
-            LoadMixes(_pageNumber);
+            await LoadMixes(_pageNumber);
         }
 
-        public void LoadMixes()
+        public async Task LoadMixes()
         {
             _pageNumber = 1;
             ItemThreshold = App.Settings.MixSettings.ItemThreshold;
             Mixes = new ObservableRangeCollection<Mix>();
-            LoadMixes(_pageNumber);
+            await LoadMixes(_pageNumber);
         }
 
-        public async void LoadMixes(int pageNumber)
+        public async Task LoadMixes(int pageNumber)
         {
             if (IsBusy) return;
 
@@ -122,7 +128,9 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
 
         private async void NavigateToTrackList(Mix mix)
         {
-            throw new NotImplementedException();
+            await GoToAsync($"details?mix={mix}");
         }
+
+        
     }
 }

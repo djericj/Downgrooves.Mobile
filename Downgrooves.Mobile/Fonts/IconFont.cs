@@ -1,4 +1,4 @@
-﻿namespace Downgrooves.Mobile.Controls
+﻿namespace Downgrooves.Mobile.Fonts
 {
     internal static class IconFont
     {

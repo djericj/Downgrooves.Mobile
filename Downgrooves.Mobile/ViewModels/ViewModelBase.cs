@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Downgrooves.Mobile.ViewModels
 {
-    public class ViewModelBase : ObservableObject
+    public abstract class ViewModelBase : ObservableObject, IViewModel
     {
 
         private bool _isActive;
@@ -23,6 +23,8 @@ namespace Downgrooves.Mobile.ViewModels
         {
             _navigationService = navigationService;
         }
+
+        public abstract Task Load();
 
         public string Title
         {
@@ -82,5 +84,7 @@ namespace Downgrooves.Mobile.ViewModels
                 return (T)properties[propertyName];
             }
         }
+
+        
     }
 }

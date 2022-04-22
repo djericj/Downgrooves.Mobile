@@ -18,6 +18,14 @@ namespace Downgrooves.Mobile.ViewModels
         public ModularViewModel(INavigationService navigationService, IVideoService videoService) : base(navigationService)
         {
             _videoService = videoService;
+            Task.Run(() => Load());
+        }
+
+        public override async Task Load()
+        {
+            IsBusy = true;
+            Videos = await LoadVideos();
+            IsBusy = false;
         }
 
         public ICommand NavigateToVideoCommand => new RelayCommand<Video>(async (video) =>
@@ -45,9 +53,7 @@ namespace Downgrooves.Mobile.ViewModels
 
         private async void ModularViewModel_IsActiveChanged(object sender, System.EventArgs e)
         {
-            IsBusy = true;
-            Videos = await LoadVideos();
-            IsBusy = false;
+            
         }
 
         public IEnumerable<Video> Videos

@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
@@ -47,7 +46,7 @@
                                HorizontalOptions="Fill"
                                HasShadow="False">
                                     <StackLayout Padding="10" Orientation="Horizontal">
-                                        <controls:SvgIcon Icon="{Binding SvgIcon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" />
+                                        <Label Text="{Binding Icon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" FontFamily="{StaticResource FontAwesomeSolid}"/>
                                         <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}"
                                               VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextTransform="Lowercase">
                                             <Label.Margin>

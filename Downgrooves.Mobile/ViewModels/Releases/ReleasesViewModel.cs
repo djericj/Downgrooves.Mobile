@@ -30,7 +30,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             Task.Run(() => Load());
         }
 
-        public async void Load()
+        public override async Task Load()
         {
             Artist = await _artistService.GetArtist("Downgrooves");
             LoadReleases();

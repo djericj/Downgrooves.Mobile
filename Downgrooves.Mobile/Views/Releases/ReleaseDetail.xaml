@@ -4,7 +4,7 @@
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
-             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
+             xmlns:fonts="clr-namespace:Downgrooves.Mobile.Fonts"
              x:Class="Downgrooves.Mobile.Views.ReleaseDetail"
              NavigationPage.HasNavigationBar="false"
              x:DataType="viewModels:ReleaseDetailViewModel">
@@ -21,17 +21,17 @@
                     <AbsoluteLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
                         <StackLayout Orientation="Horizontal"
                                      AbsoluteLayout.LayoutBounds="{OnPlatform Android='0,5,1,0.2', iOS='0,25,1,0.2'}" AbsoluteLayout.LayoutFlags="SizeProportional" Padding="5,5,10,0">
-                            <controls:SvgIcon Icon="{x:Static controls:Icon.AngleLeft}" WidthRequest="32" HeightRequest="32" HorizontalOptions="StartAndExpand">
-                                <controls:SvgIcon.GestureRecognizers>
+                            <Label Text="{x:Static fonts:FontAwesomeIcons.AngleLeft}" FontFamily="{StaticResource FontAwesomeSolid}">
+                                <Label.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
-                                </controls:SvgIcon.GestureRecognizers>
-                            </controls:SvgIcon>
+                                </Label.GestureRecognizers>
+                            </Label>
 
-                            <controls:SvgIcon Icon="{Binding FavoriteIcon}" WidthRequest="20" HeightRequest="20" HorizontalOptions="EndAndExpand" Margin="0,0,10,0">
-                                <controls:SvgIcon.GestureRecognizers>
+                            <Label Text="{x:Static fonts:FontAwesomeIcons.Heart}" FontFamily="{StaticResource FontAwesomeSolid}">
+                                <Label.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FavoriteCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
-                                </controls:SvgIcon.GestureRecognizers>
-                            </controls:SvgIcon>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
                     </AbsoluteLayout>
                     <StackLayout Grid.Row="0" Grid.Column="0" Padding="12" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand">
@@ -56,7 +56,12 @@
                         <DataTemplate x:DataType="models:ReleaseTrack">
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <controls:SvgIcon Icon="{x:Static controls:Icon.Play}" WidthRequest="10" HeightRequest="10" Margin="0" BackgroundColor="Transparent" />
+
+                                    <Label Text="{x:Static fonts:FontAwesomeIcons.Play}" FontFamily="{StaticResource FontAwesomeSolid}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                     <Label Text="{Binding Title}"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="End">
                                         <Button Text="{Binding Price, StringFormat='${0}'}"

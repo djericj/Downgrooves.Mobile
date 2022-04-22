@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Downgrooves.Mobile.Services.Interfaces;
 using Downgrooves.Mobile.Models;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -30,12 +31,12 @@ namespace Downgrooves.Mobile.ViewModels
         public HomeViewModel(INavigationService navigationService, ITileService tileService) : base(navigationService)
         {
             _tileService = tileService;
-            Load();
+            Task.Run(() => Load());
         }
 
-        public void Load()
+        public override async Task Load()
         {
-            Tiles = _tileService.GetTiles();
+            Tiles = await _tileService.GetTiles();
             Log.Information($"Loading {Tiles} tiles.");
         }
 

@@ -1,6 +1,4 @@
 ﻿using Foundation;
-using Prism;
-using Prism.Ioc;
 using Serilog;
 using UIKit;
 
@@ -34,14 +32,6 @@ namespace Downgrooves.Mobile.iOS
             //    .CreateLogger();
 
             return base.FinishedLaunching(app, options);
-        }
-    }
-
-    public class iOSInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any platform specific implementations
         }
     }
 }

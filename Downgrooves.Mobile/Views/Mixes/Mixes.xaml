@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
              NavigationPage.HasNavigationBar="false"
-             Title="DJ Sets" x:DataType="viewModels:MixesViewModel">
+             x:DataType="viewModels:MixesViewModel">
     <ContentPage.Content>
         <Frame BackgroundColor="Transparent" Padding="5">
             <AbsoluteLayout>

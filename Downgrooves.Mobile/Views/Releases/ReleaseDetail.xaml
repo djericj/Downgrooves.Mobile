@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              x:Class="Downgrooves.Mobile.Views.ReleaseDetail"
              NavigationPage.HasNavigationBar="false"
-             Title="{Binding Release.Title}" x:DataType="viewModels:ReleaseDetailViewModel">
+             x:DataType="viewModels:ReleaseDetailViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="{DynamicResource LogoBackgroundColor}" Margin="0" Padding="0,0,0,5">

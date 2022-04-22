@@ -1,7 +1,6 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Commands;
-using Prism.Navigation;
+using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -19,15 +18,14 @@ namespace Downgrooves.Mobile.ViewModels
         public ModularViewModel(INavigationService navigationService, IVideoService videoService) : base(navigationService)
         {
             _videoService = videoService;
-            this.IsActiveChanged += ModularViewModel_IsActiveChanged;
         }
 
-        public ICommand NavigateToVideoCommand => new DelegateCommand<Video>(async (video) =>
+        public ICommand NavigateToVideoCommand => new RelayCommand<Video>(async (video) =>
            {
                await OpenLink(video.VideoUrl);
            });
 
-        public ICommand RefreshCommand => new DelegateCommand(async () =>
+        public ICommand RefreshCommand => new RelayCommand(async () =>
               {
                   IsRefreshing = true;
                   try

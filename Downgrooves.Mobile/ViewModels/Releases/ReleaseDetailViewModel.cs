@@ -1,7 +1,7 @@
 ﻿using Downgrooves.Mobile.Controls;
 using Downgrooves.Mobile.Models;
-using Prism.Commands;
-using Prism.Navigation;
+using Downgrooves.Mobile.Services.Interfaces;
+using Microsoft.Toolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -10,38 +10,30 @@ namespace Downgrooves.Mobile.ViewModels.Releases
     public class ReleaseDetailViewModel : ViewModelBase
     {
         private Release _release;
-        private Icon favoriteIcon;
+        private Icon _favoriteIcon;
 
-        public ICommand OpenLinkCommand => new DelegateCommand<string>(async (link) =>
+        public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
            {
                await OpenLink(link);
            });
 
-        public ICommand GoBackCommand => new DelegateCommand(async () =>
+        public ICommand GoBackCommand => new RelayCommand(async () =>
           {
               await GoBack();
           });
 
-        public ICommand FavoriteCommand => new DelegateCommand<Release>(Favorite);
+        public ICommand FavoriteCommand => new RelayCommand<Release>(Favorite);
 
         public Release Release
         {
             get => _release;
-            set
-            {
-                _release = value;
-                RaisePropertyChanged(nameof(Release));
-            }
+            set => SetProperty(ref _release, value);
         }
 
         public Icon FavoriteIcon
         {
-            get => favoriteIcon;
-            set
-            {
-                favoriteIcon = value;
-                RaisePropertyChanged(nameof(FavoriteIcon));
-            }
+            get => _favoriteIcon;
+            set => SetProperty(ref _favoriteIcon, value);
         }
 
         public ReleaseDetailViewModel(INavigationService navigationService) : base(navigationService)
@@ -58,14 +50,6 @@ namespace Downgrooves.Mobile.ViewModels.Releases
                 else
                     FavoriteIcon = Icon.HeartOutline;
             });
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            if (_release == null)
-                Release = parameters["release"] as Release;
         }
     }
 }

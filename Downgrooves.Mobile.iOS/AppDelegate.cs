@@ -1,5 +1,4 @@
 ﻿using Foundation;
-using Naxam.Controls.Platform.iOS;
 using Prism;
 using Prism.Ioc;
 using Serilog;
@@ -27,7 +26,8 @@ namespace Downgrooves.Mobile.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
-            TopTabbedRenderer.Init();
+            Xamarin.Forms.Forms.Init();
+            Sharpnado.Tabs.iOS.Preserver.Preserve();
 
             //Log.Logger = new LoggerConfiguration()
             //    .WriteTo.NSLog()

@@ -1,10 +1,7 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism;
-using Prism.Commands;
-using Prism.Navigation;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -19,41 +16,40 @@ namespace Downgrooves.Mobile.ViewModels
         private ObservableCollection<Release> _releases2;
         private readonly IReleaseService _releaseService;
         private readonly IArtistService _artistService;
+        private int _selectedViewModelIndex;
         private bool _isBusy;
 
         public OtherMusicViewModel(INavigationService navigationService, IReleaseService releaseService, IArtistService artistService) : base(navigationService)
         {
             _releaseService = releaseService;
             _artistService = artistService;
+        }
 
-            IsActiveChanged += (sender, e) =>
-            {
-                if (sender is OtherMusicViewModel)
-                {
-                    LoadReleases();
-                }
-            };
+        public int SelectedViewModelIndex 
+        { 
+            get => _selectedViewModelIndex; 
+            set => SetProperty(ref _selectedViewModelIndex, value); 
         }
 
         public ObservableCollection<Release> Releases
         {
-            get { return _releases; }
-            set { SetProperty(ref _releases, value); }
+            get => _releases;
+            set => SetProperty(ref _releases, value);
         }
 
         public ObservableCollection<Release> Releases2
         {
-            get { return _releases2; }
-            set { SetProperty(ref _releases2, value); }
+            get => _releases2;
+            set => SetProperty(ref _releases2, value);
         }
 
         public bool IsBusy
         {
-            get { return _isBusy; }
-            set { SetProperty(ref _isBusy, value); }
+            get => _isBusy; 
+            set => SetProperty(ref _isBusy, value); 
         }
 
-        public ICommand NavigateToReleaseCommand => new DelegateCommand<Release>(NavigateToRelease);
+        public ICommand NavigateToReleaseCommand => new RelayCommand<Release>(NavigateToRelease);
 
         public async void LoadReleases()
         {
@@ -95,16 +91,8 @@ namespace Downgrooves.Mobile.ViewModels
 
         private async void NavigateToRelease(Release release)
         {
-            var props = new NavigationParameters()
-            {
-                {"release",  release}
-            };
-            await NavigationService.NavigateAsync("ReleaseDetail", props);
+            throw new NotImplementedException();
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Prism.Navigation;
+﻿using Downgrooves.Mobile.Services.Interfaces;
 
 namespace Downgrooves.Mobile.ViewModels
 {

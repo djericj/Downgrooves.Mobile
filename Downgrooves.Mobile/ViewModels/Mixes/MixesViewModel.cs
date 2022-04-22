@@ -1,7 +1,6 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Commands;
-using Prism.Navigation;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -10,31 +9,31 @@ using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace Downgrooves.Mobile.ViewModels.Mixes
 {
-    public class MixesViewModel : ViewModelBase, INavigationAware
+    public class MixesViewModel : ViewModelBase
     {
         private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
         private readonly IMixService _mixService;
 
-        public ICommand NavigateToTrackListCommand => new DelegateCommand<Mix>(NavigateToTrackList);
-        public ICommand LoadMixesCommand => new DelegateCommand(LoadMore);
+        public ICommand NavigateToTrackListCommand => new RelayCommand<Mix>(NavigateToTrackList);
+        public ICommand LoadMixesCommand => new RelayCommand(LoadMore);
 
-        public ICommand RefreshCommand => new DelegateCommand(Refresh);
+        public ICommand RefreshCommand => new RelayCommand(Refresh);
 
         private ObservableRangeCollection<Mix> _mixes;
 
         public ObservableRangeCollection<Mix> Mixes
         {
-            get { return _mixes; }
-            set { SetProperty(ref _mixes, value); }
+            get => _mixes;
+            set => SetProperty(ref _mixes, value);
         }
 
         private int _itemThreshold;
 
         public int ItemThreshold
         {
-            get { return _itemThreshold; }
-            set { SetProperty(ref _itemThreshold, value); }
+            get => _itemThreshold; 
+            set => SetProperty(ref _itemThreshold, value);
         }
 
         private bool _isBusy;
@@ -121,18 +120,9 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            LoadMixes();
-        }
-
         private async void NavigateToTrackList(Mix mix)
         {
-            var props = new NavigationParameters()
-            {
-                {"mix",  mix}
-            };
-            await NavigationService.NavigateAsync("MixDetail", props);
+            throw new NotImplementedException();
         }
     }
 }

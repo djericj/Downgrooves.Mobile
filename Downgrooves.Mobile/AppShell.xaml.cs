@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Downgrooves.Mobile.Views
+namespace Downgrooves.Mobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OtherMusic : ContentPage
+    public partial class AppShell : Shell
     {
-        public OtherMusic()
+        public AppShell()
         {
             InitializeComponent();
         }

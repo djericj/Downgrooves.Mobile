@@ -1,7 +1,6 @@
 ﻿using Downgrooves.Mobile.Controls;
 using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Navigation;
 using System.Collections.Generic;
 
 namespace Downgrooves.Mobile.Services

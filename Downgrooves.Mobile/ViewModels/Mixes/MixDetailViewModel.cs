@@ -1,7 +1,9 @@
 ﻿using Downgrooves.Mobile.Controls;
 using Downgrooves.Mobile.Models;
-using Prism.Commands;
-using Prism.Navigation;
+using Downgrooves.Mobile.Services.Interfaces;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -10,38 +12,30 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
     public class MixDetailViewModel : ViewModelBase
     {
         private Mix _mix;
-        private Icon favoriteIcon;
+        private Icon _favoriteIcon;
 
-        public ICommand OpenLinkCommand => new DelegateCommand<string>(async (link) =>
+        public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
          {
-             await OpenLink(link);
+             throw new NotImplementedException();
          });
 
-        public ICommand GoBackCommand => new DelegateCommand(async () =>
+        public ICommand GoBackCommand => new RelayCommand(async () =>
          {
-             await GoBack();
+             throw new NotImplementedException();
          });
 
-        public ICommand FavoriteCommand => new DelegateCommand<Mix>(Favorite);
+        public ICommand FavoriteCommand => new RelayCommand<Mix>(Favorite);
 
         public Icon FavoriteIcon
         {
-            get => favoriteIcon;
-            set
-            {
-                favoriteIcon = value;
-                RaisePropertyChanged(nameof(FavoriteIcon));
-            }
+            get => _favoriteIcon;
+            set => SetProperty(ref _favoriteIcon, value);
         }
 
         public Mix Mix
         {
             get => _mix;
-            set
-            {
-                _mix = value;
-                RaisePropertyChanged(nameof(Mix));
-            }
+            set => SetProperty(ref _mix, value);    
         }
 
         public MixDetailViewModel(INavigationService navigationService) : base(navigationService)
@@ -58,13 +52,6 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
                 else
                     FavoriteIcon = Icon.HeartOutline;
             });
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-            if (_mix == null)
-                Mix = parameters["mix"] as Mix;
         }
     }
 }

@@ -7,7 +7,7 @@
              x:Class="Downgrooves.Mobile.Views.MixDetail"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
              NavigationPage.HasNavigationBar="false"
-             Title="{Binding Mix.Title}" x:DataType="viewModels:MixDetailViewModel">
+             x:DataType="viewModels:MixDetailViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="{DynamicResource LogoBackgroundColor}" Margin="0" Padding="0,0,0,5">

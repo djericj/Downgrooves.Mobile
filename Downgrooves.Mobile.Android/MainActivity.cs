@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Prism;
-using Prism.Ioc;
 using Serilog;
 
 namespace Downgrooves.Mobile.Droid
@@ -27,7 +25,7 @@ namespace Downgrooves.Mobile.Droid
                     .CreateLogger();
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App(new AndroidInitializer()));
+            LoadApplication(new App());
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
@@ -37,13 +35,6 @@ namespace Downgrooves.Mobile.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
-    public class AndroidInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any platform specific implementations
-        }
-    }
+    
 }
 

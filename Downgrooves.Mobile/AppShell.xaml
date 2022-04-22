@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
+       xmlns:fonts="clr-namespace:Downgrooves.Mobile.Controls"
+       BackgroundColor="{DynamicResource LogoBackgroundColor}"
+       Shell.TabBarBackgroundColor="{DynamicResource LogoBackgroundColor}"
+       Shell.TabBarTitleColor="{DynamicResource SecondaryTextColor}"
+       Shell.TabBarUnselectedColor="{DynamicResource LighterBackgroundColor}"
+       x:Class="Downgrooves.Mobile.AppShell">
+    <TabBar>
+        <Tab Title="Home">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.House}" />
+            </Tab.Icon>
+            <ShellContent x:Name="Home" Route="home" ContentTemplate="{DataTemplate views:Home}"/>
+        </Tab>
+        <Tab Title="Releases">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.RecordVinyl}" />
+            </Tab.Icon>
+            <ShellContent x:Name="Releases" Route="releases" ContentTemplate="{DataTemplate views:Releases}"/>
+        </Tab>
+        <Tab Title="Modular">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Spinner}" />
+            </Tab.Icon>
+            <ShellContent x:Name="Modular" Route="modular" ContentTemplate="{DataTemplate views:Modular}"/>
+        </Tab>
+        <Tab Title="DJ Sets">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Headphones}" />
+            </Tab.Icon>
+            <ShellContent x:Name="Mixes" Route="mixes" ContentTemplate="{DataTemplate views:Mixes}"/>
+        </Tab>
+        <Tab Title="Other Music">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:IconFont.Music}" />
+            </Tab.Icon>
+            <ShellContent x:Name="OtherMusic" Route="othermusic" ContentTemplate="{DataTemplate views:OtherMusic}"/>
+        </Tab>
+    </TabBar>
+    
+</Shell>

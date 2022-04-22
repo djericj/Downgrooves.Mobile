@@ -1,42 +1,40 @@
 using Downgrooves.Mobile.Services;
 using Downgrooves.Mobile.Services.Interfaces;
 using Downgrooves.Mobile.ViewModels;
-using Downgrooves.Mobile.ViewModels.Releases;
 using Downgrooves.Mobile.ViewModels.Mixes;
+using Downgrooves.Mobile.ViewModels.Releases;
 using Downgrooves.Mobile.Views;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
-using Prism;
-using Prism.Ioc;
 using Serilog;
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 
 namespace Downgrooves.Mobile
 {
-    public partial class App
+    public partial class App : Application
     {
         public static AppSettings Settings { get; private set; }
 
-        public App() : this(null)
-        {
-        }
+        public IServiceProvider Services { get; set; }
 
-        public App(IPlatformInitializer initializer = null) : base(initializer, setFormsDependencyResolver: true)
-        {
-        }
+        public new static App Current => (App)Application.Current;
 
-        protected override async void OnInitialized()
+        public App()
         {
             try
             {
+                Services = ConfigureServices();
+                ConfigureRoutes();
                 InitializeComponent();
+
+                Sharpnado.Tabs.Initializer.Initialize(false, false);
+                Sharpnado.Shades.Initializer.Initialize(loggerEnable: false);
 
                 // Get environment file/data
                 var contents = GetEmbeddedResource("env.json") ?? "{}";
@@ -52,35 +50,55 @@ namespace Downgrooves.Mobile
 
                 Current.PageAppearing += (_, page) => Log.Information("Navigated to {name}", page.Title ?? "Home");
 
-                var result = await NavigationService.NavigateAsync("MainPage");
-                var f = 1;
+                MainPage = new AppShell();
             }
             catch (Exception ex)
             {
                 Log.Fatal(ex.Message);
                 Log.Fatal(ex.StackTrace);
+                Console.Write(ex.ToString());
                 throw;
             }
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        private static void ConfigureRoutes()
         {
-            containerRegistry.RegisterSingleton<IArtistService, ArtistService>();
-            containerRegistry.RegisterSingleton<IMixService, MixService>();
-            containerRegistry.RegisterSingleton<IReleaseService, ReleaseService>();
-            containerRegistry.RegisterSingleton<ITileService, TileService>();
-            containerRegistry.RegisterSingleton<IVideoService, VideoService>();
-            containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
+            Routing.RegisterRoute("home", typeof(Home));
+            Routing.RegisterRoute("releases", typeof(Releases));
+            Routing.RegisterRoute("releases/detail", typeof(ReleaseDetail));
+            Routing.RegisterRoute("modular", typeof(Modular));
+            Routing.RegisterRoute("mixes", typeof(Mixes));
+            Routing.RegisterRoute("mixes/detail", typeof(MixDetail));
+            Routing.RegisterRoute("othermusic", typeof(OtherMusic));
+        }
 
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
-            containerRegistry.RegisterForNavigation<Mixes, MixesViewModel>();
-            containerRegistry.RegisterForNavigation<MixDetail, MixDetailViewModel>();
-            containerRegistry.RegisterForNavigation<Modular, ModularViewModel>();
-            containerRegistry.RegisterForNavigation<Releases, ReleasesViewModel>();
-            containerRegistry.RegisterForNavigation<ReleaseDetail, ReleaseDetailViewModel>();
-            containerRegistry.RegisterForNavigation<OtherMusic, OtherMusicViewModel>();
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+            
+            services.AddSingleton<IArtistService, ArtistService>();
+            services.AddSingleton<IMixService, MixService>();
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IReleaseService, ReleaseService>();
+            services.AddSingleton<ITileService, TileService>();
+            services.AddSingleton<IVideoService, VideoService>();
+
+            services.AddTransient<HomeViewModel>();
+            services.AddTransient<ReleasesViewModel>();
+            services.AddTransient<ReleaseDetailViewModel>();
+            services.AddTransient<MixesViewModel>();
+            services.AddTransient<MixDetailViewModel>();
+            services.AddTransient<ModularViewModel>();
+            services.AddTransient<OtherMusicViewModel>();
+
+            return services.BuildServiceProvider();
+
+        }
+
+        private Exception GetInnerException(Exception e)
+        {
+            while (e.InnerException != null) e = e.InnerException;
+            return e;
         }
 
         private string GetEmbeddedResource(string fileName)

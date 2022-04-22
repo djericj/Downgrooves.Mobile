@@ -18,6 +18,13 @@
     <None Remove="Resources\envelope.svg" />
     <None Remove="Resources\FontAwesome6-Regular-400.otf" />
     <None Remove="Resources\FontAwesome6-Solid-900.otf" />
+    <None Remove="Resources\fonts\OpenSans-Bold.ttf" />
+    <None Remove="Resources\fonts\OpenSans-BoldItalic.ttf" />
+    <None Remove="Resources\fonts\OpenSans-ExtraBold.ttf" />
+    <None Remove="Resources\fonts\OpenSans-Italic.ttf" />
+    <None Remove="Resources\fonts\OpenSans-Light.ttf" />
+    <None Remove="Resources\fonts\OpenSans-Regular.ttf" />
+    <None Remove="Resources\fonts\OpenSans-SemiBold.ttf" />
     <None Remove="Resources\headphones.svg" />
     <None Remove="Resources\heart-o.svg" />
     <None Remove="Resources\heart.svg" />
@@ -37,6 +44,13 @@
   <ItemGroup>
     <EmbeddedResource Include="appSettings.json" />
     <EmbeddedResource Include="env.json" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-Bold.ttf" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-BoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-ExtraBold.ttf" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-Italic.ttf" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-Light.ttf" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\fonts\OpenSans-SemiBold.ttf" />
     <EmbeddedResource Include="Resources\images\pavel-pjatakov-rywx3yUFaa0-unsplash.jpg" />
     <EmbeddedResource Include="Resources\svg\angle-left.svg" />
     <EmbeddedResource Include="Resources\svg\compact-disc.svg" />
@@ -66,13 +80,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.2" />
-    <PackageReference Include="Naxam.TopTabbedPage.Forms" Version="0.0.3.5" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />
-    <PackageReference Include="Prism.Forms" Version="8.1.97" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageReference Include="Sharpnado.Tabs" Version="2.2.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
@@ -94,6 +107,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="AppShell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\MixCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

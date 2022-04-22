@@ -51,6 +51,11 @@
                                                TextColor="White" FontFamily="{StaticResource FontAwesomeSolid}" VerticalOptions="CenterAndExpand"/>
                                         <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}" 
                                               VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextTransform="Lowercase">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness">
+                                                    <On Platform="iOS" Value="0,0,0,0"/>
+                                                </OnPlatform>
+                                            </Label.Margin>
                                         </Label>
                                     </StackLayout>
                                 </Frame>

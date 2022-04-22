@@ -4,6 +4,7 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
+             xmlns:fonts="clr-namespace:Downgrooves.Mobile.Fonts"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              NavigationPage.HasNavigationBar="false"
              x:Class="Downgrooves.Mobile.Views.Home"
@@ -46,14 +47,10 @@
                                HorizontalOptions="Fill"
                                HasShadow="False">
                                     <StackLayout Padding="10" Orientation="Horizontal">
-                                        <Label Text="{Binding Icon}" WidthRequest="80" HeightRequest="80" Margin="0" BackgroundColor="Transparent" FontFamily="{StaticResource FontAwesomeSolid}"/>
-                                        <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}"
+                                        <Label Text="{Binding Icon}" FontSize="24" Margin="0" Padding="0,0,10,0" BackgroundColor="Transparent" 
+                                               TextColor="White" FontFamily="{StaticResource FontAwesomeSolid}" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="{Binding Path=Title}" HorizontalOptions="StartAndExpand" Style="{DynamicResource h1}" 
                                               VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextTransform="Lowercase">
-                                            <Label.Margin>
-                                                <OnPlatform x:TypeArguments="Thickness">
-                                                    <On Platform="iOS" Value="0,0,0,0"/>
-                                                </OnPlatform>
-                                            </Label.Margin>
                                         </Label>
                                     </StackLayout>
                                 </Frame>

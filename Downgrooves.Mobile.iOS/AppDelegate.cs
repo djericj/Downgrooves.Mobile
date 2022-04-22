@@ -22,7 +22,7 @@ namespace Downgrooves.Mobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-            LoadApplication(new App(new iOSInitializer()));
+            LoadApplication(new App());
 
             Xamarin.Forms.Forms.Init();
             Sharpnado.Tabs.iOS.Preserver.Preserve();

@@ -56,6 +56,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         public MixesViewModel(INavigationService navigationService, IMixService mixService) : base(navigationService)
         {
             _mixService = mixService;
+            Task.Run(() => Load());
         }
 
         public async override Task Load()

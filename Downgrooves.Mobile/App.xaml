@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sho="http://sharpnado.com"
              x:Class="Downgrooves.Mobile.App">
   <Application.Resources>
 
@@ -133,17 +132,5 @@
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
             <Setter Property="Margin" Value="0,10"/>
         </Style>
-
-        <Style TargetType="sho:BottomTabItem">
-            <Setter Property="SelectedTabColor" Value="{StaticResource SecondaryTextColor}" />
-            <Setter Property="UnselectedLabelColor" Value="{StaticResource SecondaryTextColor}" />
-            <Setter Property="UnselectedIconColor" Value="{StaticResource SecondaryTextColor}" />
-            <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
-            <Setter Property="LabelSize" Value="14" />
-            <Setter Property="IconSize" Value="24" />
-            <Setter Property="IsTextVisible" Value="True" />
-        </Style>
-
-
     </Application.Resources>
 </Application>

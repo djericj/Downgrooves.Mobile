@@ -1,7 +1,9 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
 using Microsoft.Toolkit.Mvvm.Input;
+using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -12,8 +14,7 @@ namespace Downgrooves.Mobile.ViewModels
 {
     public class OtherMusicViewModel : ViewModelBase
     {
-        private ObservableCollection<Release> _releases;
-        private ObservableCollection<Release> _releases2;
+        private IEnumerable<Artist> _artists;
         private readonly IReleaseService _releaseService;
         private readonly IArtistService _artistService;
         private int _selectedViewModelIndex;
@@ -28,13 +29,37 @@ namespace Downgrooves.Mobile.ViewModels
 
         public override async Task Load()
         {
-            var ericRylos = await _artistService.GetArtist("Eric Rylos");
-            if (ericRylos != null)
-                Releases = await LoadReleases(ericRylos);
 
-            var evotone = await _artistService.GetArtist("Evotone");
-            if (evotone != null)
-                Releases2 = await LoadReleases(evotone);
+            IsBusy = true;
+            try
+            {
+                _artists = await _artistService.GetArtists();
+                if (_artists != null)
+                {
+                    _artists = _artists.Where(x => x.Name == "Eric Rylos" || x.Name == "Evotone").ToList();
+
+                    var aliases = new List<Artist>();
+
+                    foreach (var artist in _artists)
+                    {
+                        var newArtist = await LoadReleases(artist);
+                        aliases.Add(newArtist);
+                    }
+
+                    Artists = aliases;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex.Message);
+                Log.Fatal(ex.StackTrace);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+            
         }
 
         public int SelectedViewModelIndex 
@@ -43,16 +68,10 @@ namespace Downgrooves.Mobile.ViewModels
             set => SetProperty(ref _selectedViewModelIndex, value); 
         }
 
-        public ObservableCollection<Release> Releases
+        public IEnumerable<Artist> Artists
         {
-            get => _releases;
-            set => SetProperty(ref _releases, value);
-        }
-
-        public ObservableCollection<Release> Releases2
-        {
-            get => _releases2;
-            set => SetProperty(ref _releases2, value);
+            get => _artists;
+            set => SetProperty(ref _artists, value);
         }
 
         public bool IsBusy
@@ -63,31 +82,26 @@ namespace Downgrooves.Mobile.ViewModels
 
         public ICommand NavigateToReleaseCommand => new RelayCommand<Release>(NavigateToRelease);
 
-        public async Task<ObservableCollection<Release>> LoadReleases(Artist artist)
+        public async Task<Artist> LoadReleases(Artist artist)
         {
             ObservableCollection<Release> releases = new ObservableCollection<Release>();
-            if (!IsBusy)
+
+            try
             {
-                IsBusy = true;
+                var releasesList = await _releaseService.GetReleases(1, 50, artistId: artist.ArtistId);
+                releasesList = releasesList.OrderByDescending(x => x.ReleaseDate);
 
-                try
-                {
-                    var releasesList = await _releaseService.GetReleases(1, 50, artistId: artist.ArtistId);
-                    releasesList = releasesList.OrderByDescending(x => x.ReleaseDate);
+                if (releasesList.Any())
+                    releases = new ObservableCollection<Release>(releasesList);
 
-                    if (releasesList.Any())
-                        releases = new ObservableCollection<Release>(releasesList);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                }
-                finally
-                {
-                    IsBusy = false;
-                }
+                artist.Releases = releases;
             }
-            return releases;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            
+            return artist;
         }
 
         private async void NavigateToRelease(Release release)

@@ -33,9 +33,6 @@ namespace Downgrooves.Mobile
                 ConfigureRoutes();
                 InitializeComponent();
 
-                Sharpnado.Tabs.Initializer.Initialize(false, false);
-                Sharpnado.Shades.Initializer.Initialize(loggerEnable: false);
-
                 // Get environment file/data
                 var contents = GetEmbeddedResource("env.json") ?? "{}";
                 var config = JsonConvert.DeserializeObject<EnvironmentFile>(contents);

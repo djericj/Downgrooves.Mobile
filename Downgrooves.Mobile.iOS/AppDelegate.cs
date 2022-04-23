@@ -24,12 +24,9 @@ namespace Downgrooves.Mobile.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             LoadApplication(new App());
 
-            Xamarin.Forms.Forms.Init();
-            Sharpnado.Tabs.iOS.Preserver.Preserve();
-
-            //Log.Logger = new LoggerConfiguration()
-            //    .WriteTo.NSLog()
-            //    .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.NSLog()
+                .CreateLogger();
 
             return base.FinishedLaunching(app, options);
         }

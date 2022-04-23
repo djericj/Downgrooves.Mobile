@@ -13,10 +13,10 @@ namespace Downgrooves.Mobile.Services
             {
                 return new List<Tile>()
                 {
-                    new Tile() { NavigateTo = "Releases", Icon = Fonts.FontAwesomeIcons.RecordVinyl, Title = "Releases" },
-                    new Tile() { NavigateTo = "Modular", Icon = Fonts.FontAwesomeIcons.Spinner, Title = "Modular Live" },
-                    new Tile() { NavigateTo = "Mixes", Icon = Fonts.FontAwesomeIcons.Headphones, Title = "DJ Sets" },
-                    new Tile() { NavigateTo = "OtherMusic", Icon = Fonts.FontAwesomeIcons.Music, Title = "Other Music" }
+                    new Tile() { NavigateTo = "//releases", Icon = Fonts.FontAwesomeIcons.RecordVinyl, Title = "Releases" },
+                    new Tile() { NavigateTo = "//modular", Icon = Fonts.FontAwesomeIcons.Spinner, Title = "Modular Live" },
+                    new Tile() { NavigateTo = "//mixes", Icon = Fonts.FontAwesomeIcons.Headphones, Title = "DJ Sets" },
+                    new Tile() { NavigateTo = "//othermusic", Icon = Fonts.FontAwesomeIcons.Music, Title = "Other Music" }
                 };
             });
         }

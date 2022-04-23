@@ -1,48 +1,41 @@
-﻿using Prism;
-using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Downgrooves.Mobile.Services.Interfaces;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Downgrooves.Mobile.ViewModels
 {
-    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, IActiveAware
+    public abstract class ViewModelBase : ObservableObject, IViewModel
     {
+
         private bool _isActive;
         private string _title;
 
-        public event EventHandler IsActiveChanged;
+        private readonly INavigationService _navigationService;
 
-        protected INavigationService NavigationService { get; private set; }
+        private Dictionary<string, object> properties = new Dictionary<string, object>();
+
+        public ViewModelBase(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        public abstract Task Load();
 
         public string Title
         {
             get { return _title; }
-            set { SetProperty(ref _title, value); }
+            set { SetProperty(_title, value); }
         }
 
         public bool IsActive
         {
             get { return _isActive; }
-            set { SetProperty(ref _isActive, value, RaiseIsActiveChanged); }
-        }
-
-        public ViewModelBase(INavigationService navigationService)
-        {
-            NavigationService = navigationService;
-        }
-
-        public virtual void Initialize(INavigationParameters parameters)
-        {
-        }
-
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
-        {
-        }
-
-        public virtual void OnNavigatedTo(INavigationParameters parameters)
-        {
+            set { SetProperty(value); }
         }
 
         public virtual void Destroy()
@@ -57,12 +50,41 @@ namespace Downgrooves.Mobile.ViewModels
 
         public async Task GoBack()
         {
-            await NavigationService.GoBackAsync();
+            await Shell.Current.GoToAsync("..");
         }
 
-        protected virtual void RaiseIsActiveChanged()
+        public async Task GoToAsync(string uri)
         {
-            IsActiveChanged?.Invoke(this, EventArgs.Empty);
+            await Shell.Current.GoToAsync(uri);
         }
+
+        protected void SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
+        {
+            if (!properties.ContainsKey(propertyName))
+            {
+                properties.Add(propertyName, default(T));
+            }
+
+            var oldValue = GetProperty<T>(propertyName);
+            if (!EqualityComparer<T>.Default.Equals(oldValue, value))
+            {
+                properties[propertyName] = value;
+                OnPropertyChanged(propertyName);
+            }
+        }
+
+        protected T GetProperty<T>([CallerMemberName] string propertyName = null)
+        {
+            if (!properties.ContainsKey(propertyName))
+            {
+                return default(T);
+            }
+            else
+            {
+                return (T)properties[propertyName];
+            }
+        }
+
+        
     }
 }

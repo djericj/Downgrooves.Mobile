@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using Downgrooves.Mobile.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.ViewModels
 {
@@ -6,6 +7,12 @@ namespace Downgrooves.Mobile.ViewModels
     {
         public MediaPlayerViewModel(INavigationService navigationService) : base(navigationService)
         {
+            Task.Run(() => Load());
+        }
+
+        public override Task Load()
+        {
+            return null;
         }
     }
 }

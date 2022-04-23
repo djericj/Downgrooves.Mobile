@@ -1,22 +1,24 @@
-﻿using Downgrooves.Mobile.Controls;
-using Downgrooves.Mobile.Models;
+﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Navigation;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.Services
 {
     public class TileService : ITileService
     {
-        public IEnumerable<Tile> GetTiles()
+        public async Task<IEnumerable<Tile>> GetTiles()
         {
-            return new List<Tile>()
+            return await Task.Run(() =>
             {
-                new Tile() { NavigateTo = "Releases", SvgIcon = Icon.RecordVinyl, Title = "Releases"},
-                new Tile() { NavigateTo = "Modular", SvgIcon = Icon.Spinner, Title = "Modular Live"},
-                new Tile() { NavigateTo = "Mixes", SvgIcon = Icon.Headphones, Title = "DJ Sets"},
-                new Tile() { NavigateTo = "OtherMusic", SvgIcon = Icon.Music, Title = "Other Music"}
-            };
+                return new List<Tile>()
+                {
+                    new Tile() { NavigateTo = "//releases", Icon = Fonts.FontAwesomeIcons.RecordVinyl, Title = "Releases" },
+                    new Tile() { NavigateTo = "//modular", Icon = Fonts.FontAwesomeIcons.Spinner, Title = "Modular Live" },
+                    new Tile() { NavigateTo = "//mixes", Icon = Fonts.FontAwesomeIcons.Headphones, Title = "DJ Sets" },
+                    new Tile() { NavigateTo = "//othermusic", Icon = Fonts.FontAwesomeIcons.Music, Title = "Other Music" }
+                };
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Downgrooves.Mobile.ViewModels.Releases;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Downgrooves.Mobile.Views
@@ -9,6 +10,7 @@ namespace Downgrooves.Mobile.Views
         public Releases()
         {
             InitializeComponent();
+            this.BindingContext = App.Current.Services.GetService<ReleasesViewModel>();
         }
     }
 }

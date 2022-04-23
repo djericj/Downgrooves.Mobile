@@ -1,7 +1,6 @@
-﻿using Downgrooves.Mobile.Controls;
-using Downgrooves.Mobile.Models;
-using Prism.Commands;
-using Prism.Navigation;
+﻿using Downgrooves.Mobile.Models;
+using Downgrooves.Mobile.Services.Interfaces;
+using Microsoft.Toolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -10,62 +9,54 @@ namespace Downgrooves.Mobile.ViewModels.Releases
     public class ReleaseDetailViewModel : ViewModelBase
     {
         private Release _release;
-        private Icon favoriteIcon;
+        private string _favoriteIcon;
 
-        public ICommand OpenLinkCommand => new DelegateCommand<string>(async (link) =>
+        public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
            {
                await OpenLink(link);
            });
 
-        public ICommand GoBackCommand => new DelegateCommand(async () =>
+        public ICommand GoBackCommand => new RelayCommand(async () =>
           {
               await GoBack();
           });
 
-        public ICommand FavoriteCommand => new DelegateCommand<Release>(Favorite);
+        public ICommand FavoriteCommand => new RelayCommand<Release>(Favorite);
 
         public Release Release
         {
             get => _release;
-            set
-            {
-                _release = value;
-                RaisePropertyChanged(nameof(Release));
-            }
+            set => SetProperty(ref _release, value);
         }
 
-        public Icon FavoriteIcon
+        public string FavoriteIcon
         {
-            get => favoriteIcon;
-            set
-            {
-                favoriteIcon = value;
-                RaisePropertyChanged(nameof(FavoriteIcon));
-            }
+            get => _favoriteIcon;
+            set => SetProperty(ref _favoriteIcon, value);
         }
 
         public ReleaseDetailViewModel(INavigationService navigationService) : base(navigationService)
         {
-            FavoriteIcon = Icon.HeartOutline;
+            FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
+            Task.Run(() => Load());
+        }
+
+        public async override Task Load()
+        {
+            
         }
 
         public async void Favorite(Release release)
         {
             await Task.Run(() =>
             {
-                if (FavoriteIcon == Icon.HeartOutline)
-                    FavoriteIcon = Icon.Heart;
+                if (FavoriteIcon == Fonts.FontAwesomeIcons.HeartCrack)
+                    FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
                 else
-                    FavoriteIcon = Icon.HeartOutline;
+                    FavoriteIcon = Fonts.FontAwesomeIcons.HeartCrack;
             });
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            if (_release == null)
-                Release = parameters["release"] as Release;
-        }
+        
     }
 }

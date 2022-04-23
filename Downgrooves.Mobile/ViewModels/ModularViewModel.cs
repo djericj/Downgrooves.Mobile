@@ -1,7 +1,6 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Commands;
-using Prism.Navigation;
+using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -19,15 +18,22 @@ namespace Downgrooves.Mobile.ViewModels
         public ModularViewModel(INavigationService navigationService, IVideoService videoService) : base(navigationService)
         {
             _videoService = videoService;
-            this.IsActiveChanged += ModularViewModel_IsActiveChanged;
+            Task.Run(() => Load());
         }
 
-        public ICommand NavigateToVideoCommand => new DelegateCommand<Video>(async (video) =>
+        public override async Task Load()
+        {
+            IsBusy = true;
+            Videos = await LoadVideos();
+            IsBusy = false;
+        }
+
+        public ICommand NavigateToVideoCommand => new RelayCommand<Video>(async (video) =>
            {
                await OpenLink(video.VideoUrl);
            });
 
-        public ICommand RefreshCommand => new DelegateCommand(async () =>
+        public ICommand RefreshCommand => new RelayCommand(async () =>
               {
                   IsRefreshing = true;
                   try
@@ -47,9 +53,7 @@ namespace Downgrooves.Mobile.ViewModels
 
         private async void ModularViewModel_IsActiveChanged(object sender, System.EventArgs e)
         {
-            IsBusy = true;
-            Videos = await LoadVideos();
-            IsBusy = false;
+            
         }
 
         public IEnumerable<Video> Videos

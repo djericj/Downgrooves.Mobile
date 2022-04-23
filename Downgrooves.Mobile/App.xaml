@@ -1,30 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
              x:Class="Downgrooves.Mobile.App">
   <Application.Resources>
 
     <!-- Application resource dictionary -->
 
-        <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands">
+        <OnPlatform x:Key="FontAwesomeBrands" x:TypeArguments="x:String">
             <On Platform="Android" Value="fabrands.otf#Regular" />
             <On Platform="iOS" Value="FontAwesome6Brands-Regular" />
         </OnPlatform>
 
-        <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeSolid">
+        <OnPlatform  x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
             <On Platform="Android" Value="fasolid.otf#Regular" />
             <On Platform="iOS" Value="FontAwesome6Free-Solid" />
         </OnPlatform>
 
-        <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeRegular">
+        <OnPlatform  x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
             <On Platform="Android" Value="faregular.otf#Regular" />
             <On Platform="iOS" Value="FontAwesome6Free-Regular" />
         </OnPlatform>
 
+        <OnPlatform x:Key="FontBold" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-Bold</On>
+            <On Platform="Android">OpenSans-Bold.ttf#Open Sans</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontExtraBold" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-ExtraBold</On>
+            <On Platform="Android">OpenSans-ExtraBold.ttf#Open Sans</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontBoldItalic" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-BoldItalic</On>
+            <On Platform="Android">OpenSans-BoldItalic.ttf#Open Sans</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontRegular" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-Regular</On>
+            <On Platform="Android">OpenSans-Regular.ttf#Open Sans</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontItalic" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-Italic</On>
+            <On Platform="Android">OpenSans-Italic.ttf#Open Sans</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontSemiBold" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-SemiBold</On>
+            <On Platform="Android">OpenSans-SemiBold.ttf#Open Sans</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontLight" x:TypeArguments="x:String">
+            <On Platform="iOS">OpenSans-Light</On>
+            <On Platform="Android">OpenSans-Light.ttf#Open Sans</On>
+        </OnPlatform>
+
         <Color x:Key="PageBackgroundColor">#555555</Color>
         <Color x:Key="LightBackgroundColor">#555555</Color>
-        <Color x:Key="LighterBackgroundColor">#525251</Color>
+        <Color x:Key="LighterBackgroundColor">#999</Color>
         <Color x:Key="StandardTextColor">#FFFFFF</Color>
         <Color x:Key="SecondaryTextColor">#dcdcdc</Color>
         <Color x:Key="MenuBackgroundColor">#242b2e</Color>
@@ -104,7 +132,5 @@
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
             <Setter Property="Margin" Value="0,10"/>
         </Style>
-      
-      
     </Application.Resources>
-</prism:PrismApplication>
+</Application>

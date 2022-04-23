@@ -1,41 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<forms:TopTabbedPage
+<ContentPage
             xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="Downgrooves.Mobile.Views.OtherMusic"
             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
+            xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
-            xmlns:forms="clr-namespace:Naxam.Controls.Forms;assembly=Naxam.TopTabbedPage.Forms"
-            BarTextColor="#00b9e1"
-            BarIndicatorColor="#00b9e1"
-            BarBackgroundColor="#ffffff"
             x:DataType="viewModels:OtherMusicViewModel">
-    <TabbedPage.Children>
-        <ContentPage Title="Eric Rylos">
-            <ContentPage.Padding>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS" Value="5, 40"/>
-                </OnPlatform>
-            </ContentPage.Padding>
-            <StackLayout>
-                <Label Text="Downgrooves producer Eric Rylos produces ambient &amp; downtempo music under his own name." Style="{DynamicResource h3}" Padding="10,15" />
-                <ScrollView Orientation="Vertical">
-                    <controls:ReleaseCollectionView ItemsSource="{Binding Releases}" />
-                </ScrollView>
-            </StackLayout>
-        </ContentPage>
-        <ContentPage Title="Evotone">
-            <ContentPage.Padding>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS" Value="5, 40"/>
-                </OnPlatform>
-            </ContentPage.Padding>
-            <StackLayout>
-                <Label Text="Downgrooves producer Eric Rylos produces organic &amp; minimal under the alias Evotone." Style="{DynamicResource h3}" Padding="10,15" />
-                <ScrollView Orientation="Vertical">
-                    <controls:ReleaseCollectionView ItemsSource="{Binding Releases2}" />
-                </ScrollView>
-            </StackLayout>
-        </ContentPage>
-    </TabbedPage.Children>
-</forms:TopTabbedPage>
+    <StackLayout>
+        <Frame BackgroundColor="{StaticResource PageBackgroundColor}">
+            <AbsoluteLayout>
+                <CollectionView ItemsSource="{Binding Artists}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Artist">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" Style="{DynamicResource h1}" Padding="10,10,0,0" />
+                                <Label Text="{Binding Description}" Style="{DynamicResource h3}" Padding="10,0" />
+                                <ScrollView Orientation="Vertical">
+                                    <controls:ReleaseCollectionView ItemsSource="{Binding Releases}" />
+                                </ScrollView>
+                                <BoxView Style="{DynamicResource Separator}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}"
+                         Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               HeightRequest="30"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               WidthRequest="30" Opacity="1" />
+                </StackLayout>
+            </AbsoluteLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

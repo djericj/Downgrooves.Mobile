@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using Downgrooves.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +11,7 @@ namespace Downgrooves.Mobile.Views
         public Home()
         {
             InitializeComponent();
+            this.BindingContext = App.Current.Services.GetService<HomeViewModel>();
         }
     }
 }

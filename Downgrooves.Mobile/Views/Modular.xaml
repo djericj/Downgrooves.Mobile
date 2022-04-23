@@ -5,7 +5,7 @@
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              NavigationPage.HasNavigationBar="false"
-             Title="Modular" x:DataType="viewModels:ModularViewModel">
+             x:DataType="viewModels:ModularViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="{StaticResource PageBackgroundColor}">

@@ -1,7 +1,4 @@
 ﻿using Foundation;
-using Naxam.Controls.Platform.iOS;
-using Prism;
-using Prism.Ioc;
 using Serilog;
 using UIKit;
 
@@ -25,23 +22,13 @@ namespace Downgrooves.Mobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-            LoadApplication(new App(new iOSInitializer()));
+            LoadApplication(new App());
 
-            TopTabbedRenderer.Init();
-
-            //Log.Logger = new LoggerConfiguration()
-            //    .WriteTo.NSLog()
-            //    .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.NSLog()
+                .CreateLogger();
 
             return base.FinishedLaunching(app, options);
-        }
-    }
-
-    public class iOSInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any platform specific implementations
         }
     }
 }

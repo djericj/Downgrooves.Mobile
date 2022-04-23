@@ -190,12 +190,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Naxam.TopTabbedPage.Forms">
-      <Version>0.0.3.5</Version>
-    </PackageReference>
-    <PackageReference Include="Prism.Forms">
-      <Version>8.1.97</Version>
-    </PackageReference>
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.2.0.64</Version>
     </PackageReference>

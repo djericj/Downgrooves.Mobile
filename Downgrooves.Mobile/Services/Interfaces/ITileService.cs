@@ -1,10 +1,11 @@
 ﻿using Downgrooves.Mobile.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Downgrooves.Mobile.Services.Interfaces
 {
     public interface ITileService
     {
-        IEnumerable<Tile> GetTiles();
+        Task<IEnumerable<Tile>> GetTiles();
     }
 }

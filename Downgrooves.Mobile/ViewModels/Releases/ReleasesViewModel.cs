@@ -1,12 +1,12 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Navigation;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Prism.Commands;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
+using System.Threading.Tasks;
+using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Downgrooves.Mobile.ViewModels.Releases
 {
@@ -26,13 +26,13 @@ namespace Downgrooves.Mobile.ViewModels.Releases
         {
             _releaseService = releaseService;
             _artistService = artistService;
-            this.IsActiveChanged += ReleasesViewModel_IsActiveChanged;
+
+            Task.Run(() => Load());
         }
 
-        private async void ReleasesViewModel_IsActiveChanged(object sender, EventArgs e)
+        public override async Task Load()
         {
-            if (sender is ReleasesViewModel)
-                Artist = await _artistService.GetArtist("Downgrooves");
+            Artist = await _artistService.GetArtist("Downgrooves");
             LoadReleases();
         }
 
@@ -66,11 +66,11 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             set { SetProperty(ref _isRefreshing, value); Debug.WriteLine($"IsRefreshing: {IsRefreshing}"); }
         }
 
-        public ICommand LoadReleasesCommand => new DelegateCommand(LoadMore);
+        public ICommand LoadReleasesCommand => new RelayCommand(LoadMore);
 
-        public ICommand RefreshCommand => new DelegateCommand(Refresh);
+        public ICommand RefreshCommand => new RelayCommand(Refresh);
 
-        public ICommand NavigateToReleaseCommand => new DelegateCommand<Release>(NavigateToRelease);
+        public ICommand NavigateToReleaseCommand => new RelayCommand<Release>(NavigateToRelease);
 
         public void LoadMore()
         {
@@ -140,16 +140,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         private async void NavigateToRelease(Release release)
         {
-            var props = new NavigationParameters()
-            {
-                {"release",  release}
-            };
-            await NavigationService.NavigateAsync("ReleaseDetail", props);
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
+            throw new NotImplementedException();
         }
     }
 }

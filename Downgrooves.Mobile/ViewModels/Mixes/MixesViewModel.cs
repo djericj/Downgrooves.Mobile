@@ -1,40 +1,40 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using Prism.Commands;
-using Prism.Navigation;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace Downgrooves.Mobile.ViewModels.Mixes
 {
-    public class MixesViewModel : ViewModelBase, INavigationAware
+    public class MixesViewModel : ViewModelBase
     {
         private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
         private readonly IMixService _mixService;
 
-        public ICommand NavigateToTrackListCommand => new DelegateCommand<Mix>(NavigateToTrackList);
-        public ICommand LoadMixesCommand => new DelegateCommand(LoadMore);
+        public ICommand NavigateToTrackListCommand => new RelayCommand<Mix>(NavigateToTrackList);
+        public ICommand LoadMixesCommand => new RelayCommand(async () => await LoadMore());
 
-        public ICommand RefreshCommand => new DelegateCommand(Refresh);
+        public ICommand RefreshCommand => new RelayCommand(async () => await Refresh());
 
         private ObservableRangeCollection<Mix> _mixes;
 
         public ObservableRangeCollection<Mix> Mixes
         {
-            get { return _mixes; }
-            set { SetProperty(ref _mixes, value); }
+            get => _mixes;
+            set => SetProperty(ref _mixes, value);
         }
 
         private int _itemThreshold;
 
         public int ItemThreshold
         {
-            get { return _itemThreshold; }
-            set { SetProperty(ref _itemThreshold, value); }
+            get => _itemThreshold; 
+            set => SetProperty(ref _itemThreshold, value);
         }
 
         private bool _isBusy;
@@ -56,14 +56,20 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         public MixesViewModel(INavigationService navigationService, IMixService mixService) : base(navigationService)
         {
             _mixService = mixService;
+            Task.Run(() => Load());
         }
 
-        public void Refresh()
+        public async override Task Load()
+        {
+            await LoadMixes();
+        }
+
+        public async Task Refresh()
         {
             try
             {
                 Mixes.Clear();
-                LoadMixes();
+                await LoadMixes();
             }
             catch (Exception ex)
             {
@@ -75,21 +81,21 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             }
         }
 
-        public void LoadMore()
+        public async Task LoadMore()
         {
             _pageNumber++;
-            LoadMixes(_pageNumber);
+            await LoadMixes(_pageNumber);
         }
 
-        public void LoadMixes()
+        public async Task LoadMixes()
         {
             _pageNumber = 1;
             ItemThreshold = App.Settings.MixSettings.ItemThreshold;
             Mixes = new ObservableRangeCollection<Mix>();
-            LoadMixes(_pageNumber);
+            await LoadMixes(_pageNumber);
         }
 
-        public async void LoadMixes(int pageNumber)
+        public async Task LoadMixes(int pageNumber)
         {
             if (IsBusy) return;
 
@@ -121,18 +127,11 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            LoadMixes();
-        }
-
         private async void NavigateToTrackList(Mix mix)
         {
-            var props = new NavigationParameters()
-            {
-                {"mix",  mix}
-            };
-            await NavigationService.NavigateAsync("MixDetail", props);
+            await GoToAsync($"details?mix={mix}");
         }
+
+        
     }
 }

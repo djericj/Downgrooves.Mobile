@@ -5,6 +5,7 @@
              xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+             xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
              NavigationPage.HasNavigationBar="false"
              x:Class="Downgrooves.Mobile.Views.Home"
               x:DataType="viewModels:HomeViewModel">
@@ -64,6 +65,10 @@
                 </CollectionView>
             
             </StackLayout>
+            <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+                <views:MediaPlayer/>
+            </Frame>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

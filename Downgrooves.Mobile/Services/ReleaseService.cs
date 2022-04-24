@@ -29,11 +29,21 @@ namespace Downgrooves.Mobile.Services
 
         public async Task<Release> GetRelease(int collectionId, CancellationToken token = default)
         {
-            var response = await GetAsync($"/releases/collection/{collectionId}", cancel: token);
-            if (response.IsSuccessful)
-                return JsonConvert.DeserializeObject<Release>(response.Content);
-            else
-                Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription} {response.ErrorMessage}");
+            try
+            {
+                var response = await GetAsync($"/release/collection/{collectionId}", cancel: token);
+                if (response.IsSuccessful)
+                    return JsonConvert.DeserializeObject<Release>(response.Content);
+                else
+                    Log.Fatal($"Http Exception {response.StatusCode}: {response.StatusDescription} {response.ErrorMessage}");
+                
+            }
+            catch (System.Exception ex)
+            {
+                Log.Fatal(ex.Message);
+                Log.Fatal(ex.StackTrace);
+                throw;
+            }
             return null;
         }
     }

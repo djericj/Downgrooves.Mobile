@@ -45,8 +45,6 @@ namespace Downgrooves.Mobile
 
                 Settings = configuration.Get<AppSettings>();
 
-                Current.PageAppearing += (_, page) => Log.Information("Navigated to {name}", page.Title ?? "Home");
-
                 MainPage = new AppShell();
             }
             catch (Exception ex)
@@ -76,6 +74,7 @@ namespace Downgrooves.Mobile
             services.AddSingleton<IArtistService, ArtistService>();
             services.AddSingleton<IMixService, MixService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IPlayerService, PlayerService>();
             services.AddSingleton<IReleaseService, ReleaseService>();
             services.AddSingleton<ITileService, TileService>();
             services.AddSingleton<IVideoService, VideoService>();

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
+             xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
              xmlns:fonts="clr-namespace:Downgrooves.Mobile.Fonts"
              x:Class="Downgrooves.Mobile.Views.MixDetail"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
@@ -62,6 +63,10 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </StackLayout>
+            <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+                <views:MediaPlayer/>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -6,6 +6,7 @@
             xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
             xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
+            xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
             x:DataType="viewModels:OtherMusicViewModel">
     <StackLayout>
         <Frame BackgroundColor="{StaticResource PageBackgroundColor}">
@@ -32,6 +33,10 @@
                                VerticalOptions="CenterAndExpand"
                                WidthRequest="30" Opacity="1" />
                 </StackLayout>
+                <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+                    <views:MediaPlayer/>
+                </Frame>
             </AbsoluteLayout>
         </Frame>
     </StackLayout>

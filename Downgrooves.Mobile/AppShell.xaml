@@ -7,8 +7,9 @@
        Shell.TabBarBackgroundColor="{DynamicResource LogoBackgroundColor}"
        Shell.TabBarTitleColor="{DynamicResource SecondaryTextColor}"
        Shell.TabBarUnselectedColor="{DynamicResource LighterBackgroundColor}"
+       Shell.NavBarIsVisible="False"
        x:Class="Downgrooves.Mobile.AppShell">
-    <TabBar>
+     <TabBar>
         <Tab Title="Home">
             <Tab.Icon>
                 <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fonts:FontAwesomeIcons.House}" />
@@ -40,5 +41,4 @@
             <ShellContent x:Name="OtherMusic" Route="othermusic" ContentTemplate="{DataTemplate views:OtherMusic}"/>
         </Tab>
     </TabBar>
-    
 </Shell>

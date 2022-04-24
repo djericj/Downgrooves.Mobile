@@ -20,7 +20,7 @@ namespace Downgrooves.Mobile.ViewModels
         private int _selectedViewModelIndex;
         private bool _isBusy;
 
-        public OtherMusicViewModel(INavigationService navigationService, IReleaseService releaseService, IArtistService artistService) : base(navigationService)
+        public OtherMusicViewModel(IPlayerService playerService, IReleaseService releaseService, IArtistService artistService) : base(playerService)
         {
             _releaseService = releaseService;
             _artistService = artistService;

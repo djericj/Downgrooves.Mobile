@@ -1,15 +1,29 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
 using Microsoft.Toolkit.Mvvm.Input;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Downgrooves.Mobile.ViewModels.Releases
 {
-    public class ReleaseDetailViewModel : ViewModelBase
+    public class ReleaseDetailViewModel : ViewModelBase, IQueryAttributable
     {
+        private IPlayerService _playerService;
+        private IReleaseService _releaseService;
         private Release _release;
         private string _favoriteIcon;
+        private int _collectionId;
+        private bool _isFavorite;
+
+        public ReleaseDetailViewModel(IPlayerService playerService, IReleaseService releaseService) : base(playerService)
+        {
+            _releaseService = releaseService;
+            _playerService = playerService;
+        }
 
         public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
            {
@@ -21,7 +35,18 @@ namespace Downgrooves.Mobile.ViewModels.Releases
               await GoBack();
           });
 
-        public ICommand FavoriteCommand => new RelayCommand<Release>(Favorite);
+        public ICommand FavoriteCommand => new RelayCommand(() => IsFavorite = !IsFavorite);
+
+        public ICommand PlayCommand => new RelayCommand<Release>(async (release) =>
+        {
+            await _playerService.Play(release);
+        });
+
+        public int CollectionId
+        {
+            get => _collectionId;
+            set { SetProperty(ref _collectionId, value); }
+        }
 
         public Release Release
         {
@@ -35,28 +60,29 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             set => SetProperty(ref _favoriteIcon, value);
         }
 
-        public ReleaseDetailViewModel(INavigationService navigationService) : base(navigationService)
+        public bool IsFavorite 
+        { 
+            get => _isFavorite; 
+            set => SetProperty(ref _isFavorite, value); 
+        }
+
+        public ReleaseDetailViewModel(IPlayerService playerService) : base(playerService)
         {
             FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
-            Task.Run(() => Load());
+            IsFavorite = false;
         }
 
-        public async override Task Load()
+        public async override Task Load() { }
+
+        public async Task Load(int collectionId)
         {
-            
+            Release = await _releaseService.GetRelease(collectionId);
         }
 
-        public async void Favorite(Release release)
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
         {
-            await Task.Run(() =>
-            {
-                if (FavoriteIcon == Fonts.FontAwesomeIcons.HeartCrack)
-                    FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
-                else
-                    FavoriteIcon = Fonts.FontAwesomeIcons.HeartCrack;
-            });
+            CollectionId = Convert.ToInt32(query["collectionId"]);
+            Task.Run(() => Load(_collectionId));
         }
-
-        
     }
 }

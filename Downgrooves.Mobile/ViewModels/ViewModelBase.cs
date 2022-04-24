@@ -14,14 +14,16 @@ namespace Downgrooves.Mobile.ViewModels
 
         private bool _isActive;
         private string _title;
+        private bool _isPlayerVisible;
 
-        private readonly INavigationService _navigationService;
+        private readonly IPlayerService _playerService;
 
         private Dictionary<string, object> properties = new Dictionary<string, object>();
+        
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(IPlayerService playerService)
         {
-            _navigationService = navigationService;
+            _playerService = playerService;
         }
 
         public abstract Task Load();
@@ -36,6 +38,12 @@ namespace Downgrooves.Mobile.ViewModels
         {
             get { return _isActive; }
             set { SetProperty(value); }
+        }
+
+        public bool IsPlayerVisible 
+        { 
+            get => _isPlayerVisible; 
+            set => SetProperty(ref _isPlayerVisible, value); 
         }
 
         public virtual void Destroy()
@@ -85,6 +93,6 @@ namespace Downgrooves.Mobile.ViewModels
             }
         }
 
-        
+
     }
 }

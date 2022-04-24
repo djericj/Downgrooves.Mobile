@@ -4,6 +4,7 @@
              x:Class="Downgrooves.Mobile.Views.Modular"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
+             xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
              NavigationPage.HasNavigationBar="false"
              x:DataType="viewModels:ModularViewModel">
     <ContentPage.Content>
@@ -25,6 +26,10 @@
                                VerticalOptions="CenterAndExpand"
                                WidthRequest="30" Opacity="1" />
                     </StackLayout>
+                    <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+                        <views:MediaPlayer/>
+                    </Frame>
                 </AbsoluteLayout>
             </Frame>
         </StackLayout>

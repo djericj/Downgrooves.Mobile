@@ -36,7 +36,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             set => SetProperty(ref _mix, value);    
         }
 
-        public MixDetailViewModel(INavigationService navigationService) : base(navigationService)
+        public MixDetailViewModel(IPlayerService playerService) : base(playerService)
         {
             FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
             Task.Run(() => Load());

@@ -53,7 +53,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             set { SetProperty(ref _isRefreshing, value); Debug.WriteLine($"IsRefreshing: {IsRefreshing}"); }
         }
 
-        public MixesViewModel(INavigationService navigationService, IMixService mixService) : base(navigationService)
+        public MixesViewModel(IPlayerService playerService, IMixService mixService) : base(playerService)
         {
             _mixService = mixService;
             Task.Run(() => Load());

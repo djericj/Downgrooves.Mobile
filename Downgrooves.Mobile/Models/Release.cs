@@ -22,7 +22,11 @@ namespace Downgrooves.Mobile.Models
         public string PreviewUrl { get; set; }
         public double Price { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public int ReleaseId { get; set; }
         public string Title { get; set; }
+        public int TrackId { get; set; }
+        public int TrackNumber { get; set; }
+        public int TrackTimeInMilliseconds { get; set; }
         public ICollection<ReleaseTrack> Tracks { get; set; }
         public int VendorId { get; set; }
     }

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Releases"
+             xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              xmlns:fonts="clr-namespace:Downgrooves.Mobile.Fonts"
@@ -13,26 +14,36 @@
             <Frame BackgroundColor="{DynamicResource LogoBackgroundColor}" Margin="0" Padding="0,0,0,5">
                 <Grid RowSpacing="0" HeightRequest="400">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="220*"></RowDefinition>
+                        <RowDefinition Height="240*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Source="{Binding Release.ArtworkUrl}" Aspect="AspectFill" HeightRequest="400"
                                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                     <AbsoluteLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
-                        <StackLayout Orientation="Horizontal"
-                                     AbsoluteLayout.LayoutBounds="{OnPlatform Android='0,5,1,0.2', iOS='0,25,1,0.2'}" AbsoluteLayout.LayoutFlags="SizeProportional" Padding="5,5,10,0">
-                            <Label Text="{x:Static fonts:FontAwesomeIcons.AngleLeft}" FontFamily="{StaticResource FontAwesomeSolid}">
+                        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{x:Static fonts:FontAwesomeIcons.AngleLeft}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="26">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
                                 </Label.GestureRecognizers>
                             </Label>
-
-                            <Label Text="{x:Static fonts:FontAwesomeIcons.Heart}" FontFamily="{StaticResource FontAwesomeSolid}">
+                            <Label Grid.Column="1" Text="{x:Static fonts:FontAwesomeIcons.Heart}" FontFamily="{StaticResource FontAwesomeRegular}" FontSize="20" HorizontalOptions="End" Padding="0,1,0,0">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FavoriteCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
                                 </Label.GestureRecognizers>
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsFavorite}" Value="True">
+                                        <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsFavorite}" Value="False">
+                                        <Setter Property="FontFamily" Value="{StaticResource FontAwesomeRegular}"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
                             </Label>
-                        </StackLayout>
+                        </Grid>
                     </AbsoluteLayout>
                     <StackLayout Grid.Row="0" Grid.Column="0" Padding="12" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand">
                         <Label Text="{Binding Release.Title}" Style="{DynamicResource h3}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" BackgroundColor="{DynamicResource LogoBackgroundColor}" Padding="5,2" />
@@ -56,8 +67,7 @@
                         <DataTemplate x:DataType="models:ReleaseTrack">
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal">
-
-                                    <Label Text="{x:Static fonts:FontAwesomeIcons.Play}" FontFamily="{StaticResource FontAwesomeSolid}">
+                                    <Label Text="{x:Static fonts:FontAwesomeIcons.Play}" FontFamily="{StaticResource FontAwesomeSolid}" Padding="0,5,0,0">
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
                                         </Label.GestureRecognizers>
@@ -76,6 +86,10 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </StackLayout>
+            <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+                <views:MediaPlayer/>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

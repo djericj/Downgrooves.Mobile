@@ -4,10 +4,11 @@
              x:Class="Downgrooves.Mobile.Views.Mixes"
              xmlns:controls="clr-namespace:Downgrooves.Mobile.Controls"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
+             xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
              NavigationPage.HasNavigationBar="false"
              x:DataType="viewModels:MixesViewModel">
     <ContentPage.Content>
-        <Frame BackgroundColor="Transparent" Padding="5">
+        <Frame BackgroundColor="Transparent">
             <AbsoluteLayout>
                 <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="All">
@@ -27,6 +28,10 @@
                                VerticalOptions="CenterAndExpand"
                                WidthRequest="30" Opacity="1" />
                 </StackLayout>
+                <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+                    <views:MediaPlayer/>
+                </Frame>
             </AbsoluteLayout>
         </Frame>
     </ContentPage.Content>

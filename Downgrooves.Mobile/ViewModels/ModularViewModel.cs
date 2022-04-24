@@ -15,7 +15,7 @@ namespace Downgrooves.Mobile.ViewModels
         private bool _isBusy;
         private bool _isRefreshing;
 
-        public ModularViewModel(INavigationService navigationService, IVideoService videoService) : base(navigationService)
+        public ModularViewModel(IPlayerService playerService, IVideoService videoService) : base(playerService)
         {
             _videoService = videoService;
             Task.Run(() => Load());

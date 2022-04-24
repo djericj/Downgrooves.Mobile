@@ -22,7 +22,7 @@ namespace Downgrooves.Mobile.ViewModels.Releases
         private bool _isBusy;
         private bool _isRefreshing;
 
-        public ReleasesViewModel(INavigationService navigationService, IReleaseService releaseService, IArtistService artistService) : base(navigationService)
+        public ReleasesViewModel(IPlayerService playerService, IReleaseService releaseService, IArtistService artistService) : base(playerService)
         {
             _releaseService = releaseService;
             _artistService = artistService;
@@ -70,7 +70,10 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         public ICommand RefreshCommand => new RelayCommand(Refresh);
 
-        public ICommand NavigateToReleaseCommand => new RelayCommand<Release>(NavigateToRelease);
+        public ICommand NavigateToReleaseCommand => new RelayCommand<Release>(async (release) =>
+        {
+            await GoToAsync($"detail?collectionId={release.CollectionId}");
+        });
 
         public void LoadMore()
         {
@@ -136,11 +139,6 @@ namespace Downgrooves.Mobile.ViewModels.Releases
             {
                 IsRefreshing = false;
             }
-        }
-
-        private async void NavigateToRelease(Release release)
-        {
-            throw new NotImplementedException();
         }
     }
 }

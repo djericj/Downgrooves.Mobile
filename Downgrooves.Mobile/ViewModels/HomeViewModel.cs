@@ -28,7 +28,7 @@ namespace Downgrooves.Mobile.ViewModels
             await GoToAsync(tile.NavigateTo);
         });
 
-        public HomeViewModel(INavigationService navigationService, ITileService tileService) : base(navigationService)
+        public HomeViewModel(IPlayerService playerService, ITileService tileService) : base(playerService)
         {
             _tileService = tileService;
             Task.Run(() => Load());

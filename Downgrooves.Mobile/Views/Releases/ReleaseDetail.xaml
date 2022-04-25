@@ -6,7 +6,9 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:models="clr-namespace:Downgrooves.Mobile.Models"
              xmlns:fonts="clr-namespace:Downgrooves.Mobile.Fonts"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              x:Class="Downgrooves.Mobile.Views.ReleaseDetail"
+             ios:Page.UseSafeArea="False"
              NavigationPage.HasNavigationBar="false"
              x:DataType="viewModels:ReleaseDetailViewModel">
     <ContentPage.Content>
@@ -20,7 +22,7 @@
                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Source="{Binding Release.ArtworkUrl}" Aspect="AspectFill" HeightRequest="400"
                                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                     <AbsoluteLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
-                        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
+                        <Grid AbsoluteLayout.LayoutBounds="{OnPlatform Android='0,0,1,1', iOS='0,150,1,1'}" AbsoluteLayout.LayoutFlags="All" Padding="20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>

@@ -86,6 +86,7 @@ namespace Downgrooves.Mobile
             services.AddTransient<MixDetailViewModel>();
             services.AddTransient<ModularViewModel>();
             services.AddTransient<OtherMusicViewModel>();
+            services.AddTransient<MediaPlayerViewModel>();
 
             return services.BuildServiceProvider();
 

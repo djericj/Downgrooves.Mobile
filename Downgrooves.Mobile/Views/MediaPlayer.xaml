@@ -2,12 +2,13 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fonts="clr-namespace:Downgrooves.Mobile.Fonts"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
              x:DataType="viewModels:MediaPlayerViewModel"
              x:Class="Downgrooves.Mobile.Views.MediaPlayer">
     <ContentView.Content>
-        <Frame HeightRequest="60" Background="{StaticResource LogoBackgroundColor}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-            <Grid>
+        <Frame HeightRequest="80" Background="{StaticResource LighterBackgroundColor}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+            <Grid Margin="0,1,0,2" Padding="0,10" Background="{StaticResource LogoBackgroundColor}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="*"/>
@@ -15,23 +16,26 @@
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Frame Grid.Column="0">
-                    <!-- artwork -->
+                <Frame Grid.Column="0" BorderColor="{StaticResource LighterBackgroundColor}" Padding="0" Margin="10,0">
+                    <ff:CachedImage Source="{Binding CurrentTrack.ImageUri}" Aspect="AspectFill" 
+                                WidthRequest="50" HeightRequest="50"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" />
                 </Frame>
-                <StackLayout>
-                    
+                <StackLayout Grid.Column="1">
+                    <Label Text="{Binding CurrentTrack.Title}" FontSize="11" FontAttributes="Bold" Margin="0,0,0,-5" LineBreakMode="TailTruncation" />
+                    <Label Text="{Binding CurrentTrack.Artist}" FontSize="10" TextColor="#ccc" LineBreakMode="TailTruncation" />
                 </StackLayout>
-                <Label Grid.Column="2" Text="{x:Static fonts:FontAwesomeIcons.Heart}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="26">
+                <Label Grid.Column="2" Text="{x:Static fonts:FontAwesomeIcons.Heart}" FontFamily="{StaticResource FontAwesomeRegular}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="20">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FavoriteCommand, Source={RelativeSource AncestorType={x:Type viewModels:MediaPlayerViewModel}}}" />
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Grid.Column="3" Text="{x:Static fonts:FontAwesomeIcons.Play}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="26">
+                <Label Grid.Column="3" Text="{Binding PlayIcon}" FontFamily="{StaticResource FontAwesomeRegular}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="20">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding PlayCommand, Source={RelativeSource AncestorType={x:Type viewModels:MediaPlayerViewModel}}}" />
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding PlayPauseCommand, Source={RelativeSource AncestorType={x:Type viewModels:MediaPlayerViewModel}}}" />
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Grid.Column="4" Text="{x:Static fonts:FontAwesomeIcons.ForwardFast}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="26">
+                <Label Grid.Column="4" Text="{x:Static fonts:FontAwesomeIcons.ForwardFast}" FontFamily="{StaticResource FontAwesomeSolid}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="18">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FastForwardCommand, Source={RelativeSource AncestorType={x:Type viewModels:MediaPlayerViewModel}}}" />
                     </Label.GestureRecognizers>

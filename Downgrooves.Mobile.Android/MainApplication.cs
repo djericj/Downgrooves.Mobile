@@ -5,7 +5,8 @@ using Android.Runtime;
 namespace Downgrooves.Mobile.Droid
 {
     [Application(
-        Theme = "@style/MainTheme"
+        Theme = "@style/MainTheme",
+        UsesCleartextTraffic = true
         )]
     public class MainApplication : Application
     {

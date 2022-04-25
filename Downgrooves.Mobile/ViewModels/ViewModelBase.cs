@@ -1,4 +1,5 @@
 ﻿using Downgrooves.Mobile.Services.Interfaces;
+using MediaManager;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,17 @@ namespace Downgrooves.Mobile.ViewModels
 
         private Dictionary<string, object> properties = new Dictionary<string, object>();
         
-
         public ViewModelBase(IPlayerService playerService)
         {
             _playerService = playerService;
+            IsPlayerVisible = playerService.IsPlayerVisible;
+            OnPropertyChanged(nameof(IsPlayerVisible));
+            CrossMediaManager.Current.StateChanged += (sender, args) =>
+            {
+                if (!IsPlayerVisible && args.State == MediaManager.Player.MediaPlayerState.Playing)
+                    IsPlayerVisible = true;
+                OnPropertyChanged(nameof(IsPlayerVisible));
+            };
         }
 
         public abstract Task Load();

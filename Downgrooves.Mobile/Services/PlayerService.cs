@@ -1,53 +1,74 @@
 ﻿using Downgrooves.Mobile.Models;
 using Downgrooves.Mobile.Services.Interfaces;
-using System;
 using System.Threading.Tasks;
+using MediaManager;
+using MediaManager.Library;
 
 namespace Downgrooves.Mobile.Services
 {
     public class PlayerService : IPlayerService
     {
-        public PlayerTrack Create(Release release)
+        private bool _isPlayerVisible;
+
+        public bool IsPlayerVisible
         {
-            return new PlayerTrack()
+            get => _isPlayerVisible;
+            set => _isPlayerVisible = value;
+        }
+
+        public PlayerService()
+        {
+            CrossMediaManager.Current.ClearQueueOnPlay = true;
+            CrossMediaManager.Current.StateChanged += (sender, args) =>
             {
-                Artist = release.Artist.Name,
-                ArtworkUrl = release.ArtworkUrl,
-                AudioUrl = release.PreviewUrl,
-                Title = release.Title
+                if (!IsPlayerVisible && args.State == MediaManager.Player.MediaPlayerState.Playing)
+                    IsPlayerVisible = true;
             };
         }
 
-        public PlayerTrack Create(Mix mix)
+        public MediaItem Create(Release release, ReleaseTrack track)
         {
-            return new PlayerTrack()
+            return new MediaItem()
+            {
+                Artist = track.ArtistName,
+                AlbumImageUri = release.ArtworkUrl,
+                DisplayImageUri = release.ArtworkUrl,
+                ImageUri = release.ArtworkUrl,
+                MediaUri = track.PreviewUrl,
+                Title = track.Title
+            };
+        }
+
+        public MediaItem Create(Mix mix)
+        {
+            return new MediaItem()
             {
                 Artist = mix.Artist,
-                ArtworkUrl = mix.ArtworkUrl,
-                AudioUrl = mix.AudioUrl,
+                AlbumImageUri = mix.ArtworkUrl,
+                DisplayImageUri = mix.ArtworkUrl,
+                ImageUri = mix.ArtworkUrl,
+                MediaUri = mix.AudioUrl,
                 Title = mix.Title
             };
         }
 
-        public async Task Pause()
+        public async Task Pause() => await CrossMediaManager.Current.Pause();
+        public async Task Play() => await CrossMediaManager.Current.Play();
+        public async Task Play(MediaItem mediaItem) => await CrossMediaManager.Current.Play(mediaItem);
+        public async Task PlayPause() => await CrossMediaManager.Current.PlayPause();
+        public async Task Stop() => await CrossMediaManager.Current.Stop();
+        public async Task Start(Release release, ReleaseTrack track)
         {
-            throw new NotImplementedException();
+            await Stop();
+            var mediaItem = Create(release, track);
+            await Play(mediaItem);
         }
-
-        public async Task Play(string url)
+        public async Task Start(Mix mix) 
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task Play(Release release) => await Play(release.PreviewUrl);
-        
-
-        public async Task Play(Mix mix) => await Play(mix.AudioUrl);
-        
-
-        public async Task Stop()
-        {
-            throw new NotImplementedException();
+            await Stop();
+            
+            var mediaItem = Create(mix);
+            await Play(mediaItem); 
         }
     }
 }

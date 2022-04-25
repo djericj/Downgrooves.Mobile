@@ -57,27 +57,28 @@
                     Command="{Binding OpenLinkCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}"
                     CommandParameter="{Binding Release.BuyUrl}"
                     Style="{DynamicResource BuyButton}" />
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Preview" HorizontalOptions="StartAndExpand" TextColor="{DynamicResource SecondaryTextColor}" />
-                    <Label Text="Buy" HorizontalOptions="EndAndExpand" TextColor="{DynamicResource SecondaryTextColor}" />
-                </StackLayout>
-                <BoxView Style="{DynamicResource Separator}" Margin="3" />
                 <CollectionView ItemsSource="{Binding Release.Tracks}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:ReleaseTrack">
-                            <StackLayout>
+                            <StackLayout VerticalOptions="CenterAndExpand">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{x:Static fonts:FontAwesomeIcons.Play}" FontFamily="{StaticResource FontAwesomeSolid}" Padding="0,5,0,0">
+                                    <Label Text="{x:Static fonts:FontAwesomeIcons.Play}" FontFamily="{StaticResource FontAwesomeSolid}" Padding="0,5,10,0" VerticalOptions="CenterAndExpand">
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" />
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                  Command="{Binding PlayCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}" 
+                                                                  CommandParameter="{Binding}"
+                                                                  />
                                         </Label.GestureRecognizers>
                                     </Label>
-                                    <Label Text="{Binding Title}"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <StackLayout HorizontalOptions="StartAndExpand" Margin="0,0,0,-10">
+                                        <Label Text="{Binding Title}" FontSize="12" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,0,-5" Padding="0" FontAttributes="Bold" />
+                                        <Label Text="{Binding ArtistName}" FontSize="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" TextColor="#ccc" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
                                         <Button Text="{Binding Price, StringFormat='${0}'}"
                                             Command="{Binding OpenLinkCommand, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}"
                                             CommandParameter="{Binding Release.BuyUrl, Source={RelativeSource AncestorType={x:Type viewModels:ReleaseDetailViewModel}}}"
-                                            Style="{DynamicResource SmallBuyButton}" HeightRequest="25" WidthRequest="60" />
+                                            Style="{DynamicResource SmallBuyButton}" HeightRequest="25" WidthRequest="60" VerticalOptions="CenterAndExpand" />
                                     </StackLayout>
                                 </StackLayout>
                                 <BoxView Style="{DynamicResource Separator}" />
@@ -86,7 +87,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </StackLayout>
-            <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
+            <Frame HeightRequest="100" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
                      AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
                 <views:MediaPlayer/>
             </Frame>

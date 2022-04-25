@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using MediaManager;
 using Serilog;
 using UIKit;
 
@@ -22,6 +23,7 @@ namespace Downgrooves.Mobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            CrossMediaManager.Current.Init();
             LoadApplication(new App());
 
             Log.Logger = new LoggerConfiguration()

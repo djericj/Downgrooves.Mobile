@@ -1,5 +1,4 @@
 ﻿using Serilog;
-using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Downgrooves.Mobile.Services.Interfaces;
@@ -31,6 +30,7 @@ namespace Downgrooves.Mobile.ViewModels
         public HomeViewModel(IPlayerService playerService, ITileService tileService) : base(playerService)
         {
             _tileService = tileService;
+            
             Task.Run(() => Load());
         }
 

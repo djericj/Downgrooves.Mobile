@@ -37,9 +37,9 @@ namespace Downgrooves.Mobile.ViewModels.Releases
 
         public ICommand FavoriteCommand => new RelayCommand(() => IsFavorite = !IsFavorite);
 
-        public ICommand PlayCommand => new RelayCommand<Release>(async (release) =>
+        public ICommand PlayCommand => new RelayCommand<ReleaseTrack>(async (track) =>
         {
-            await _playerService.Play(release);
+            await _playerService.Start(_release, track);
         });
 
         public int CollectionId

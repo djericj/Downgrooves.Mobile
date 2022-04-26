@@ -7,7 +7,7 @@
              x:DataType="viewModels:MediaPlayerViewModel"
              x:Class="Downgrooves.Mobile.Views.MediaPlayer">
     <ContentView.Content>
-        <Frame HeightRequest="80" Background="{StaticResource LighterBackgroundColor}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+        
             <Grid Margin="0,1,0,2" Padding="0,10" Background="{StaticResource LogoBackgroundColor}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
@@ -35,6 +35,6 @@
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
-        </Frame>
+        
     </ContentView.Content>
 </ContentView>

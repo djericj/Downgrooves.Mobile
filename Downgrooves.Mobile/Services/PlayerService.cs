@@ -23,8 +23,9 @@ namespace Downgrooves.Mobile.Services
             CrossMediaManager.Current.ClearQueueOnPlay = true;
             CrossMediaManager.Current.StateChanged += (sender, args) =>
             {
-                if (!IsPlayerVisible && args.State == MediaManager.Player.MediaPlayerState.Playing)
-                    IsPlayerVisible = true;
+                //if (!IsPlayerVisible && args.State == MediaManager.Player.MediaPlayerState.Playing)
+                //    IsPlayerVisible = true;
+                IsPlayerVisible = true;
             };
             CrossMediaManager.Current.MediaItemFailed += (sender, args) =>
             {

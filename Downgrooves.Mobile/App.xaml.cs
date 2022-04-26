@@ -4,6 +4,7 @@ using Downgrooves.Mobile.ViewModels;
 using Downgrooves.Mobile.ViewModels.Mixes;
 using Downgrooves.Mobile.ViewModels.Releases;
 using Downgrooves.Mobile.Views;
+using MediaManager;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -32,6 +33,8 @@ namespace Downgrooves.Mobile
                 Services = ConfigureServices();
                 ConfigureRoutes();
                 InitializeComponent();
+
+                CrossMediaManager.Current.Init();
 
                 // Get environment file/data
                 var contents = GetEmbeddedResource("env.json") ?? "{}";

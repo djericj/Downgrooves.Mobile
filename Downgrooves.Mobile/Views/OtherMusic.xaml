@@ -8,36 +8,38 @@
             xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels"
             xmlns:views="clr-namespace:Downgrooves.Mobile.Views"
             x:DataType="viewModels:OtherMusicViewModel">
-    <StackLayout>
-        <Frame BackgroundColor="{StaticResource PageBackgroundColor}">
-            <AbsoluteLayout>
-                <CollectionView ItemsSource="{Binding Artists}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Artist">
-                            <StackLayout>
-                                <Label Text="{Binding Name}" Style="{DynamicResource h1}" Padding="10,10,0,0" />
-                                <Label Text="{Binding Description}" Style="{DynamicResource h3}" Padding="10,0" />
-                                <ScrollView Orientation="Vertical">
-                                    <controls:ReleaseCollectionView ItemsSource="{Binding Releases}" />
-                                </ScrollView>
-                                <BoxView Style="{DynamicResource Separator}"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}"
-                         Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
-                    <ActivityIndicator IsRunning="{Binding IsBusy}"
-                               HeightRequest="30"
-                               HorizontalOptions="CenterAndExpand"
-                               VerticalOptions="CenterAndExpand"
-                               WidthRequest="30" Opacity="1" />
-                </StackLayout>
-                <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
-                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
-                    <views:MediaPlayer/>
-                </Frame>
-            </AbsoluteLayout>
-        </Frame>
-    </StackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding PlayerRowHeight}"/>
+            </Grid.RowDefinitions>
+
+            <CollectionView ItemsSource="{Binding Artists}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Artist">
+                        <StackLayout>
+                            <Label Text="{Binding Name}" Style="{DynamicResource h1}" Padding="10,10,0,0" />
+                            <Label Text="{Binding Description}" Style="{DynamicResource h3}" Padding="10,0" />
+                            <ScrollView Orientation="Vertical">
+                                <controls:ReleaseCollectionView ItemsSource="{Binding Releases}" />
+                            </ScrollView>
+                            <BoxView Style="{DynamicResource Separator}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                        Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                            HeightRequest="30"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="30" Opacity="1" />
+            </StackLayout>
+            <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}">
+                <views:MediaPlayer/>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

@@ -15,8 +15,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="{Binding PlayerRowHeight}"/>
             </Grid.RowDefinitions>
-            <ff:CachedImage Source="{Binding BackgroundImage}" Aspect="Fill" Opacity="0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+            <ff:CachedImage Source="{Binding BackgroundImage}" Aspect="Fill" Opacity="0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
                 <StackLayout.Margin>
                     <OnPlatform x:TypeArguments="Thickness">

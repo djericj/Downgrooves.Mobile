@@ -14,5 +14,7 @@ namespace Downgrooves.Mobile.Services.Interfaces
         Task<IEnumerable<Mix>> GetMixesAsync(string category, CancellationToken token = default);
 
         Task<IEnumerable<Mix>> GetMixesAsync(Genre genre, CancellationToken token = default);
+
+        Task<Mix> GetMixAsync(int mixId, CancellationToken token = default);
     }
 }

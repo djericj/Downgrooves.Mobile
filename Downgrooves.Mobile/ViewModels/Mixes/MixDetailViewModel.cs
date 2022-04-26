@@ -2,33 +2,33 @@
 using Downgrooves.Mobile.Services.Interfaces;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Downgrooves.Mobile.ViewModels.Mixes
 {
-    public class MixDetailViewModel : ViewModelBase
+    public class MixDetailViewModel : ViewModelBase, IQueryAttributable
     {
         private Mix _mix;
-        private string _favoriteIcon;
+        private int _mixId;
+        private bool _isFavorite;
+        private readonly IPlayerService _playerService;
+        private readonly IMixService _mixService;
 
-        public ICommand OpenLinkCommand => new RelayCommand<string>(async (link) =>
-         {
-             await OpenLink(link);
-         });
-
-        public ICommand GoBackCommand => new RelayCommand(async () =>
-         {
-             await GoBack();
-         });
-
-        public ICommand FavoriteCommand => new RelayCommand<Mix>(Favorite);
-
-        public string FavoriteIcon
+        public MixDetailViewModel(IPlayerService playerService, IMixService mixService) : base(playerService)
         {
-            get => _favoriteIcon;
-            set => SetProperty(ref _favoriteIcon, value);
+            _playerService = playerService;
+            _mixService = mixService;
+            Task.Run(() => Load());
         }
+
+        public ICommand ListenCommand => new RelayCommand<Mix>(async (mix) => await _playerService.Start(mix));
+
+        public ICommand GoBackCommand => new RelayCommand(async () => await GoBack());
+
+        public ICommand FavoriteCommand => new RelayCommand<Mix>((mix) => IsFavorite = !IsFavorite);
 
         public Mix Mix
         {
@@ -36,10 +36,16 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             set => SetProperty(ref _mix, value);    
         }
 
-        public MixDetailViewModel(IPlayerService playerService) : base(playerService)
+        public int MixId
         {
-            FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
-            Task.Run(() => Load());
+            get => _mixId;
+            set { SetProperty(ref _mixId, value); }
+        }
+
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+            set => SetProperty(ref _isFavorite, value);
         }
 
         public override Task Load()
@@ -47,17 +53,15 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             return null;            
         }
 
-        public async void Favorite(Mix mix)
+        public async Task Load(int mixId)
         {
-            await Task.Run(() =>
-            {
-                if (FavoriteIcon == Fonts.FontAwesomeIcons.HeartPulse)
-                    FavoriteIcon = Fonts.FontAwesomeIcons.Heart;
-                else
-                    FavoriteIcon = Fonts.FontAwesomeIcons.HeartPulse;
-            });
+            Mix = await _mixService.GetMixAsync(mixId);
         }
 
-        
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
+        {
+            MixId = Convert.ToInt32(query["mixId"]);
+            Task.Run(() => Load(MixId));
+        }
     }
 }

@@ -28,7 +28,7 @@
                     </OnPlatform>
                 </ff:CachedImage.Margin>
             </ff:CachedImage>
-                <Label Text="Deep, melodic electronic music" Style="{DynamicResource h1}" HorizontalOptions="CenterAndExpand" Padding="10" 
+                <Label Text="Deep, melodic electronic music" Style="{DynamicResource h2}" HorizontalOptions="CenterAndExpand" Padding="10" 
                        TextColor="{DynamicResource SecondaryTextColor}" Opacity="0.7"/>
             
                 <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="0">

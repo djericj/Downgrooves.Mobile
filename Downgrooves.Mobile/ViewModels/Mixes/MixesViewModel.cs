@@ -15,8 +15,17 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
         private int _pageSize = App.Settings.MixSettings.PageSize;
         private int _pageNumber = 0;
         private readonly IMixService _mixService;
+        private readonly IPlayerService _playerService;
 
-        public ICommand NavigateToTrackListCommand => new RelayCommand<Mix>(NavigateToTrackList);
+        public MixesViewModel(IPlayerService playerService, IMixService mixService) : base(playerService)
+        {
+            _mixService = mixService;
+            _playerService = playerService;
+            Task.Run(() => Load());
+        }
+
+        public ICommand NavigateToTrackListCommand => new RelayCommand<Mix>(async (mix) => await GoToAsync($"detail?mixId={mix.Id}"));
+        public ICommand ListenCommand => new RelayCommand<Mix>(async (mix) => await _playerService.Start(mix));
         public ICommand LoadMixesCommand => new RelayCommand(async () => await LoadMore());
 
         public ICommand RefreshCommand => new RelayCommand(async () => await Refresh());
@@ -53,11 +62,7 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
             set { SetProperty(ref _isRefreshing, value); Debug.WriteLine($"IsRefreshing: {IsRefreshing}"); }
         }
 
-        public MixesViewModel(IPlayerService playerService, IMixService mixService) : base(playerService)
-        {
-            _mixService = mixService;
-            Task.Run(() => Load());
-        }
+        
 
         public async override Task Load()
         {
@@ -126,12 +131,6 @@ namespace Downgrooves.Mobile.ViewModels.Mixes
                 IsBusy = false;
             }
         }
-
-        private async void NavigateToTrackList(Mix mix)
-        {
-            await GoToAsync($"details?mix={mix}");
-        }
-
-        
+       
     }
 }

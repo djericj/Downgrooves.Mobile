@@ -41,5 +41,12 @@ namespace Downgrooves.Mobile.Services
             var content = await GetAsync($"/mixes/genre/{genre.Name}", token);
             return JsonConvert.DeserializeObject<List<Mix>>(content.Content);
         }
+
+        public async Task<Mix> GetMixAsync(int mixId, CancellationToken token = default)
+        {
+            var content = await GetAsync($"/mix/{mixId}", token);
+            return JsonConvert.DeserializeObject<Mix>(content.Content);
+        }
+        
     }
 }

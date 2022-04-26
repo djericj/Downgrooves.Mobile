@@ -3,6 +3,7 @@
                 xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                xmlns:effects="http://xamarin.com/schemas/2020/toolkit"
                 xmlns:viewModels="clr-namespace:Downgrooves.Mobile.ViewModels.Mixes"
                 xmlns:models="clr-namespace:Downgrooves.Mobile.Models">
     <CollectionView.ItemTemplate>
@@ -23,7 +24,9 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Text="Listen" ContentLayout="Left, 5" HorizontalOptions="StartAndExpand" Margin="0" Padding="10,2">
+                            <Button Grid.Column="0" Text="Listen" ContentLayout="Left, 5" HorizontalOptions="StartAndExpand" Margin="0" Padding="10,2"
+                                    Command="{Binding ListenCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixesViewModel}}}"
+                                                    CommandParameter="{Binding}">
                                 <Button.ImageSource>
                                     <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" />
                                 </Button.ImageSource>
@@ -39,7 +42,8 @@
                     </StackLayout>
                     <StackLayout Grid.Column="1">
                         <Frame BackgroundColor="{DynamicResource ButtonBackgroundColor}" Margin="1" Padding="3" HeightRequest="140" WidthRequest="140">
-                            <ff:CachedImage Source="{Binding ArtworkUrl}" />
+                            <ff:CachedImage Source="{Binding ArtworkUrl}" effects:TouchEffect.Command="{Binding NavigateToTrackListCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixesViewModel}}}"
+                            effects:TouchEffect.CommandParameter="{Binding}" />
                         </Frame>
                     </StackLayout>
                 </Grid>

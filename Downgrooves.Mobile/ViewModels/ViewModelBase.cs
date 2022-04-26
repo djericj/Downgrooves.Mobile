@@ -24,7 +24,8 @@ namespace Downgrooves.Mobile.ViewModels
         public ViewModelBase(IPlayerService playerService)
         {
             _playerService = playerService;
-            IsPlayerVisible = playerService.IsPlayerVisible;
+            //IsPlayerVisible = playerService.IsPlayerVisible;
+            IsPlayerVisible = true;
             OnPropertyChanged(nameof(IsPlayerVisible));
             CrossMediaManager.Current.StateChanged += (sender, args) =>
             {

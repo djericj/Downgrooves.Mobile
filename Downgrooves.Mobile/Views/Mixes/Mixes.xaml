@@ -8,31 +8,31 @@
              NavigationPage.HasNavigationBar="false"
              x:DataType="viewModels:MixesViewModel">
     <ContentPage.Content>
-        <Frame BackgroundColor="Transparent">
-            <AbsoluteLayout>
-                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
-                 AbsoluteLayout.LayoutFlags="All">
-                    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-                        <ScrollView Orientation="Vertical">
-                            <controls:MixCollectionView ItemsSource="{Binding Path=Mixes}"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding PlayerRowHeight}"/>
+            </Grid.RowDefinitions>
+            <StackLayout>
+                <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+                    <ScrollView Orientation="Vertical">
+                        <controls:MixCollectionView ItemsSource="{Binding Path=Mixes}"
                                 RemainingItemsThreshold="{Binding ItemThreshold}"
                                 RemainingItemsThresholdReachedCommand="{Binding LoadMixesCommand}" />
-                        </ScrollView>
-                    </RefreshView>
-                </StackLayout>
-                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy}"
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsBusy}"
                          Background="{DynamicResource PageBackgroundColor}" Opacity="0.5">
-                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
                                HeightRequest="30"
                                HorizontalOptions="CenterAndExpand"
                                VerticalOptions="CenterAndExpand"
                                WidthRequest="30" Opacity="1" />
-                </StackLayout>
-                <Frame HeightRequest="180" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"
-                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
-                    <views:MediaPlayer/>
-                </Frame>
-            </AbsoluteLayout>
-        </Frame>
+            </StackLayout>
+            <Frame Grid.Row="1" HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <views:MediaPlayer/>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

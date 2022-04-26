@@ -20,7 +20,6 @@ namespace Downgrooves.Mobile.Services
 
         public PlayerService()
         {
-            IsPlayerVisible = true;
             CrossMediaManager.Current.ClearQueueOnPlay = true;
             CrossMediaManager.Current.StateChanged += (sender, args) =>
             {

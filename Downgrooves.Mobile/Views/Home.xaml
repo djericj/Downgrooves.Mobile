@@ -10,27 +10,30 @@
              x:Class="Downgrooves.Mobile.Views.Home"
               x:DataType="viewModels:HomeViewModel">
     <ContentPage.Content>
-        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="{Binding PlayerRowHeight}"/>
+            </Grid.RowDefinitions>
             <ff:CachedImage Source="{Binding BackgroundImage}" Aspect="Fill" Opacity="0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                             AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
-                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
                 <StackLayout.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="Android" Value="20,20"/>
                         <On Platform="iOS" Value="20, 60"/>
                     </OnPlatform>
                 </StackLayout.Margin>
-            <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png">
-                <ff:CachedImage.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="iOS" Value="40,0"/>
-                    </OnPlatform>
-                </ff:CachedImage.Margin>
-            </ff:CachedImage>
+                <ff:CachedImage Source="resource://Downgrooves.Mobile.Resources.images.dg_logo_white.png">
+                    <ff:CachedImage.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="40,0"/>
+                        </OnPlatform>
+                    </ff:CachedImage.Margin>
+                </ff:CachedImage>
                 <Label Text="Deep, melodic electronic music" Style="{DynamicResource h2}" HorizontalOptions="CenterAndExpand" Padding="10" 
                        TextColor="{DynamicResource SecondaryTextColor}" Opacity="0.7"/>
-            
+
                 <CollectionView ItemsSource="{Binding Path=Tiles}" Margin="0">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Tile">
@@ -63,12 +66,12 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            
+
             </StackLayout>
-            <Frame HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}"
-                     AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="XProportional,WidthProportional,HeightProportional">
+            <Frame Grid.Row="1" HeightRequest="60" Background="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" IsVisible="{Binding IsPlayerVisible}">
                 <views:MediaPlayer/>
             </Frame>
-        </AbsoluteLayout>
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

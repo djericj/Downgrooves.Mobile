@@ -16,23 +16,30 @@ namespace Downgrooves.Mobile.ViewModels
         private bool _isActive;
         private string _title;
         private bool _isPlayerVisible;
+        private int _playerRowHeight;
 
         private readonly IPlayerService _playerService;
 
         private Dictionary<string, object> properties = new Dictionary<string, object>();
         
+
         public ViewModelBase(IPlayerService playerService)
         {
             _playerService = playerService;
-            //IsPlayerVisible = playerService.IsPlayerVisible;
-            IsPlayerVisible = true;
-            OnPropertyChanged(nameof(IsPlayerVisible));
+            ShowPlayer(playerService.IsPlayerVisible);
             CrossMediaManager.Current.StateChanged += (sender, args) =>
             {
                 if (!IsPlayerVisible && args.State == MediaManager.Player.MediaPlayerState.Playing)
-                    IsPlayerVisible = true;
-                OnPropertyChanged(nameof(IsPlayerVisible));
+                    ShowPlayer(true);
             };
+        }
+
+        private void ShowPlayer(bool show)
+        {
+            IsPlayerVisible = show;
+            OnPropertyChanged(nameof(IsPlayerVisible));
+            PlayerRowHeight = show ? 60 : 0;
+            OnPropertyChanged(nameof(PlayerRowHeight));
         }
 
         public abstract Task Load();
@@ -49,10 +56,16 @@ namespace Downgrooves.Mobile.ViewModels
             set { SetProperty(value); }
         }
 
-        public bool IsPlayerVisible 
+        public bool IsPlayerVisible
+        {
+            get => _isPlayerVisible;
+            set => SetProperty(ref _isPlayerVisible, value);
+        }
+
+        public int PlayerRowHeight 
         { 
-            get => _isPlayerVisible; 
-            set => SetProperty(ref _isPlayerVisible, value); 
+            get => _playerRowHeight; 
+            set => SetProperty(ref _playerRowHeight, value); 
         }
 
         public virtual void Destroy()

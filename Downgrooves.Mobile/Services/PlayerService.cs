@@ -3,6 +3,8 @@ using Downgrooves.Mobile.Services.Interfaces;
 using System.Threading.Tasks;
 using MediaManager;
 using MediaManager.Library;
+using Serilog;
+using System.Diagnostics;
 
 namespace Downgrooves.Mobile.Services
 {
@@ -23,6 +25,12 @@ namespace Downgrooves.Mobile.Services
             {
                 if (!IsPlayerVisible && args.State == MediaManager.Player.MediaPlayerState.Playing)
                     IsPlayerVisible = true;
+            };
+            CrossMediaManager.Current.MediaItemFailed += (sender, args) =>
+            {
+                Log.Fatal(args.Message);
+                Log.Fatal(args.Exeption.Message);
+                Log.Fatal(args.Exeption.StackTrace);
             };
         }
 
@@ -59,16 +67,36 @@ namespace Downgrooves.Mobile.Services
         public async Task Stop() => await CrossMediaManager.Current.Stop();
         public async Task Start(Release release, ReleaseTrack track)
         {
-            await Stop();
-            var mediaItem = Create(release, track);
-            await Play(mediaItem);
+            try
+            {
+                await Stop();
+                var mediaItem = Create(release, track);
+                await Play(mediaItem);
+            }
+            catch (System.Exception ex)
+            {
+                Log.Fatal(ex.Message);
+                Log.Fatal(ex.StackTrace);
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
         }
         public async Task Start(Mix mix) 
         {
-            await Stop();
-            
-            var mediaItem = Create(mix);
-            await Play(mediaItem); 
+            try
+            {
+                await Stop();
+                var mediaItem = Create(mix);
+                await Play(mediaItem);
+
+            }
+            catch (System.Exception ex)
+            {
+                Log.Fatal(ex.Message);
+                Log.Fatal(ex.StackTrace);
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
         }
     }
 }

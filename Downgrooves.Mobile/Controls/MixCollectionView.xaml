@@ -28,14 +28,14 @@
                                     Command="{Binding ListenCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixesViewModel}}}"
                                                     CommandParameter="{Binding}">
                                 <Button.ImageSource>
-                                    <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" />
+                                    <FontImageSource Glyph="&#xf025;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" Color="White" />
                                 </Button.ImageSource>
                             </Button>
                             <Button Grid.Column="1" Text="Tracks" ContentLayout="Left, 10" HorizontalOptions="StartAndExpand" Margin="0" Padding="10,2"
                                                     Command="{Binding NavigateToTrackListCommand, Source={RelativeSource AncestorType={x:Type viewModels:MixesViewModel}}}"
                                                     CommandParameter="{Binding}">
                                 <Button.ImageSource>
-                                    <FontImageSource Glyph="&#xf03a;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" />
+                                    <FontImageSource Glyph="&#xf03a;" FontFamily="{StaticResource FontAwesomeSolid}" Size="Small" Color="White" />
                                 </Button.ImageSource>
                             </Button>
                         </Grid>

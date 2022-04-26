@@ -22,7 +22,7 @@
                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Source="{Binding Release.ArtworkUrl}" Aspect="AspectFill" HeightRequest="400"
                                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                     <AbsoluteLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
-                        <Grid AbsoluteLayout.LayoutBounds="{OnPlatform Android='0,0,1,1', iOS='0,150,1,1'}" AbsoluteLayout.LayoutFlags="All" Padding="20">
+                        <Grid AbsoluteLayout.LayoutBounds="{OnPlatform Android='0,0,1,1', iOS='0,80,1,1'}" AbsoluteLayout.LayoutFlags="All" Padding="20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
